@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:shiheyishu/pages/home/bindings/home_bindings.dart';
+import 'package:shiheyishu/pages/home/views/home_page.dart';
 
 part 'app_routes.dart';
 
@@ -9,8 +11,8 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.HOME,
-      page: () => HomeView(),
-      bindings: [HomeBinding()],
+      page: () => HomePage(),
+      bindings: [HomeBindings()],
       children: [
         // GetPage(
         //   name: Routes.COUNTRY,

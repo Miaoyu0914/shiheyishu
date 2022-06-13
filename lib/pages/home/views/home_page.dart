@@ -9,7 +9,6 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final controller = Get.find<HomeController>();
     return Center(
-      child: Text(controller.title),
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class CommonUtils {
   static Size getScreenSize(BuildContext context) {
@@ -68,3 +70,37 @@ class CommonUtils {
         RegExp(regEx5).hasMatch(str);
   }
 }
+
+class ImageHelper {
+  // static String requestBaseUrl = Env.getApiOptions(ApiName.DEFAULT).baseUrl;
+  // static String wikiBaseUrl = requestBaseUrl+'/wiki/attachment/downloadFile?id=';
+  // static String portalBaseUrl = requestBaseUrl+'/portal/attachment/downloadFile?id=';
+  // static const String baseUrl = 'http://www.meetingplus.cn';
+  // static const String imagePrefix = '$baseUrl/uimg/';
+  //
+  // static String wrapUrl(String url) {
+  //   if (url.startsWith('http')) {
+  //     return url;
+  //   } else {}
+  //   return imagePrefix + url;
+  // }
+
+  static String wrapAssets(String url) {
+    return "assets/images/" + url;
+  }
+
+  static Widget placeHolder({double? width, double? height}) {
+    return SizedBox(width: width, height: height, child: CupertinoActivityIndicator(radius: min(10.0, width! / 3)));
+  }
+
+  static Widget error({double? width, double? height, double? size}) {
+    return SizedBox(
+        width: width,
+        height: height,
+        child: Icon(
+          Icons.error_outline,
+          size: size,
+        ));
+  }
+}
+

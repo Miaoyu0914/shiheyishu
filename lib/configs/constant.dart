@@ -30,8 +30,8 @@ abstract class Constant {
   }
 
   static Future<String> getToken() async {
-    final token = StorageManager.sharedPreferences?.getString(TOKEN);
-    if (!CommonUtils.strIsEmpty(token!)) {
+    final token = StorageManager.sharedPreferences?.getString(TOKEN) ?? "";
+    if (!CommonUtils.strIsEmpty(token)) {
       TOKENVALUE = token;
     }
     return token;

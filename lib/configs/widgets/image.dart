@@ -15,32 +15,31 @@ class WrapperImage extends StatelessWidget {
   final ImageType imageType;
 
   WrapperImage(
-      {@required this.url,
-      @required this.width,
-      @required this.height,
-      this.imageType: ImageType.normal,
-      this.fit: BoxFit.cover});
+      {@required this.url, this.width, this.height,
+      this.imageType = ImageType.normal,
+      this.fit = BoxFit.cover});
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: imageUrl,
-      width: width,
-      height: height,
-      placeholder: (_, __) =>
-          ImageHelper.placeHolder(width: width, height: height),
-      errorWidget: (_, __, ___) =>
-          ImageHelper.error(width: width, height: height),
-      fit: fit,
-    );
-  }
-
-  String get imageUrl {
     switch (imageType) {
       case ImageType.assets:
-        return ImageHelper.wrapAssets(url!);
+        return Image.asset(
+          ImageHelper.wrapAssets(url!),
+          width: width,
+          height: height,
+          fit: fit,
+        );
       case ImageType.normal:
-        return url!;
+        return CachedNetworkImage(
+          imageUrl: url!,
+          width: width,
+          height: height,
+          placeholder: (_, __) =>
+              ImageHelper.placeHolder(width: width, height: height),
+          errorWidget: (_, __, ___) =>
+              ImageHelper.error(width: width, height: height),
+          fit: fit,
+        );
     }
   }
 }

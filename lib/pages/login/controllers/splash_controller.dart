@@ -1,7 +1,11 @@
 import 'dart:async';
 
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
+import 'package:shiheyishu/configs/constant.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
+import 'package:shiheyishu/routes/app_pages.dart';
+
+import '../../../configs/storage_manager.dart';
 
 class SplashController extends ViewStateController {
   int countNumber = 3;
@@ -12,10 +16,14 @@ class SplashController extends ViewStateController {
     startCount();
   }
 
-  void startCount() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+  Future<void> startCount() async {
+    await StorageManager.init();
+    Constant.getToken();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       if(countNumber <= 0){
         _timer?.cancel();
+        await pushToNextPage();
+        update();
       }else{
         countNumber -= 1;
         update();
@@ -23,15 +31,20 @@ class SplashController extends ViewStateController {
     });
   }
 
-  void endCount() {
-    print(countNumber);
+  Future<void> endCount() async {
     countNumber = 0;
-
+    await pushToNextPage();
     update();
   }
 
-  void pushToNextPage() {
-    // SharedPreferences sharedPreferences
+  Future<void> pushToNextPage()  async {
+    if(Constant.TOKENVALUE == ""){
+      //loginPage
+      Get.toNamed(Routes.SPLASH+Routes.LOGIN);
+    }else{
+      //tabPage
+
+    }
   }
 
   @override

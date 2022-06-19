@@ -35,7 +35,7 @@ class CommonUtils {
   }
 
   static bool strIsEmpty(String str) {
-    return str == null || str == "" || !str.isNotEmpty || str == "null";
+    return str == "" || !str.isNotEmpty || str == "null";
   }
 
   static bool objectIsNull(Object object) {

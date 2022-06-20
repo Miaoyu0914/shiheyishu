@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
 import 'package:shiheyishu/configs/common.dart';
+import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
 import 'package:shiheyishu/pages/login/controllers/login_controller.dart';
 
@@ -11,7 +12,7 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     if (controller.isBusy) {
-      // return ViewState
+      return ViewStateBusyWidget();
     }
     return Scaffold(
       backgroundColor: AppColors.main,
@@ -64,8 +65,9 @@ class LoginPage extends GetView<LoginController> {
               imageType: ImageType.assets,
             ),
             Container(
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 30),
-              padding: EdgeInsets.all(30),
+              margin: const EdgeInsets.only(
+                  left: 30, right: 30, top: 30, bottom: 65),
+              padding: const EdgeInsets.all(30),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 gradient: LinearGradient(
@@ -80,6 +82,7 @@ class LoginPage extends GetView<LoginController> {
                 children: [
                   TextField(
                     controller: controller.phoneController,
+                    cursorColor: Colors.white,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -103,6 +106,7 @@ class LoginPage extends GetView<LoginController> {
                   ),
                   TextField(
                     controller: controller.pswController,
+                    cursorColor: Colors.white,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -124,6 +128,55 @@ class LoginPage extends GetView<LoginController> {
                       ),
                     ),
                   ),
+                  InkWell(
+                    onTap: () => controller.login(),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                AppColors.loginButtonLeftColor,
+                                AppColors.loginButtonRightColor
+                              ])),
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(top: 16.5, bottom: 16.5),
+                      margin: const EdgeInsets.only(top: 62, bottom: 42),
+                      child: Text(
+                        'login.button'.tr,
+                        style: const TextStyle(
+                            height: 1,
+                            color: AppColors.loginButtonTitleColor,
+                            fontSize: 17),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () => controller.pushToRegisterPage(),
+                        child: Text(
+                          'login.register'.tr,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 12),
+                        ),
+                      ),
+                      const Text(
+                        '  |  ',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                      InkWell(
+                        onTap: () => controller.pushToForgetPswPage(),
+                        child: Text(
+                          'login.forget.psw'.tr,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 12),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

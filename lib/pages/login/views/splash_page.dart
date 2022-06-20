@@ -23,9 +23,7 @@ class SplashPage extends GetView<SplashController> {
       children: [
         WrapperImage(url: 'splash.png', width: Get.width, height: Get.height,imageType: ImageType.assets,),
         InkWell(
-          onTap: () {
-            controller.endCount();
-          },
+          onTap: () => controller.endCount(),
           child: Padding(
             padding: const EdgeInsets.only(right: 20, top: 30),
             child: Container(

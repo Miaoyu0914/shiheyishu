@@ -11,4 +11,7 @@ class AppColors{
   static const Color loginTopColor = Color(0xFF454756);
   static const Color loginBottomColor = Color(0xFF2C2D35);
   static const Color loginTextFieldLineColor = Color(0xFFBDC4CE);
+  static const Color loginButtonLeftColor = Color(0xFFEEE0AD);
+  static const Color loginButtonRightColor = Color(0xFFEBC67D);
+  static const Color loginButtonTitleColor = Color(0xFF76531D);
 }

@@ -66,7 +66,7 @@ class ForgetPswPage extends GetView<ForgetPswController> {
                         )),
                   ),
                   Text(
-                    'login.forget.psw.title'.tr,
+                    'login.forget.psw'.tr,
                     style: const TextStyle(
                         fontSize: 20,
                         color: Colors.white,

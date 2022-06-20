@@ -14,22 +14,24 @@ class LoginPage extends GetView<LoginController> {
     if (controller.isBusy) {
       return ViewStateBusyWidget();
     }
-    return Scaffold(
-      backgroundColor: AppColors.main,
-      body: CustomScrollView(
-        slivers: [
-          SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-            switch (index) {
-              case 0:
-                return _body();
-              default:
-                return Container();
-            }
-          }, childCount: 1))
-        ],
-      ),
-    );
+    return GetBuilder<LoginController>(builder: (controller) {
+      return Scaffold(
+        backgroundColor: AppColors.main,
+        body: CustomScrollView(
+          slivers: [
+            SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  switch (index) {
+                    case 0:
+                      return _body();
+                    default:
+                      return Container();
+                  }
+                }, childCount: 1))
+          ],
+        ),
+      );
+    });
   }
 
   Widget _body() {
@@ -144,7 +146,7 @@ class LoginPage extends GetView<LoginController> {
                       padding: const EdgeInsets.only(top: 16.5, bottom: 16.5),
                       margin: const EdgeInsets.only(top: 62, bottom: 42),
                       child: Text(
-                        'login.button'.tr,
+                        'login.title'.tr,
                         style: const TextStyle(
                             height: 1,
                             color: AppColors.loginButtonTitleColor,

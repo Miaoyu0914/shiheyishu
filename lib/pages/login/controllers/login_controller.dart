@@ -10,7 +10,7 @@ class LoginController extends ViewStateController {
   @override
   void onInit() {
     super.onInit();
-
+    print('login');
   }
 
   void login() {

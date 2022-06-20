@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
-import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
 import 'package:shiheyishu/pages/login/controllers/splash_controller.dart';
 

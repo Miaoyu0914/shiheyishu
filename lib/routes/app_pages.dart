@@ -44,18 +44,6 @@ class AppPages {
       name: Routes.HOME,
       page: () => const HomePage(),
       bindings: [HomeBindings()],
-      children: [
-        // GetPage(
-        //   name: Routes.COUNTRY,
-        //   page: () => CountryView(),
-        //   children: [
-        //     GetPage(
-        //       name: Routes.DETAILS,
-        //       page: () => DetailsView(),
-        //     ),
-        //   ],
-        // ),
-      ],
     ),
   ];
 }

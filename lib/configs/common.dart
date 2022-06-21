@@ -55,6 +55,14 @@ class CommonUtils {
     return false;
   }
 
+  static RegExp exp = RegExp(
+      r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
+
+  static bool isPhoneNumber(String phoneNumber) {
+    bool matched = exp.hasMatch(phoneNumber);
+    return matched;
+  }
+
   //根据中文unicode范围判断u4e00 ~ u9fa5不全
   static bool _isChinese(String str) {
     String regEx1 = "[\\u4e00-\\uFA29]+";

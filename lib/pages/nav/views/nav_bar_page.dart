@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
+import 'package:shiheyishu/configs/widgets/image.dart';
 import 'package:shiheyishu/pages/home/views/home_page.dart';
 import 'package:shiheyishu/pages/market/views/market_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_page.dart';
@@ -17,20 +18,8 @@ class NavBarPage extends StatefulWidget {
   _NavBarPageState createState() => _NavBarPageState();
 }
 
-class _NavBarPageState extends State<NavBarPage>
-    with SingleTickerProviderStateMixin {
+class _NavBarPageState extends State<NavBarPage> {
   final controller = Get.find<NavBarController>();
-  TabController? tabController;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    tabController = TabController(length: 4, vsync: this);
-    tabController?.addListener(() {
-      controller.changeNavBarIndex(tabController!.index);
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,66 +28,63 @@ class _NavBarPageState extends State<NavBarPage>
     }
     return GetBuilder<NavBarController>(builder: (controller) {
       return Scaffold(
-        backgroundColor: AppColors.main,
-        body: TabBarView(
-          controller: tabController,
-          children: const [
-            HomePage(),
-            BlindBoxPage(),
-            MarketPage(),
-            MinePage()
-          ],
-        ),
-        bottomNavigationBar: Container(
-          height: 70,
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.all(Radius.circular(35)),
-          ),
-          margin: const EdgeInsets.only(left: 15, right: 15, bottom: 36),
-          child: TabBar(
-            controller: tabController,
-            enableFeedback: false,
-            splashBorderRadius: const BorderRadius.all(Radius.circular(35)),
-            indicator: const BoxDecoration(),
-            tabs: [
-              Tab(
-                child: Column(
-                  children: [
-                    Text(controller.clickedIndex == 0 ? '000' : '111')
-                  ],
-                ),
-              ),
-              Tab(
-                text: 'blind.box.title'.tr,
-                icon: Icon(Icons.home),
-
-              ),
-              Tab(
-                text: 'market.title'.tr,
-                icon: Icon(Icons.home),
-              ),
-              Tab(
-                text: 'mine.title'.tr,
-                icon: Icon(Icons.home),
-              )
+          backgroundColor: AppColors.main,
+          body: IndexedStack(
+            children: const <Widget>[
+              HomePage(),
+              BlindBoxPage(),
+              MarketPage(),
+              MinePage(),
             ],
+            index: controller.currentIndex,
           ),
-        ),
-        // body: CustomScrollView(
-        //   slivers: [
-        //     SliverList(
-        //         delegate: SliverChildBuilderDelegate((context, index) {
-        //           switch (index) {
-        //             case 0:
-        //               return _body();
-        //             default:
-        //               return Container();
-        //           }
-        //         }, childCount: 1))
-        //   ],
-        // ),
-      );
+          bottomNavigationBar: Container(
+            height: 70,
+            decoration: const BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.all(Radius.circular(35)),
+            ),
+            margin: const EdgeInsets.only(left: 15, right: 15, bottom: 36),
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 15, bottom: 15),
+              scrollDirection: Axis.horizontal,
+              itemCount: controller.navTitles.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    controller.changeNavBarIndex(index);
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    width: (Get.width - 30) / controller.navTitles.length,
+                    child: Column(
+                      children: [
+                        WrapperImage(
+                          url: controller.currentIndex == index
+                              ? controller.navSelectedIcons[index]
+                              : controller.navNormalIcons[index],
+                          width: 20,
+                          height: 20,
+                          imageType: ImageType.assets,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: Text(
+                            controller.navTitles[index],
+                            style: TextStyle(
+                                color: controller.currentIndex == index
+                                    ? AppColors.navSelectedTitleColor
+                                    : Colors.white,
+                                fontSize: 11),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ));
     });
   }
 }

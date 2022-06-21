@@ -41,7 +41,7 @@ class SplashController extends ViewStateController {
   Future<void> pushToNextPage()  async {
     if(Constant.TOKENVALUE == ""){
       //loginPage
-      Get.offAndToNamed(Routes.NAV);
+      Get.offAndToNamed(Routes.LOGIN);
     }else{
       //tabPage
       Get.offAndToNamed(Routes.NAV);

@@ -15,4 +15,5 @@ class AppColors{
   static const Color loginButtonRightColor = Color(0xFFEBC67D);
   static const Color loginButtonTitleColor = Color(0xFF76531D);
   static const Color codeButtonTitleColor = Color(0xFFEEC67F);
+  static const Color navSelectedTitleColor = Color(0xFFEEC67F);
 }

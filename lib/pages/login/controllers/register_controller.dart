@@ -1,8 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
+import 'package:shiheyishu/services/http/http_error.dart';
+import 'package:shiheyishu/services/http/http_runner_params.dart';
+import 'package:shiheyishu/services/nft_service.dart';
 
 class RegisterController extends ViewStateController {
   TextEditingController phoneController = TextEditingController();
@@ -24,9 +29,22 @@ class RegisterController extends ViewStateController {
 
   }
 
-  void sendCode() {
-    canSend = false;
-    startCodeTimer();
+  Future<void> sendCode() async {
+    if(CommonUtils.isPhoneNumber(phoneController.text)){
+      try {
+        EasyLoading.show();
+        bool? isSendSms = await NFTService.sendSms(HttpRunnerParams(data: {"phone":phoneController.text,"scene":"register"}));
+        if(isSendSms!){
+          EasyLoading.dismiss();
+        }
+      } on HttpError catch (error) {
+        EasyLoading.dismiss();
+      }
+      canSend = false;
+      startCodeTimer();
+    }else{
+      EasyLoading.showToast('login.phone.correct'.tr);
+    }
   }
 
   void startCodeTimer() {
@@ -46,7 +64,11 @@ class RegisterController extends ViewStateController {
   }
 
   void register() {
+    if(isAgree){
 
+    }else{
+      EasyLoading.showToast('login.register.agree'.tr);
+    }
   }
 
   void changeAgree() {

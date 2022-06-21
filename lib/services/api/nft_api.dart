@@ -1,4 +1,7 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart' as api_get;
 import 'package:shiheyishu/configs/constant.dart';
+import 'package:shiheyishu/routes/app_pages.dart';
 import 'package:shiheyishu/services/http/http.dart';
 import 'package:shiheyishu/services/http/http_base_options.dart';
 import 'package:shiheyishu/services/http/http_standard_transformer.dart';
@@ -38,7 +41,11 @@ class _Interceptor extends InterceptorsWrapper {
     print('defaultApi.onResponse: ${response.data}');
 
     DefaultResponseData respData = DefaultResponseData.fromJson(response.data);
-
+    if(respData.code == 0){
+      EasyLoading.showError(respData.message!);
+    }else if(respData.code == -1){
+      api_get.Get.toNamed(Routes.LOGIN);
+    }
     // String message = "";
     // if (respData.messageId != null) {
     //   if (respData.messageId!.tr != respData.messageId) {

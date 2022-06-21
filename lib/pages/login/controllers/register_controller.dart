@@ -13,7 +13,8 @@ class RegisterController extends ViewStateController {
   TextEditingController secondPswAgainController = TextEditingController();
   TextEditingController inviteController = TextEditingController();
   String codeButtonTitle = 'login.code.get'.tr;
-  int countNumber = 10;
+  int countNumber = 60;
+  bool canSend = true;
   Timer? _timer;
   bool isAgree = true;
 
@@ -23,19 +24,20 @@ class RegisterController extends ViewStateController {
 
   }
 
-  Future<void> sendCode() async {
-    await startCodeTimer();
+  void sendCode() {
+    canSend = false;
+    startCodeTimer();
   }
 
-  Future<void> startCodeTimer() async {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
+  void startCodeTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer){
       if(countNumber <= 0){
+        canSend = true;
+        codeButtonTitle = 'login.code.get.again'.tr;
         _timer?.cancel();
-        _timer = null;
-        countNumber = 10;
-        codeButtonTitle = 'login.code.get'.tr;
+        countNumber = 60;
         update();
-      }else{
+      }else {
         countNumber -= 1;
         codeButtonTitle = '$countNumber S';
         update();

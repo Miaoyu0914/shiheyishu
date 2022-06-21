@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:shiheyishu/pages/home/bindings/home_bindings.dart';
-import 'package:shiheyishu/pages/home/views/home_page.dart';
 import 'package:shiheyishu/pages/login/bindings/psw_bindings.dart';
 import 'package:shiheyishu/pages/login/bindings/register_bindings.dart';
 import 'package:shiheyishu/pages/login/bindings/splash_bindings.dart';
@@ -8,6 +6,8 @@ import 'package:shiheyishu/pages/login/views/login_page.dart';
 import 'package:shiheyishu/pages/login/views/psw_page.dart';
 import 'package:shiheyishu/pages/login/views/register_page.dart';
 import 'package:shiheyishu/pages/login/views/splash_page.dart';
+import 'package:shiheyishu/pages/nav/bindings/nav_bar_bindings.dart';
+import 'package:shiheyishu/pages/nav/views/nav_bar_page.dart';
 
 import '../pages/login/bindings/login_bindings.dart';
 
@@ -41,9 +41,12 @@ class AppPages {
         ]
     ),
     GetPage(
-      name: Routes.HOME,
-      page: () => const HomePage(),
-      bindings: [HomeBindings()],
+      name: Routes.NAV,
+      page: () => const NavBarPage(),
+      bindings: [NavBarBindings()],
+      children: [
+
+      ]
     ),
   ];
 }

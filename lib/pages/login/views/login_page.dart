@@ -85,6 +85,7 @@ class LoginPage extends GetView<LoginController> {
                   TextField(
                     controller: controller.phoneController,
                     cursorColor: Colors.white,
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -109,6 +110,8 @@ class LoginPage extends GetView<LoginController> {
                   TextField(
                     controller: controller.pswController,
                     cursorColor: Colors.white,
+                    style: const TextStyle(color: Colors.white),
+                    obscureText: true,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),

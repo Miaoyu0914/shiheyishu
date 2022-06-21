@@ -21,13 +21,13 @@ class RegisterPage extends GetView<RegisterController> {
           slivers: [
             SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
-                  switch (index) {
-                    case 0:
-                      return _body();
-                    default:
-                      return Container();
-                  }
-                }, childCount: 1))
+              switch (index) {
+                case 0:
+                  return _body();
+                default:
+                  return Container();
+              }
+            }, childCount: 1))
           ],
         ),
       );
@@ -99,6 +99,7 @@ class RegisterPage extends GetView<RegisterController> {
                   TextField(
                     controller: controller.phoneController,
                     cursorColor: Colors.white,
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -126,6 +127,7 @@ class RegisterPage extends GetView<RegisterController> {
                         child: TextField(
                           controller: controller.codeController,
                           cursorColor: Colors.white,
+                          style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             prefixIcon: Container(
                               margin: const EdgeInsets.all(12),
@@ -149,7 +151,11 @@ class RegisterPage extends GetView<RegisterController> {
                         ),
                       ),
                       InkWell(
-                        onTap: () => controller.sendCode(),
+                        onTap: () {
+                          if (controller.canSend) {
+                            controller.sendCode();
+                          }
+                        },
                         child: SizedBox(
                             width: 80,
                             child: Center(
@@ -165,6 +171,8 @@ class RegisterPage extends GetView<RegisterController> {
                   TextField(
                     controller: controller.pswController,
                     cursorColor: Colors.white,
+                    style: const TextStyle(color: Colors.white),
+                    obscureText: true,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -189,6 +197,8 @@ class RegisterPage extends GetView<RegisterController> {
                   TextField(
                     controller: controller.pswAgainController,
                     cursorColor: Colors.white,
+                    style: const TextStyle(color: Colors.white),
+                    obscureText: true,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -213,6 +223,8 @@ class RegisterPage extends GetView<RegisterController> {
                   TextField(
                     controller: controller.secondPswController,
                     cursorColor: Colors.white,
+                    style: const TextStyle(color: Colors.white),
+                    obscureText: true,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -237,6 +249,8 @@ class RegisterPage extends GetView<RegisterController> {
                   TextField(
                     controller: controller.secondPswAgainController,
                     cursorColor: Colors.white,
+                    style: const TextStyle(color: Colors.white),
+                    obscureText: true,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -261,6 +275,7 @@ class RegisterPage extends GetView<RegisterController> {
                   TextField(
                     controller: controller.inviteController,
                     cursorColor: Colors.white,
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -321,7 +336,7 @@ class RegisterPage extends GetView<RegisterController> {
                             : const Icon(
                                 Icons.check_circle_outline,
                                 color: Colors.white,
-                          size: 11,
+                                size: 11,
                               ),
                       ),
                       Text(

@@ -7,8 +7,8 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<HomeController>();
     return Center(
+      child: Text('home.title'.tr)
     );
   }
 }

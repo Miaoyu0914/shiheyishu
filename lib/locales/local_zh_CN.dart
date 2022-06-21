@@ -7,6 +7,7 @@ const Map<String, String> zh_CN = {
   'login.phone.hint': '请输入手机号',
   'login.code.hint': '请输入验证码',
   'login.code.get': '获取验证码',
+  'login.code.get.again': '重新获取',
   'login.psw.hint': '请输入登录密码',
   'login.psw.again.hint': '请再次输入登录密码',
   'login.psw.second.hint': '请输入二级密码',
@@ -19,4 +20,8 @@ const Map<String, String> zh_CN = {
   'login.agree': ' 同意 ',
   'login.privacy': '《隐私政策》',
   'login.manual': '《用户使用手册》',
+  'home.title': '首页',
+  'blind.box.title': '盲盒',
+  'market.title': '市场',
+  'mine.title': '我的',
 };

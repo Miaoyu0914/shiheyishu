@@ -32,6 +32,7 @@ class SplashController extends ViewStateController {
   }
 
   Future<void> endCount() async {
+    _timer?.cancel();
     countNumber = 0;
     await pushToNextPage();
     update();
@@ -40,10 +41,10 @@ class SplashController extends ViewStateController {
   Future<void> pushToNextPage()  async {
     if(Constant.TOKENVALUE == ""){
       //loginPage
-      Get.offAndToNamed(Routes.LOGIN);
+      Get.offAndToNamed(Routes.NAV);
     }else{
       //tabPage
-
+      Get.offAndToNamed(Routes.NAV);
     }
   }
 

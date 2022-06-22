@@ -33,25 +33,22 @@ abstract class BaseResponseData {
   int? code = 0;
   String? message;
   dynamic data;
-  String? messageId;
 
   bool get success;
 
-  BaseResponseData({this.code, this.message, this.data, this.messageId});
+  BaseResponseData({this.code, this.message, this.data});
 
   @override
   String toString() {
-    return 'BaseRespData{code: $code, message: $message, data: $data, messageId: $messageId}';
+    return 'BaseRespData{code: $code, message: $message, data: $data}';
   }
 }
 
 class NotSuccessException implements Exception {
   String? message;
-  String? messageId;
 
   NotSuccessException.fromRespData(BaseResponseData respData) {
     message = respData.message;
-    messageId = respData.messageId;
   }
 
   @override

@@ -29,7 +29,7 @@ class _Interceptor extends InterceptorsWrapper {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     // TODO: implement onRequest
     print("head：${options.headers.toString()}");
-    print('defaultApi.onRequest: ${options.baseUrl}${options.path}' + ' queryParameters: ${options.queryParameters}' + ' data:${options.data}');
+    print('defaultApi.onRequest: ${options.baseUrl}${options.path} queryParameters: ${options.queryParameters}' + ' data:${options.data}');
 
     // return options;
     super.onRequest(options, handler);
@@ -39,13 +39,19 @@ class _Interceptor extends InterceptorsWrapper {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     // TODO: implement onResponse
     print('defaultApi.onResponse: ${response.data}');
-
-    DefaultResponseData respData = DefaultResponseData.fromJson(response.data);
-    if(respData.code == 0){
-      EasyLoading.showError(respData.message!);
-    }else if(respData.code == -1){
+    if(response.data["code"] == 0){
+      if(EasyLoading.isShow){
+        EasyLoading.dismiss();
+      }
+      EasyLoading.showError(response.data["msg"],);
+    }else if(response.data["code"] == -1){
       api_get.Get.toNamed(Routes.LOGIN);
+    }else{
+      DefaultResponseData respData = DefaultResponseData.fromJson(response.data);
+      response.data = respData.data;
+      super.onResponse(response, handler);
     }
+
     // String message = "";
     // if (respData.messageId != null) {
     //   if (respData.messageId!.tr != respData.messageId) {
@@ -82,8 +88,6 @@ class _Interceptor extends InterceptorsWrapper {
     //   EasyLoading.dismiss();
     //   return;
     // }
-    response.data = respData.data;
-    super.onResponse(response, handler);
   }
 }
 
@@ -91,7 +95,7 @@ class DefaultResponseData extends BaseResponseData {
   bool get success => 1 == code;
 
   DefaultResponseData.fromJson(Map<String, dynamic> json) {
-    code = int.parse(json['code']);
+    code = json['code'];
     message = json['msg'];
     data = json['data'];
   }

@@ -7,16 +7,16 @@ import 'package:shiheyishu/services/http/http_runner_params.dart';
 
 abstract class NFTService {
   //验证码
-  static final sendSms =
-      buildHttpRunner<bool>((HttpRunnerParams params) async {
+  static final sendSms = buildHttpRunner<bool>((HttpRunnerParams params) async {
     var res = await request('/app/auth/sendSms', params);
     return res.success;
   });
 
   //登录
   static final login =
-  buildHttpRunner<LoginEntity>((HttpRunnerParams params) async {
+      buildHttpRunner<LoginEntity>((HttpRunnerParams params) async {
     var res = await request('/app/auth/login', params);
+    // var res = await nftApi.post('/app/auth/login', data: params.data);
     return LoginEntity.fromJson(res.data);
   });
 //
@@ -29,8 +29,7 @@ abstract class NFTService {
 }
 
 dynamic request(String url, HttpRunnerParams params) async {
-  Response res;
-  res = await nftApi
+  var res = await nftApi
       .post(
     url,
     data: params.data,

@@ -21,13 +21,9 @@ class LoginController extends ViewStateController {
 
   Future<void> login() async {
     if(CommonUtils.isPhoneNumber(phoneController.text)){
-      try {
-        EasyLoading.show();
-        LoginEntity? loginEntity = await NFTService.login(HttpRunnerParams(data: {"phone":phoneController.text,"password":pswController.text}));
-        print(loginEntity);
-      } on HttpError catch (error) {
-        EasyLoading.dismiss();
-      }
+      EasyLoading.show();
+      LoginEntity? loginEntity = await NFTService.login(HttpRunnerParams(data: {"phone":phoneController.text,"password":pswController.text}));
+      print(loginEntity);
     }else{
       EasyLoading.showToast('login.phone.correct'.tr);
     }

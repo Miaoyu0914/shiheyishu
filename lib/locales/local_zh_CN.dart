@@ -3,6 +3,7 @@
 const Map<String, String> zh_CN = {
   'home': '世禾艺术',
   'splash.jump': '跳过',
+  'http.error': '请检查手机网络是否开启并连接通畅',
   'login.title': '登录',
   'login.phone.hint': '请输入手机号',
   'login.phone.correct': '请输入正确的手机号',

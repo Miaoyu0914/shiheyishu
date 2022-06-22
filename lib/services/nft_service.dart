@@ -1,5 +1,5 @@
-import 'package:dio/src/response.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
 import 'package:shiheyishu/services/api/nft_api.dart';
 import 'package:shiheyishu/services/http/http_runner.dart';
@@ -16,7 +16,6 @@ abstract class NFTService {
   static final login =
       buildHttpRunner<LoginEntity>((HttpRunnerParams params) async {
     var res = await request('/app/auth/login', params);
-    // var res = await nftApi.post('/app/auth/login', data: params.data);
     return LoginEntity.fromJson(res.data);
   });
 //
@@ -39,6 +38,7 @@ dynamic request(String url, HttpRunnerParams params) async {
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();
     }
+    EasyLoading.showError('http.error'.tr);
   });
   return res;
 }

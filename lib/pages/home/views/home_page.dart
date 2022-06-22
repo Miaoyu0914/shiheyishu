@@ -7,8 +7,26 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('home.title'.tr)
-    );
+    return GetBuilder<HomeController>(builder: (controller) {
+      return Scaffold(
+        appBar: null,
+        body: CustomScrollView(
+          slivers: [
+            SliverList(delegate: SliverChildBuilderDelegate((context, index) {
+              switch (index) {
+                case 0:
+                  return _body();
+                default:
+                  return Container();
+              }
+            }, childCount: 1))
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget _body() {
+    return Container();
   }
 }

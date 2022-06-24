@@ -32,10 +32,12 @@ abstract class BaseHttp extends DioForNative {
 abstract class BaseResponseData {
   int? code = 0;
   String? message;
+  // String? status;
   dynamic data;
 
   bool get success;
 
+  // BaseResponseData({this.code, this.message, this.status, this.data});
   BaseResponseData({this.code, this.message, this.data});
 
   @override

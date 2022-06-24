@@ -23,7 +23,12 @@ const Map<String, String> zh_CN = {
   'login.agree': ' 同意 ',
   'login.privacy': '《隐私政策》',
   'login.manual': '《用户使用手册》',
+
+
   'home.title': '首页',
+  'home.more': '更多',
+
+
   'blind.box.title': '盲盒',
   'market.title': '市场',
   'mine.title': '我的',

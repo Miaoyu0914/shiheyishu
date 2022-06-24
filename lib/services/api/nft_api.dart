@@ -17,7 +17,7 @@ Http get nftApi {
       baseUrl: Constant.host,
       transformer: HttpStandardTransformer(),
       headers: {
-        // "token": accessToken,
+        "token": Constant.TOKENVALUE,
       }));
   _http!.interceptors.clear();
   _http!.interceptors.add(_Interceptor());

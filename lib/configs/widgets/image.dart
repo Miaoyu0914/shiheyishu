@@ -15,7 +15,7 @@ class WrapperImage extends StatelessWidget {
   final ImageType imageType;
 
   WrapperImage(
-      {@required this.url, this.width, this.height,
+      {@required this.url, this.width = 20, this.height = 20,
       this.imageType = ImageType.normal,
       this.fit = BoxFit.cover});
 

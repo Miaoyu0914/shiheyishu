@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/storage_manager.dart';
+import 'package:shiheyishu/entities/login_entity.dart';
+import 'package:shiheyishu/services/api/nft_api.dart';
 
 abstract class Constant {
   // host
@@ -26,6 +30,7 @@ abstract class Constant {
     if (!CommonUtils.strIsEmpty(token!)) {
       StorageManager.sharedPreferences?.setString(TOKEN, token);
     }
+    nftApi.options.headers["token"] = token;
     TOKENVALUE = token;
   }
 
@@ -37,30 +42,27 @@ abstract class Constant {
     return token;
   }
 
-  //userID
+  //userInfo
   // ignore: constant_identifier_names
-  static const String USERID = "USERID";
+  static const String USERINFO = "USERINFO";
   // ignore: non_constant_identifier_names
-  static String USERIDVALUE = "";
+  static LoginEntity? USERINFOVALUE;
 
-  static void setUSERIDVALUE({String? userID}) {
-    if (!CommonUtils.strIsEmpty(userID!)) {
-      StorageManager.sharedPreferences?.setString(USERID, userID);
-    }
-    USERIDVALUE = userID;
+  static void setUSERINFOVALUE({LoginEntity? loginEntity}) {
+    StorageManager.sharedPreferences?.setString(USERINFO, jsonEncode(loginEntity).toString());
+    USERINFOVALUE = loginEntity;
   }
 
-  static Future<String> getUserID() async {
-    final userID = StorageManager.sharedPreferences?.getString(USERID);
-    if (!CommonUtils.strIsEmpty(userID!)) {
-      USERIDVALUE = userID;
-    }
-    return userID;
+  static Future<LoginEntity> getUserInfo() async {
+    Map<String,dynamic> data = jsonDecode(StorageManager.sharedPreferences!.getString(USERINFO)!);
+    LoginEntity userInfo = LoginEntity.fromJson(data);
+    USERINFOVALUE = userInfo;
+    return userInfo;
   }
 
   static Future<void> constantInit() async {
     Constant.getToken();
-    Constant.getUserID();
+    Constant.getUserInfo();
   }
 
   static final Map<String, ApiConstant> apiSettings = {

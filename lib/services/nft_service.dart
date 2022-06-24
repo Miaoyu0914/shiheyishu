@@ -1,5 +1,7 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:shiheyishu/entities/board_list_entity.dart';
+import 'package:shiheyishu/entities/home_banner_entity.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
 import 'package:shiheyishu/services/api/nft_api.dart';
 import 'package:shiheyishu/services/http/http_runner.dart';
@@ -17,6 +19,23 @@ abstract class NFTService {
       buildHttpRunner<LoginEntity>((HttpRunnerParams params) async {
     var res = await request('/app/auth/login', params);
     return LoginEntity.fromJson(res.data);
+  });
+
+  //首页轮播图
+  static final getBanners =
+  buildHttpRunner<List<HomeBannerEntity>>((HttpRunnerParams params) async {
+    var res = await request('/app/slider/sliderList', params);
+    List<dynamic> data = res.data;
+    return data.map((e){
+      return HomeBannerEntity.fromJson(e);
+    }).toList();
+  });
+
+  //首页公告
+  static final getBoards =
+  buildHttpRunner<BoardListEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/article/articleList', params);
+    return BoardListEntity.fromJson(res.data);
   });
 //
 // //

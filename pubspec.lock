@@ -132,6 +132,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.5"
+  flutter_inset_box_shadow:
+    dependency: "direct main"
+    description:
+      name: flutter_inset_box_shadow
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.8"
   flutter_lints:
     dependency: "direct dev"
     description:

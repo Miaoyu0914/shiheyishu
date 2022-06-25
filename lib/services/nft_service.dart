@@ -1,5 +1,6 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:shiheyishu/entities/blind_box_list_entity.dart';
 import 'package:shiheyishu/entities/board_list_entity.dart';
 import 'package:shiheyishu/entities/home_album_entity.dart';
 import 'package:shiheyishu/entities/home_banner_entity.dart';
@@ -57,6 +58,26 @@ abstract class NFTService {
     List<dynamic> data = res.data;
     return data.map((e){
       return HomeNftEntity.fromJson(e);
+    }).toList();
+  });
+
+  //盲盒列表
+  static final getBlindBoxes =
+  buildHttpRunner<List<BlindBoxListEntity>>((HttpRunnerParams params) async {
+    var res = await request('/app/blind_box/pageList', params);
+    List<dynamic> data = res.data;
+    return data.map((e){
+      return BlindBoxListEntity.fromJson(e);
+    }).toList();
+  });
+
+  //市场列表
+  static final getMarketNFTs =
+  buildHttpRunner<List<BlindBoxListEntity>>((HttpRunnerParams params) async {
+    var res = await request('/app/goods_rent/marketList', params);
+    List<dynamic> data = res.data;
+    return data.map((e){
+      return BlindBoxListEntity.fromJson(e);
     }).toList();
   });
 //

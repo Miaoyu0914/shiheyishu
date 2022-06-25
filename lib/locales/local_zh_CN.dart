@@ -36,6 +36,22 @@ const Map<String, String> zh_CN = {
 
 
   'blind.box.title': '盲盒',
+  'blind.box.creator': '创作者：',
+  'blind.box.issuer': '发行方：',
+  'blind.box.amount': '发行量：',
+  'blind.box.sale': '/已售：',
+  'blind.box.money': '¥ ',
+
+
   'market.title': '市场',
+  'market.search.hint': '请输入藏品名称',
+  'market.price': '价格',
+  'market.new': '最新',
+  'market.select': '筛选',
+  'market.number': '编号',
+  'market.money': '¥ ',
+
+
+
   'mine.title': '我的',
 };

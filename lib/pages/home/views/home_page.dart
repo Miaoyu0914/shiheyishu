@@ -55,7 +55,7 @@ class HomePage extends GetView<HomeController> {
   }
 
   Widget _nftList() {
-    return Container(
+    return SizedBox(
       height: 520 * 5 + 106,
       child: Column(
         mainAxisSize: MainAxisSize.min,

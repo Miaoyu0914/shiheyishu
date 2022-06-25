@@ -19,4 +19,6 @@ class AppColors{
   static const Color borderInsiderLineColor = Color(0xFF35383E);
   static const Color borderInsideColor = Color(0xFF040406);
   static const Color nftUnselectColor = Color(0xFFBCBCBC);
+  static const Color blindBoxTitleBorderColor = Color(0xFFE5E5E5);
+  static const Color blindBoxTitleBckColor = Color(0xFF506E79);
 }

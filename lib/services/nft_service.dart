@@ -6,6 +6,8 @@ import 'package:shiheyishu/entities/home_album_entity.dart';
 import 'package:shiheyishu/entities/home_banner_entity.dart';
 import 'package:shiheyishu/entities/home_nft_entity.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
+import 'package:shiheyishu/entities/market_nft_list_entity.dart';
+import 'package:shiheyishu/entities/user_info_entity.dart';
 import 'package:shiheyishu/services/api/nft_api.dart';
 import 'package:shiheyishu/services/http/http_runner.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
@@ -22,6 +24,13 @@ abstract class NFTService {
       buildHttpRunner<LoginEntity>((HttpRunnerParams params) async {
     var res = await request('/app/auth/login', params);
     return LoginEntity.fromJson(res.data);
+  });
+
+  //用户信息
+  static final getUserInfo =
+  buildHttpRunner<UserInfoEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/member/memberInfo', params);
+    return UserInfoEntity.fromJson(res.data);
   });
 
   //首页轮播图
@@ -73,12 +82,9 @@ abstract class NFTService {
 
   //市场列表
   static final getMarketNFTs =
-  buildHttpRunner<List<BlindBoxListEntity>>((HttpRunnerParams params) async {
+  buildHttpRunner<MarketNftListEntity>((HttpRunnerParams params) async {
     var res = await request('/app/goods_rent/marketList', params);
-    List<dynamic> data = res.data;
-    return data.map((e){
-      return BlindBoxListEntity.fromJson(e);
-    }).toList();
+    return MarketNftListEntity.fromJson(res.data);
   });
 //
 // //

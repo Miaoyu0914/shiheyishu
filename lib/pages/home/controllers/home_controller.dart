@@ -23,6 +23,7 @@ class HomeController extends ViewStateController {
   List<HomeNftEntity>? hotNFTList;
   List<HomeNftEntity>? futureNFTList;
   int nftIndex = 0;
+  int page = 1;
 
   @override
   Future<void> onInit() async {
@@ -54,11 +55,11 @@ class HomeController extends ViewStateController {
   Future<void> getNFTList() async {
     hotNFTList = await NFTService.getNFTs(HttpRunnerParams(data: {
       "status": 0,
-      "page": 1
+      "page": page
     }));
-    hotNFTList = await NFTService.getNFTs(HttpRunnerParams(data: {
+    futureNFTList = await NFTService.getNFTs(HttpRunnerParams(data: {
       "status": 1,
-      "page": 1
+      "page": page
     }));
   }
 

@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/services.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
@@ -21,7 +23,7 @@ class MarketPage extends GetView<MarketController> {
           appBar: AppBar(
             title: Center(
                 child: Text(
-              'market'.tr,
+              'market.title'.tr,
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -74,6 +76,7 @@ class MarketPage extends GetView<MarketController> {
           ),
           Expanded(
             child: TextField(
+              onEditingComplete: () => controller.search(),
               controller: controller.searchController,
               cursorColor: Colors.white,
               style: const TextStyle(color: Colors.white),

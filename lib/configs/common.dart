@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class CommonUtils {
   static Size getScreenSize(BuildContext context) {
@@ -76,6 +77,29 @@ class CommonUtils {
         RegExp(regEx3).hasMatch(str) ||
         RegExp(regEx4).hasMatch(str) ||
         RegExp(regEx5).hasMatch(str);
+  }
+
+  static Widget refreshFooter(LoadStatus? mode) {
+    Widget body;
+    if(mode==LoadStatus.idle){
+      body =  Text("pull up load");
+    }
+    else if(mode==LoadStatus.loading){
+      body =  const CupertinoActivityIndicator();
+    }
+    else if(mode == LoadStatus.failed){
+      body = Text("Load Failed!Click retry!");
+    }
+    else if(mode == LoadStatus.canLoading){
+      body = Text("release to load more");
+    }
+    else{
+      body = Text("No more Data");
+    }
+    return Container(
+      height: 55.0,
+      child: Center(child:body),
+    );
   }
 }
 

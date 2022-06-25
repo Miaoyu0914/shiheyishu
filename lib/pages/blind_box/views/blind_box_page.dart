@@ -55,7 +55,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
             //横轴间距
             crossAxisSpacing: 10.0,
             //子组件宽高长度比例
-            childAspectRatio: 0.60),
+            childAspectRatio: 0.58),
         itemBuilder: (context, index) {
           BlindBoxListEntity blindBox = controller.blindBoxes![index];
           return Container(

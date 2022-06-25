@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:shiheyishu/configs/constant.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
 import 'package:shiheyishu/routes/app_pages.dart';
+import 'package:shiheyishu/services/http/http_runner_params.dart';
+import 'package:shiheyishu/services/nft_service.dart';
 
 import '../../../configs/storage_manager.dart';
 
@@ -39,6 +41,7 @@ class SplashController extends ViewStateController {
   }
 
   Future<void> pushToNextPage()  async {
+    await NFTService.getUserInfo(HttpRunnerParams());
     Constant.constantInit();
     if(Constant.TOKENVALUE == ""){
       //loginPage

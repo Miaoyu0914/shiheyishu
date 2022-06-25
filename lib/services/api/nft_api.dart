@@ -45,7 +45,7 @@ class _Interceptor extends InterceptorsWrapper {
       }
       EasyLoading.showError(response.data["msg"],);
     }else if(response.data["code"] == -1){
-      api_get.Get.toNamed(Routes.LOGIN);
+      api_get.Get.offAndToNamed(Routes.LOGIN);
     }else{
       DefaultResponseData respData = DefaultResponseData.fromJson(response.data);
       response.data = respData.data;

@@ -18,4 +18,5 @@ class AppColors{
   static const Color navSelectedTitleColor = Color(0xFFEEC67F);
   static const Color borderInsiderLineColor = Color(0xFF35383E);
   static const Color borderInsideColor = Color(0xFF040406);
+  static const Color nftUnselectColor = Color(0xFFBCBCBC);
 }

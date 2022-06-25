@@ -1,7 +1,9 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/entities/board_list_entity.dart';
+import 'package:shiheyishu/entities/home_album_entity.dart';
 import 'package:shiheyishu/entities/home_banner_entity.dart';
+import 'package:shiheyishu/entities/home_nft_entity.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
 import 'package:shiheyishu/services/api/nft_api.dart';
 import 'package:shiheyishu/services/http/http_runner.dart';
@@ -36,6 +38,26 @@ abstract class NFTService {
   buildHttpRunner<BoardListEntity>((HttpRunnerParams params) async {
     var res = await request('/app/article/articleList', params);
     return BoardListEntity.fromJson(res.data);
+  });
+
+  //首页专辑
+  static final getAlbums =
+  buildHttpRunner<List<HomeAlbumEntity>>((HttpRunnerParams params) async {
+    var res = await request('/app/goods_series/homeSeriesList', params);
+    List<dynamic> data = res.data;
+    return data.map((e){
+      return HomeAlbumEntity.fromJson(e);
+    }).toList();
+  });
+
+  //首页商品列表
+  static final getNFTs =
+  buildHttpRunner<List<HomeNftEntity>>((HttpRunnerParams params) async {
+    var res = await request('/app/goods/goodsList', params);
+    List<dynamic> data = res.data;
+    return data.map((e){
+      return HomeNftEntity.fromJson(e);
+    }).toList();
   });
 //
 // //

@@ -61,10 +61,14 @@ class LoginPage extends GetView<LoginController> {
             WrapperImage(
               url: 'login_logo.png',
               imageType: ImageType.assets,
+              width: 101,
+              height: 101,
             ),
             WrapperImage(
               url: 'logowenzi.png',
               imageType: ImageType.assets,
+              width: 169,
+              height: 56,
             ),
             Container(
               margin: const EdgeInsets.only(

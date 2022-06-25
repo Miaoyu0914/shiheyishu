@@ -27,6 +27,12 @@ const Map<String, String> zh_CN = {
 
   'home.title': '首页',
   'home.more': '更多',
+  'home.nft.hot': '热门藏品 ',
+  'home.nft.future': '即将发售',
+  'home.nft.limit': ' 限量 ',
+  'home.nft.unit': '份 ',
+  'home.nft.already': '已售：',
+  'home.nft.money': '￥ ',
 
 
   'blind.box.title': '盲盒',

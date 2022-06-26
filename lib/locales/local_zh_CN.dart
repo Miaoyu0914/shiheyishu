@@ -45,13 +45,28 @@ const Map<String, String> zh_CN = {
 
   'market.title': '市场',
   'market.search.hint': '请输入藏品名称',
-  'market.price': '价格',
-  'market.new': '最新',
-  'market.select': '筛选',
-  'market.number': '编号',
+  'market.price': '价格 ',
+  'market.new': '最新 ',
+  'market.screen': '筛选 ',
+  'market.number': '编号：',
   'market.money': '¥ ',
 
 
 
   'mine.title': '我的',
+  'mine.wallet.address': '钱包地址：',
+  'mine.copy.hint': '已成功复制至粘贴板',
+  'mine.wallet': '钱包',
+  'mine.blind.box': '盲盒',
+  'mine.collection': '藏品',
+  'mine.3d.room': '3D藏品室',
+  'mine.market.order': '市场订单',
+  'mine.platform.order': '平台订单',
+  'mine.donation': '转增记录',
+  'mine.compose': '合成',
+  'mine.safe.setting': '安全设置',
+  'mine.certification': '实名认证',
+  'mine.logout': '退出登录',
+
+
 };

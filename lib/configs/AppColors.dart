@@ -20,5 +20,6 @@ class AppColors{
   static const Color borderInsideColor = Color(0xFF040406);
   static const Color nftUnselectColor = Color(0xFFBCBCBC);
   static const Color blindBoxTitleBorderColor = Color(0xFFE5E5E5);
-  static const Color blindBoxTitleBckColor = Color(0xFF506E79);
+  static const Color blindBoxTitleBackColor = Color(0xFF506E79);
+  static const Color mineCellLineColor = Color(0xFF474747);
 }

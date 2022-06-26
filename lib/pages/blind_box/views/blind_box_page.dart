@@ -91,7 +91,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
                               padding: const EdgeInsets.only(
                                   top: 15, bottom: 15, right: 20, left: 20),
                               decoration: BoxDecoration(
-                                  color: AppColors.blindBoxTitleBckColor,
+                                  color: AppColors.blindBoxTitleBackColor,
                                   border: Border.all(
                                       color: AppColors.blindBoxTitleBorderColor,
                                       width: 1),

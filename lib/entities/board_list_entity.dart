@@ -173,7 +173,7 @@ Data copyWith({  int? id,
   String? get createTime => _createTime;
   String? get updateTime => _updateTime;
   String? get url => _url;
-  int? get look => _look;
+  dynamic get look => _look;
   String? get time => _time;
   int? get isRead => _isRead;
 

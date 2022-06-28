@@ -176,6 +176,7 @@ class MinePage extends GetView<MineController> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         InkWell(
+          onTap: () => controller.pushToWalletPage(),
           child: Column(
             children: [
               WrapperImage(

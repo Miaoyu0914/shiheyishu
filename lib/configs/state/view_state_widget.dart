@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
+import 'package:shiheyishu/configs/widgets/image.dart';
 
 /// loading
 class ViewStateBusyWidget extends StatelessWidget {
@@ -14,35 +15,33 @@ class ViewStateBusyWidget extends StatelessWidget {
 }
 
 /// empty
-// class ViewStateEmptyWidget extends StatefulWidget {
-//   String msg = 'viewState.no.data'.tr;
-//
-//   ViewStateEmptyWidget(this.msg);
-//
-//   @override
-//   State<ViewStateEmptyWidget> createState() => _ViewStateEmptyWidgetState();
-// }
+// ignore: must_be_immutable
+class ViewStateEmptyWidget extends StatefulWidget {
+  String msg = 'viewState.no.data'.tr;
 
-// class _ViewStateEmptyWidgetState extends State<ViewStateEmptyWidget> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Column(
-//         mainAxisSize: MainAxisSize.min,
-//         children: [
-//           Icon(
-//             AppIcons.nodata,
-//             size: fitScreen.fitWidth(50),
-//             color: Colors.grey,
-//           ),
-//           SizedBox(height: fitScreen.fitY(10)),
-//           Text(widget.msg),
-//           SizedBox(height: fitScreen.fitY(50)),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  ViewStateEmptyWidget(this.msg, {Key? key}) : super(key: key);
+
+  @override
+  State<ViewStateEmptyWidget> createState() => _ViewStateEmptyWidgetState();
+}
+
+class _ViewStateEmptyWidgetState extends State<ViewStateEmptyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          WrapperImage(url: 'empty.png', width: 260, height: 260, imageType: ImageType.assets,),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(widget.msg, style: const TextStyle(color: AppColors.nftUnselectColor, fontSize: 17),),
+          ),
+        ],
+      ),
+    );
+  }
+}
 //
 // class ViewLoadSkeleton extends StatelessWidget {
 //   @override

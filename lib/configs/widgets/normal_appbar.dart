@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
+import 'package:shiheyishu/configs/widgets/image.dart';
 
 class NormalAppBar {
   List<Widget>? actions;
@@ -13,16 +14,17 @@ class NormalAppBar {
   bool isShowBottomLine;
   double? toolbarHeight;
 
-  NormalAppBar(
-      {this.actions,
-      this.backgroundColor: Colors.white,
-      this.titleColor: AppColors.main,
-      this.title,
-      this.isBack: true,
-      this.leading,
-      this.isShowBack: true,
-      this.isShowBottomLine: true,
-      this.toolbarHeight,});
+  NormalAppBar({
+    this.actions,
+    this.backgroundColor = AppColors.main,
+    this.titleColor = Colors.white,
+    this.title,
+    this.isBack = true,
+    this.leading,
+    this.isShowBack = true,
+    this.isShowBottomLine = false,
+    this.toolbarHeight,
+  });
 
   AppBar getAppBar(BuildContext context) {
     return AppBar(
@@ -35,21 +37,18 @@ class NormalAppBar {
                     Get.back();
                   },
                   child: Container(
-                      color: Colors.transparent,
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: AppColors.main,
-                          size: 22,
-                        ),
+                      margin: const EdgeInsets.all(20),
+                      child: WrapperImage(
+                        url: 'nav_back.png',
+                        width: 12,
+                        height: 8,
+                        imageType: ImageType.assets,
+                        fit: BoxFit.contain,
                       )),
                 )
               : null,
       toolbarHeight: toolbarHeight,
       actions: actions,
-      centerTitle: true,
       backgroundColor: backgroundColor,
       title: _getTitle(),
       bottom: isShowBottomLine
@@ -68,7 +67,8 @@ class NormalAppBar {
     return Text(
       title.toString(),
       textAlign: TextAlign.center,
-      style: TextStyle(color: titleColor, fontSize: 18),
+      style: TextStyle(
+          color: titleColor, fontSize: 16, fontWeight: FontWeight.bold),
     );
   }
 }

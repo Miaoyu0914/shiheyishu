@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:shiheyishu/configs/constant.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
 import 'package:shiheyishu/entities/board_list_entity.dart';
@@ -8,6 +9,7 @@ import 'package:shiheyishu/entities/home_album_entity.dart';
 import 'package:shiheyishu/entities/home_banner_entity.dart';
 import 'package:shiheyishu/entities/home_nft_entity.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
+import 'package:shiheyishu/routes/app_pages.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 import 'package:shiheyishu/services/nft_service.dart';
 
@@ -89,6 +91,10 @@ class HomeController extends ViewStateController {
     nftIndex = index;
     nftController?.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.linear);
     update();
+  }
+
+  void pushToBoardListPage() {
+    Get.toNamed(Routes.NAV+Routes.BOARDLIST);
   }
 
   @override

@@ -4,6 +4,8 @@ const Map<String, String> zh_CN = {
   'home': '世禾艺术',
   'splash.jump': '跳过',
   'http.error': '请检查手机网络是否开启并连接通畅',
+  'list.empty': '暂无数据',
+
   'login.title': '登录',
   'login.phone.hint': '请输入手机号',
   'login.phone.correct': '请输入正确的手机号',
@@ -33,6 +35,9 @@ const Map<String, String> zh_CN = {
   'home.nft.unit': '份 ',
   'home.nft.already': '已售：',
   'home.nft.money': '￥ ',
+  'board.title': '公告',
+  'board.detail.title': '公告详情',
+  'board.look': '观看',
 
 
   'blind.box.title': '盲盒',
@@ -67,6 +72,14 @@ const Map<String, String> zh_CN = {
   'mine.safe.setting': '安全设置',
   'mine.certification': '实名认证',
   'mine.logout': '退出登录',
+
+  'wallet.title':'钱包',
+  'wallet.list.title':' 钱包明细',
+  'wallet.balance':'余额',
+  'wallet.recharge':'充值',
+  'wallet.cash.out':'提现',
+  'wallet.look.more':'查看全部',
+  'wallet.money': '¥ ',
 
 
 };

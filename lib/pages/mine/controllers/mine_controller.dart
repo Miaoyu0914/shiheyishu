@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:shiheyishu/configs/constant.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
+import 'package:shiheyishu/routes/app_pages.dart';
 
 class MineController extends ViewStateController {
   LoginEntity? userInfo;
@@ -16,5 +17,7 @@ class MineController extends ViewStateController {
     userInfo = Constant.USERINFOVALUE;
   }
 
-
+  void pushToWalletPage() {
+    Get.toNamed(Routes.NAV+Routes.WALLET);
+  }
 }

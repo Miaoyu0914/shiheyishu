@@ -363,6 +363,7 @@ class HomePage extends GetView<HomeController> {
             ],
           ),
           InkWell(
+            onTap: () => controller.pushToBoardListPage(),
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(8.5)),

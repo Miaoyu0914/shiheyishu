@@ -8,6 +8,7 @@ import 'package:shiheyishu/entities/home_nft_entity.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
 import 'package:shiheyishu/entities/market_nft_list_entity.dart';
 import 'package:shiheyishu/entities/user_info_entity.dart';
+import 'package:shiheyishu/entities/wallet_list_entity.dart';
 import 'package:shiheyishu/services/api/nft_api.dart';
 import 'package:shiheyishu/services/http/http_runner.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
@@ -85,6 +86,13 @@ abstract class NFTService {
   buildHttpRunner<MarketNftListEntity>((HttpRunnerParams params) async {
     var res = await request('/app/goods_rent/marketList', params);
     return MarketNftListEntity.fromJson(res.data);
+  });
+
+  //钱包
+  static final getWalletList =
+  buildHttpRunner<WalletListEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/balance_log/balanceList', params);
+    return WalletListEntity.fromJson(res.data);
   });
 //
 // //

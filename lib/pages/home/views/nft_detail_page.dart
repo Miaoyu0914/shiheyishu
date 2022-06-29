@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
@@ -62,7 +64,8 @@ class _NFTDetailPageState extends State<NFTDetailPage> with TickerProviderStateM
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 70),
-          child: RotationTransition(turns: _animation,child: WrapperImage(url: 'splash.png', width: 200, height: 200, imageType: ImageType.assets,)),
+          child: Transform(alignment: FractionalOffset.center, transform: Matrix4.identity()..setEntry(3, 2, 0.0015)..rotateY(pi * _animation.value),child: WrapperImage(url: 'splash.png', width: 200, height: 200, imageType: ImageType.assets,),),
+          // child: RotationTransition(turns: _animation,child: WrapperImage(url: 'splash.png', width: 200, height: 200, imageType: ImageType.assets,)),
         )
       ],
     );

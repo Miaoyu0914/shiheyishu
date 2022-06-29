@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
+import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
-import 'package:shiheyishu/entities/board_list_entity.dart';
+import 'package:shiheyishu/entities/board_list_entity.dart' as bl;
 import 'package:shiheyishu/entities/home_album_entity.dart';
 import 'package:shiheyishu/entities/home_banner_entity.dart';
+import 'package:shiheyishu/entities/home_nft_list_entity.dart';
 import 'package:shiheyishu/pages/home/controllers/home_controller.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
@@ -19,44 +22,56 @@ class HomePage extends GetView<HomeController> {
         return ViewStateBusyWidget();
       }
       return Scaffold(
-        backgroundColor: AppColors.main,
-        appBar: AppBar(
-          title: Center(
-              child: Text(
-            'home'.tr,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
-          )),
-          leadingWidth: 0,
-          leading: Container(),
           backgroundColor: AppColors.main,
-          elevation: 0,
-        ),
-        body: CustomScrollView(
-          slivers: [
-            SliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
-              switch (index) {
-                case 0:
-                  return _banner();
-                case 1:
-                  return _board();
-                case 2:
-                  return _album();
-                case 3:
-                  return _nftList();
-                default:
-                  return Container();
-              }
-            }, childCount: 4))
-          ],
-        ),
-      );
+          appBar: AppBar(
+            title: Center(
+                child: Text(
+              'home'.tr,
+              style: const TextStyle(color: Colors.white, fontSize: 20),
+            )),
+            leadingWidth: 0,
+            leading: Container(),
+            backgroundColor: AppColors.main,
+            elevation: 0,
+          ),
+          body: SmartRefresher(
+            enablePullDown: true,
+            enablePullUp: true,
+            header: const WaterDropHeader(),
+            footer: CustomFooter(
+              builder: (BuildContext context, LoadStatus? mode) {
+                return CommonUtils.refreshFooter(mode);
+              },
+            ),
+            controller: controller.refreshController,
+            onRefresh: controller.refreshList,
+            onLoading: controller.loadMoreList,
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                  switch (index) {
+                    case 0:
+                      return _banner();
+                    case 1:
+                      return _board();
+                    case 2:
+                      return _album();
+                    case 3:
+                      return _nftList();
+                    default:
+                      return Container();
+                  }
+                }, childCount: 4))
+              ],
+            ),
+          ));
     });
   }
 
   Widget _nftList() {
     return SizedBox(
-      height: 520 * 5 + 106,
+      height: controller.nftIndex == 0 ? (520 * controller.hotNFTList.length + 106) : (520 * controller.futureNFTList.length + 106),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -123,142 +138,194 @@ class HomePage extends GetView<HomeController> {
                 itemBuilder: (context, pageIndex) {
                   return ListView.builder(
                     itemBuilder: (context, index) {
-                      return Container(
-                        decoration: const BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.all(Radius.circular(20))),
-                        margin: const EdgeInsets.all(15),
-                        // padding: const EdgeInsets.all(20),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
-                              child: ClipRRect(
-                                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                child: WrapperImage(
-                                  url: 'splash.png',
-                                  width: Get.width - 30,
-                                  height: (Get.width - 70) * 1.05,
-                                  imageType: ImageType.assets,
+                      Data nft = pageIndex == 0
+                          ? controller.hotNFTList[index]
+                          : controller.futureNFTList[index];
+                      return InkWell(
+                        onTap: () => controller.pushToNFTDetailPage(nft.id),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: Colors.black,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          margin: const EdgeInsets.all(15),
+                          // padding: const EdgeInsets.all(20),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 20, left: 20, right: 20),
+                                child: ClipRRect(
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(20)),
+                                  child: WrapperImage(
+                                    url: nft.goodsImage,
+                                    width: Get.width - 30,
+                                    height: (Get.width - 70) * 1.05,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Stack(
-                              alignment: Alignment.bottomRight,
-                              children: [
-                                Opacity(opacity: 0.1,
-                                child: ClipRRect(borderRadius: BorderRadius.only(bottomRight: Radius.circular(20)),child: WrapperImage(url: 'http://oss.ytsz.vip/16527578438262.jpg', width: 145,height: 145,)),),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 20,left: 20,right: 20),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 15),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                '热魂碰撞潮玩盲盒',
-                                                maxLines: 1,
-                                                style: const TextStyle(
-                                                  overflow: TextOverflow.ellipsis,
-                                                    color: Colors.white, fontSize: 20),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 15,bottom: 15),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius: const BorderRadius.only(
-                                                      topLeft: Radius.circular(6),
-                                                      bottomLeft: Radius.circular(6),
-                                                      bottomRight: Radius.circular(6)),
-                                                  border: Border.all(
-                                                      color: AppColors.navSelectedTitleColor,
-                                                      width: 1)),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    decoration: const BoxDecoration(
-                                                        color: AppColors.navSelectedTitleColor,
-                                                        borderRadius: BorderRadius.only(
-                                                            topLeft: Radius.circular(5),
-                                                            bottomLeft: Radius.circular(5))),
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      'home.nft.limit'.tr,
-                                                      style: const TextStyle(
-                                                          color:
-                                                          AppColors.loginButtonTitleColor,
-                                                          fontSize: 14),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    decoration: const BoxDecoration(
-                                                      color: Colors.transparent,
-                                                      borderRadius: BorderRadius.only(
-                                                          bottomRight: Radius.circular(6)),
-                                                    ),
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      ' 980' + 'home.nft.unit'.tr,
-                                                      style: const TextStyle(
-                                                          color:
-                                                          AppColors.navSelectedTitleColor,
-                                                          fontSize: 14),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            Text(
-                                              'home.nft.already'.tr + '9099',
-                                              style: const TextStyle(
-                                                  color: Colors.white, fontSize: 12),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
+                              Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  Opacity(
+                                    opacity: 0.1,
+                                    child: ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                            bottomRight: Radius.circular(20)),
+                                        child: WrapperImage(
+                                          url: nft.authorImage,
+                                          width: 145,
+                                          height: 145,
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 20, left: 20, right: 20),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 15),
+                                          child: Row(
                                             children: [
-                                              WrapperImage(
-                                                url: 'login_logo.png',
-                                                imageType: ImageType.assets,
+                                              Expanded(
+                                                child: Text(
+                                                  nft.goodsName!,
+                                                  maxLines: 1,
+                                                  style: const TextStyle(
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
                                               ),
-                                              Text(
-                                                '潮玩文化工作室',
-                                                style: TextStyle(
-                                                    color: Colors.white, fontSize: 11),
-                                              )
                                             ],
                                           ),
-                                          Text(
-                                            'home.nft.money'.tr + '1253.00',
-                                            style: TextStyle(
-                                                color: AppColors.navSelectedTitleColor,
-                                                fontSize: 20),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 15, bottom: 15),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                            topLeft: Radius
+                                                                .circular(6),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    6),
+                                                            bottomRight: Radius
+                                                                .circular(6)),
+                                                    border: Border.all(
+                                                        color: AppColors
+                                                            .navSelectedTitleColor,
+                                                        width: 1)),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      decoration: const BoxDecoration(
+                                                          color: AppColors
+                                                              .navSelectedTitleColor,
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          5),
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          5))),
+                                                      alignment: Alignment.center,
+                                                      child: Text(
+                                                        'home.nft.limit'.tr,
+                                                        style: const TextStyle(
+                                                            color: AppColors
+                                                                .loginButtonTitleColor,
+                                                            fontSize: 14),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                        color: Colors.transparent,
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                bottomRight:
+                                                                    Radius
+                                                                        .circular(
+                                                                            6)),
+                                                      ),
+                                                      alignment: Alignment.center,
+                                                      child: Text(
+                                                        ' ${nft.totalNum}' +
+                                                            'home.nft.unit'.tr,
+                                                        style: const TextStyle(
+                                                            color: AppColors
+                                                                .navSelectedTitleColor,
+                                                            fontSize: 14),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Text(
+                                                'home.nft.already'.tr +
+                                                    '${nft.sale}',
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  child: WrapperImage(
+                                                    url: nft.issuerImage,
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  ' ' + nft.issuer!,
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 11),
+                                                )
+                                              ],
+                                            ),
+                                            Text(
+                                              'home.nft.money'.tr +
+                                                  '${nft.price}',
+                                              style: const TextStyle(
+                                                  color: AppColors
+                                                      .navSelectedTitleColor,
+                                                  fontSize: 20),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       );
                     },
-                    itemCount: 5,
+                    itemCount: pageIndex == 0 ? controller.hotNFTList.length : controller.futureNFTList.length,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                   );
@@ -344,15 +411,18 @@ class HomePage extends GetView<HomeController> {
                 width: 150,
                 child: PageView.builder(
                   itemBuilder: (context, index) {
-                    Data board = controller.boardListEntity!.data![index];
-                    return Row(
-                      children: [
-                        Text(
-                          board.title!,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 14),
-                        ),
-                      ],
+                    bl.Data board = controller.boardListEntity!.data![index];
+                    return InkWell(
+                      onTap: () => controller.pushToBoardDetailPage(index),
+                      child: Row(
+                        children: [
+                          Text(
+                            board.title!,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 14),
+                          ),
+                        ],
+                      ),
                     );
                   },
                   controller: controller.boardController,

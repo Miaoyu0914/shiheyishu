@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:shiheyishu/pages/home/bindings/board_bindings.dart';
 import 'package:shiheyishu/pages/home/bindings/board_detail_bindings.dart';
+import 'package:shiheyishu/pages/home/bindings/nft_detail_bindings.dart';
 import 'package:shiheyishu/pages/home/views/board_detail_page.dart';
 import 'package:shiheyishu/pages/home/views/board_page.dart';
+import 'package:shiheyishu/pages/home/views/nft_detail_page.dart';
 import 'package:shiheyishu/pages/login/bindings/psw_bindings.dart';
 import 'package:shiheyishu/pages/login/bindings/register_bindings.dart';
 import 'package:shiheyishu/pages/login/bindings/splash_bindings.dart';
@@ -75,6 +77,14 @@ class AppPages {
                 page: () => const BoardDetailPage(),
                 bindings: [BoardDetailBindings()],
               ),
+            ]
+        ),
+        GetPage(
+            name: Routes.NFTDETAIL,
+            page: () => const NFTDetailPage(),
+            bindings: [NFTDetailBindings()],
+            children: [
+
             ]
         ),
       ]

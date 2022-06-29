@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.0.15
   localstorage: ^4.0.0+1
   flutter_inset_box_shadow: ^1.0.8
+  flutter_widget_from_html_core: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:

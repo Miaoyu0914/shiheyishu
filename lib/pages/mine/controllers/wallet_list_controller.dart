@@ -42,10 +42,9 @@ class WalletListController extends ViewStateController {
     isNotEnough = false;
     refreshController.footerMode!.setValueWithNoNotify(LoadStatus.idle);
     await getWalletList();
+    refreshController.refreshCompleted();
     if (isNotEnough) {
       refreshController.loadNoData();
-    } else {
-      refreshController.refreshCompleted();
     }
   }
 

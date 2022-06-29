@@ -54,38 +54,41 @@ class BoardPage extends GetView<BoardController> {
   Widget _body() {
     return ListView.builder(itemBuilder: (context,index){
       Data board = controller.boards[index];
-      return Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-                          color: AppColors.borderInsideColor,
-                          offset: Offset(0, 3),
-                          blurRadius: 6,
-                          spreadRadius: 1,
-                          inset: true
-                      ),
-          ]
-        ),
-        margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-        padding: const EdgeInsets.only(left: 10,right: 20, top: 10, bottom: 10),
-        child: Row(
-          children: [
-            WrapperImage(url: 'horn.png',width: 40, height: 40,imageType: ImageType.assets,),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Text(board.title!, maxLines: 1, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),),
-                  ),
-                  Text('${board.look}'+'board.look'.tr+' | '+'${board.time}', style: const TextStyle(color: AppColors.nftUnselectColor, fontSize: 11),)
-                ],
-              ),
-            )
-          ],
+      return InkWell(
+        onTap: () => controller.pushToBoardDetailPage(index),
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                            color: AppColors.borderInsideColor,
+                            offset: Offset(0, 3),
+                            blurRadius: 6,
+                            spreadRadius: 1,
+                            inset: true
+                        ),
+            ]
+          ),
+          margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+          padding: const EdgeInsets.only(left: 10,right: 20, top: 10, bottom: 10),
+          child: Row(
+            children: [
+              WrapperImage(url: 'horn.png',width: 40, height: 40,imageType: ImageType.assets,),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Text(board.title!, maxLines: 1, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),),
+                    ),
+                    Text('${board.look}'+'board.look'.tr+' | '+'${board.time}', style: const TextStyle(color: AppColors.nftUnselectColor, fontSize: 11),)
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       );
     },itemCount: controller.boards.length, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),);

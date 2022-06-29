@@ -10,4 +10,5 @@ abstract class Routes {
   static const WALLETLIST = '/wallet_list';
   static const BOARDLIST = '/board_list';
   static const BOARDDETAIL = '/board_detail';
+  static const NFTDETAIL = '/nft_detail';
 }

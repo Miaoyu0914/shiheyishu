@@ -39,6 +39,22 @@ const Map<String, String> zh_CN = {
   'board.detail.title': '公告详情',
   'board.look': '观看',
 
+  'nft.detail.title': '商品详情',
+  'nft.detail.creator': '创作者',
+  'nft.detail.issuer': '发行方',
+  'nft.detail.nft.info': '作品简介',
+  'nft.detail.issuer.info': '发行方简介',
+  'nft.detail.creator.info': '创作者简介',
+  'nft.detail.identity.info': '认证信息',
+  'nft.detail.album': '所属专辑',
+  'nft.detail.number': '编号/查看其他',
+  'nft.detail.type': '权益类型',
+  'nft.detail.standard': '认证标准',
+  'nft.detail.flag': '链上标识',
+  'nft.detail.must.know': '购物须知',
+  'nft.detail.buy': '购买',
+
+
 
   'blind.box.title': '盲盒',
   'blind.box.creator': '创作者：',

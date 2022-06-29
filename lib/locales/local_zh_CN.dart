@@ -42,6 +42,7 @@ const Map<String, String> zh_CN = {
   'nft.detail.title': '商品详情',
   'nft.detail.creator': '创作者',
   'nft.detail.issuer': '发行方',
+  'nft.detail.money': '￥ ',
   'nft.detail.nft.info': '作品简介',
   'nft.detail.issuer.info': '发行方简介',
   'nft.detail.creator.info': '创作者简介',

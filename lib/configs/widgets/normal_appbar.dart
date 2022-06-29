@@ -36,15 +36,16 @@ class NormalAppBar {
                   onTap: () {
                     Get.back();
                   },
-                  child: Container(
-                      margin: const EdgeInsets.all(20),
-                      child: WrapperImage(
-                        url: 'nav_back.png',
-                        width: 12,
-                        height: 8,
-                        imageType: ImageType.assets,
-                        fit: BoxFit.contain,
-                      )),
+                  child: Padding(
+                    padding: const EdgeInsets.all(22),
+                    child: WrapperImage(
+                      url: 'nav_back.png',
+                      width: 8,
+                      height: 12,
+                      imageType: ImageType.assets,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 )
               : null,
       toolbarHeight: toolbarHeight,

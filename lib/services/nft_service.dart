@@ -8,6 +8,7 @@ import 'package:shiheyishu/entities/home_banner_entity.dart';
 import 'package:shiheyishu/entities/home_nft_list_entity.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
 import 'package:shiheyishu/entities/market_nft_list_entity.dart';
+import 'package:shiheyishu/entities/nft_detail_entity.dart';
 import 'package:shiheyishu/entities/user_info_entity.dart';
 import 'package:shiheyishu/entities/wallet_list_entity.dart';
 import 'package:shiheyishu/services/api/nft_api.dart';
@@ -74,6 +75,13 @@ abstract class NFTService {
   buildHttpRunner<HomeNftListEntity>((HttpRunnerParams params) async {
     var res = await request('/app/goods/goodsList', params);
     return HomeNftListEntity.fromJson(res.data);
+  });
+
+  //首页商品详情
+  static final getNFTDetail =
+  buildHttpRunner<NftDetailEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/goods/goodsInfo', params);
+    return NftDetailEntity.fromJson(res.data);
   });
 
   //盲盒列表

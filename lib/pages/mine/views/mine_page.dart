@@ -59,36 +59,39 @@ class MinePage extends GetView<MineController> {
       child: ListView.separated(
         padding: const EdgeInsets.only(top: 20,bottom: 20,left: 20),
         itemBuilder: (context, index) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  WrapperImage(
-                    url: controller.settingImageList[index],
-                    width: 20,
-                    height: 20,
+          return InkWell(
+            onTap: () => controller.pushToSettingPages(index),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    WrapperImage(
+                      url: controller.settingImageList[index],
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        controller.settingTitleList[index],
+                        style: const TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: WrapperImage(
+                    url: 'arrow.png',
+                    width: 7,
+                    height: 14,
                     imageType: ImageType.assets,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      controller.settingTitleList[index],
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: WrapperImage(
-                  url: 'arrow.png',
-                  width: 7,
-                  height: 14,
-                  imageType: ImageType.assets,
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           );
         },
         itemCount: controller.settingTitleList.length,

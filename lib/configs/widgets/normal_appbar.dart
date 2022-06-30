@@ -37,7 +37,7 @@ class NormalAppBar {
                     Get.back();
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(22),
+                    padding: const EdgeInsets.only(top: 22, bottom: 22, left: 24, right: 24),
                     child: WrapperImage(
                       url: 'nav_back.png',
                       width: 8,
@@ -52,6 +52,7 @@ class NormalAppBar {
       actions: actions,
       backgroundColor: backgroundColor,
       title: _getTitle(),
+      centerTitle: false,
       bottom: isShowBottomLine
           ? PreferredSize(
               preferredSize: const Size.fromHeight(3),

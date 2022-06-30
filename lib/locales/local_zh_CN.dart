@@ -89,6 +89,11 @@ const Map<String, String> zh_CN = {
   'mine.safe.setting': '安全设置',
   'mine.certification': '实名认证',
   'mine.logout': '退出登录',
+  'safe.title': '安全设置',
+  'safe.reset.psw': '重置登录密码',
+  'safe.reset.second.psw': '重置支付密码',
+  'safe.set.card': '银行卡',
+  'safe.set.account': '账号与隐私设置',
 
   'wallet.title':'钱包',
   'wallet.list.title':' 钱包明细',

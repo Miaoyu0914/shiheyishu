@@ -29,7 +29,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
     _repeatController =
         AnimationController(vsync: this, duration: const Duration(seconds: 5))
           ..repeat();
-    _animation = Tween<double>(begin: 0, end: 1).animate(_repeatController);
+    _animation = Tween<double>(begin: 0, end: 360.0).animate(_repeatController);
   }
 
   final controller = Get.find<NFTDetailController>();
@@ -87,9 +87,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
         child: Text(
           'nft.detail.buy'.tr,
           style: const TextStyle(
-              height: 1,
-              color: AppColors.loginButtonTitleColor,
-              fontSize: 17),
+              height: 1, color: AppColors.loginButtonTitleColor, fontSize: 17),
         ),
       ),
     );
@@ -100,17 +98,15 @@ class _NFTDetailPageState extends State<NFTDetailPage>
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        boxShadow: [
-          BoxShadow(
-                        color: AppColors.borderInsideColor,
-                        offset: Offset(0, 3),
-                        blurRadius: 6,
-                        spreadRadius: 1,
-                        inset: true
-                    ),
-        ]
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.borderInsideColor,
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                spreadRadius: 1,
+                inset: true),
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -118,36 +114,49 @@ class _NFTDetailPageState extends State<NFTDetailPage>
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 10),
-                child: WrapperImage(url: 'diamonds.png', width: 20, height: 20, imageType: ImageType.assets,),
+                child: WrapperImage(
+                  url: 'diamonds.png',
+                  width: 20,
+                  height: 20,
+                  imageType: ImageType.assets,
+                ),
               ),
-              Text('nft.detail.must.know'.tr, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),)
+              Text(
+                'nft.detail.must.know'.tr,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15),
+              )
             ],
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10, bottom: 15),
-            child: Text('          ' + controller.nftDetailEntity!.purchaseInfo!, style: const TextStyle(color: AppColors.nftDetailInfoColor, fontSize: 13),),
+            child: Text(
+              '          ' + controller.nftDetailEntity!.purchaseInfo!,
+              style: const TextStyle(
+                  color: AppColors.nftDetailInfoColor, fontSize: 13),
+            ),
           )
         ],
       ),
     );
   }
-  
+
   Widget _nftInfo() {
     return Container(
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        boxShadow: [
-          BoxShadow(
-                        color: AppColors.borderInsideColor,
-                        offset: Offset(0, 3),
-                        blurRadius: 6,
-                        spreadRadius: 1,
-                        inset: true
-                    ),
-        ]
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.borderInsideColor,
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                spreadRadius: 1,
+                inset: true),
+          ]),
       child: Column(
         children: [
           Column(
@@ -157,14 +166,29 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: WrapperImage(url: 'diamonds.png', width: 20, height: 20, imageType: ImageType.assets,),
+                    child: WrapperImage(
+                      url: 'diamonds.png',
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
                   ),
-                  Text('nft.detail.nft.info'.tr, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),)
+                  Text(
+                    'nft.detail.nft.info'.tr,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  )
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
-                child: Text('          ' + controller.nftDetailEntity!.info!, style: const TextStyle(color: AppColors.nftDetailInfoColor, fontSize: 13),),
+                child: Text(
+                  '          ' + controller.nftDetailEntity!.info!,
+                  style: const TextStyle(
+                      color: AppColors.nftDetailInfoColor, fontSize: 13),
+                ),
               )
             ],
           ),
@@ -175,14 +199,29 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: WrapperImage(url: 'diamonds.png', width: 20, height: 20, imageType: ImageType.assets,),
+                    child: WrapperImage(
+                      url: 'diamonds.png',
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
                   ),
-                  Text('nft.detail.issuer.info'.tr, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),)
+                  Text(
+                    'nft.detail.issuer.info'.tr,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  )
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
-                child: Text('          ' + controller.nftDetailEntity!.issuerInfo!, style: const TextStyle(color: AppColors.nftDetailInfoColor, fontSize: 13),),
+                child: Text(
+                  '          ' + controller.nftDetailEntity!.issuerInfo!,
+                  style: const TextStyle(
+                      color: AppColors.nftDetailInfoColor, fontSize: 13),
+                ),
               )
             ],
           ),
@@ -193,14 +232,29 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: WrapperImage(url: 'diamonds.png', width: 20, height: 20, imageType: ImageType.assets,),
+                    child: WrapperImage(
+                      url: 'diamonds.png',
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
                   ),
-                  Text('nft.detail.creator.info'.tr, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),)
+                  Text(
+                    'nft.detail.creator.info'.tr,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  )
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: Text('          ' + controller.nftDetailEntity!.authorInfo!, style: const TextStyle(color: AppColors.nftDetailInfoColor, fontSize: 13),),
+                child: Text(
+                  '          ' + controller.nftDetailEntity!.authorInfo!,
+                  style: const TextStyle(
+                      color: AppColors.nftDetailInfoColor, fontSize: 13),
+                ),
               )
             ],
           ),
@@ -208,33 +262,49 @@ class _NFTDetailPageState extends State<NFTDetailPage>
             margin: const EdgeInsets.all(15),
             padding: const EdgeInsets.all(15),
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                    color: AppColors.borderInsideColor,
-                    offset: Offset(0, 3),
-                    blurRadius: 6,
-                    spreadRadius: 1,
-                    inset: true
-                ),
-              ]
-            ),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                      color: AppColors.borderInsideColor,
+                      offset: Offset(0, 3),
+                      blurRadius: 6,
+                      spreadRadius: 1,
+                      inset: true),
+                ]),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('nft.detail.identity.info'.tr, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),),
+                Text(
+                  'nft.detail.identity.info'.tr,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15,bottom: 15),
+                  padding: const EdgeInsets.only(top: 15, bottom: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('nft.detail.album'.tr, style: const TextStyle(color: Colors.white, fontSize: 13),),
+                      Text(
+                        'nft.detail.album'.tr,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 13),
+                      ),
                       InkWell(
-
                         child: Row(
                           children: [
-                            Text(controller.nftDetailEntity!.seriesName!+'  ', style: const TextStyle(color: Colors.white, fontSize: 13),),
-                            WrapperImage(url: 'arrow.png', width: 5, height: 5, imageType: ImageType.assets,)
+                            Text(
+                              controller.nftDetailEntity!.seriesName! + '  ',
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 13),
+                            ),
+                            WrapperImage(
+                              url: 'arrow.png',
+                              width: 5,
+                              height: 5,
+                              imageType: ImageType.assets,
+                            )
                           ],
                         ),
                       )
@@ -244,37 +314,65 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('nft.detail.number'.tr, style: const TextStyle(color: Colors.white, fontSize: 13),),
-                    Text('#${controller.nftDetailEntity!.advanceGoodsId!}/${controller.nftDetailEntity!.advanceNum!}', style: const TextStyle(color: Colors.white, fontSize: 13),),
+                    Text(
+                      'nft.detail.number'.tr,
+                      style: const TextStyle(color: Colors.white, fontSize: 13),
+                    ),
+                    Text(
+                      '#${controller.nftDetailEntity!.advanceGoodsId!}/${controller.nftDetailEntity!.advanceNum!}',
+                      style: const TextStyle(color: Colors.white, fontSize: 13),
+                    ),
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15,bottom: 15),
+                  padding: const EdgeInsets.only(top: 15, bottom: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('nft.detail.type'.tr, style: const TextStyle(color: Colors.white, fontSize: 13),),
-                      Text(controller.nftDetailEntity!.equityTypeDesc!, style: const TextStyle(color: Colors.white, fontSize: 13),),
+                      Text(
+                        'nft.detail.type'.tr,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 13),
+                      ),
+                      Text(
+                        controller.nftDetailEntity!.equityTypeDesc!,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 13),
+                      ),
                     ],
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('nft.detail.standard'.tr, style: const TextStyle(color: Colors.white, fontSize: 13),),
-                    Text(controller.nftDetailEntity!.standard!, style: const TextStyle(color: Colors.white, fontSize: 13),),
+                    Text(
+                      'nft.detail.standard'.tr,
+                      style: const TextStyle(color: Colors.white, fontSize: 13),
+                    ),
+                    Text(
+                      controller.nftDetailEntity!.standard!,
+                      style: const TextStyle(color: Colors.white, fontSize: 13),
+                    ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('nft.detail.flag'.tr, style: const TextStyle(color: Colors.white, fontSize: 13),),
-                      Text('H7SFG7SGFSF****H8FH8H', style: const TextStyle(color: Colors.white, fontSize: 13),),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 15),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         'nft.detail.flag'.tr,
+                //         style:
+                //             const TextStyle(color: Colors.white, fontSize: 13),
+                //       ),
+                //       Text(
+                //         'H7SFG7SGFSF****H8FH8H',
+                //         style:
+                //             const TextStyle(color: Colors.white, fontSize: 13),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           )
@@ -320,13 +418,19 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                         'nft.detail.creator'.tr +
                             controller.nftDetailEntity!.authorName!,
                         maxLines: 1,
-                        style: const TextStyle(color: Colors.white, fontSize: 14, overflow: TextOverflow.ellipsis),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            overflow: TextOverflow.ellipsis),
                       ),
                     ),
                     Text(
                       'nft.detail.issuer'.tr +
                           controller.nftDetailEntity!.issuer!,
-                      style: const TextStyle(color: Colors.white, fontSize: 14, overflow: TextOverflow.ellipsis),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          overflow: TextOverflow.ellipsis),
                     ),
                   ],
                 ),
@@ -406,14 +510,24 @@ class _NFTDetailPageState extends State<NFTDetailPage>
         ),
         Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 80, bottom: 70),
-            child: RotationTransition(
-                turns: _animation,
-                child: WrapperImage(
-                  url: controller.nftDetailEntity!.goodsImage,
-                  width: 200,
-                  height: 200,
-                )),
+            padding: const EdgeInsets.only(top: 100, bottom: 70),
+            child: AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                return Transform(
+                  transform: Matrix4.identity()
+                    ..setEntry(3, 2, 0.0001) // 第三参数定义视图距离，值越小物体就离你越远，看着就有立体感
+                    // 旋转Y轴角度，pi为圆半径，animation.value为动态获取的动画值
+                    ..rotateY(pi * _animation.value / 180),
+                  alignment: FractionalOffset.center, // 以轴中心开始动画
+                  child: WrapperImage(
+                    url: controller.nftDetailEntity!.goodsImage,
+                    width: 180,
+                    height: 180,
+                  ),
+                );
+              },
+            ),
           ),
         ),
         Padding(
@@ -423,7 +537,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
               InkWell(
                 onTap: () => Get.back(),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 40, top: 5),
+                  padding: const EdgeInsets.only(left: 25, right: 40, top: 3),
                   child: WrapperImage(
                     url: 'nav_back.png',
                     width: 8,

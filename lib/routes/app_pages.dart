@@ -12,8 +12,10 @@ import 'package:shiheyishu/pages/login/views/login_page.dart';
 import 'package:shiheyishu/pages/login/views/psw_page.dart';
 import 'package:shiheyishu/pages/login/views/register_page.dart';
 import 'package:shiheyishu/pages/login/views/splash_page.dart';
+import 'package:shiheyishu/pages/mine/bindings/safe_setting_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/wallet_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/wallet_list_bindings.dart';
+import 'package:shiheyishu/pages/mine/views/safe_setting_page.dart';
 import 'package:shiheyishu/pages/mine/views/wallet_list_page.dart';
 import 'package:shiheyishu/pages/mine/views/wallet_page.dart';
 import 'package:shiheyishu/pages/nav/bindings/nav_bar_bindings.dart';
@@ -83,6 +85,14 @@ class AppPages {
             name: Routes.NFTDETAIL,
             page: () => const NFTDetailPage(),
             bindings: [NFTDetailBindings()],
+            children: [
+
+            ]
+        ),
+        GetPage(
+            name: Routes.SAFE,
+            page: () => const SafeSettingPage(),
+            bindings: [SafeSettingBindings()],
             children: [
 
             ]

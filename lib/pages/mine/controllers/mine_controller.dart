@@ -20,4 +20,14 @@ class MineController extends ViewStateController {
   void pushToWalletPage() {
     Get.toNamed(Routes.NAV+Routes.WALLET);
   }
+
+  void pushToSettingPages(int index) {
+    switch(index){
+      case 0:
+        Get.toNamed(Routes.NAV+Routes.SAFE);
+        break;
+      default:
+        break;
+    }
+  }
 }

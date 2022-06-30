@@ -12,4 +12,5 @@ abstract class Routes {
   static const BOARDDETAIL = '/board_detail';
   static const NFTDETAIL = '/nft_detail';
   static const SAFE = '/mine_safe';
+  static const RESETPSW = '/reset_psw';
 }

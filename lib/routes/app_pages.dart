@@ -12,9 +12,11 @@ import 'package:shiheyishu/pages/login/views/login_page.dart';
 import 'package:shiheyishu/pages/login/views/psw_page.dart';
 import 'package:shiheyishu/pages/login/views/register_page.dart';
 import 'package:shiheyishu/pages/login/views/splash_page.dart';
+import 'package:shiheyishu/pages/mine/bindings/reset_psw_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/safe_setting_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/wallet_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/wallet_list_bindings.dart';
+import 'package:shiheyishu/pages/mine/views/reset_psw_page.dart';
 import 'package:shiheyishu/pages/mine/views/safe_setting_page.dart';
 import 'package:shiheyishu/pages/mine/views/wallet_list_page.dart';
 import 'package:shiheyishu/pages/mine/views/wallet_page.dart';
@@ -94,7 +96,11 @@ class AppPages {
             page: () => const SafeSettingPage(),
             bindings: [SafeSettingBindings()],
             children: [
-
+              GetPage(
+                  name: Routes.RESETPSW,
+                  page: () => const ResetPswPage(),
+                  bindings: [ResetPswBindings()],
+              ),
             ]
         ),
       ]

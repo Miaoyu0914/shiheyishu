@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
+import 'package:shiheyishu/routes/app_pages.dart';
 
 class SafeSettingController extends ViewStateController {
   List<String> menuTitles = [
@@ -23,7 +24,10 @@ class SafeSettingController extends ViewStateController {
   void pushToSafeSettingPages(int index) {
     switch(index){
       case 0:
-
+        Get.toNamed(Routes.NAV+Routes.SAFE+Routes.RESETPSW, arguments: {'isLoginPsw':true});
+        break;
+      case 1:
+        Get.toNamed(Routes.NAV+Routes.SAFE+Routes.RESETPSW, arguments: {'isLoginPsw':false});
         break;
       default:
         break;

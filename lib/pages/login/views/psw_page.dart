@@ -100,6 +100,7 @@ class ForgetPswPage extends GetView<ForgetPswController> {
                     controller: controller.phoneController,
                     cursorColor: Colors.white,
                     style: const TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -128,6 +129,7 @@ class ForgetPswPage extends GetView<ForgetPswController> {
                           controller: controller.codeController,
                           cursorColor: Colors.white,
                           style: const TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             prefixIcon: Container(
                               margin: const EdgeInsets.all(12),

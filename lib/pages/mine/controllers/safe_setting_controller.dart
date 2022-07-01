@@ -29,6 +29,9 @@ class SafeSettingController extends ViewStateController {
       case 1:
         Get.toNamed(Routes.NAV+Routes.SAFE+Routes.RESETPSW, arguments: {'isLoginPsw':false});
         break;
+      case 3:
+        Get.toNamed(Routes.NAV+Routes.SAFE+Routes.PRIVACY);
+        break;
       default:
         break;
     }

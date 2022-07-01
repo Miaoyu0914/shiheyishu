@@ -5,7 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
-import 'package:shiheyishu/services/http/http_error.dart';
+import 'package:shiheyishu/routes/app_pages.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 import 'package:shiheyishu/services/nft_service.dart';
 
@@ -30,20 +30,18 @@ class RegisterController extends ViewStateController {
   }
 
   Future<void> sendCode() async {
-    if(CommonUtils.isPhoneNumber(phoneController.text)){
-      try {
+    if(canSend){
+      if(CommonUtils.isPhoneNumber(phoneController.text)){
         EasyLoading.show();
-        bool? isSendSms = await NFTService.sendSms(HttpRunnerParams(data: {"phone":phoneController.text,"scene":"register"}));
-        if(isSendSms!){
-          EasyLoading.dismiss();
-        }
-      } on HttpError catch (error) {
+        bool? isSendSms = await NFTService.sendSMS(HttpRunnerParams(data: {"phone":phoneController.text,"scene":"register"}));
         EasyLoading.dismiss();
+        if(isSendSms!){
+          canSend = false;
+          startCodeTimer();
+        }
+      }else{
+        EasyLoading.showToast('login.phone.correct'.tr);
       }
-      canSend = false;
-      startCodeTimer();
-    }else{
-      EasyLoading.showToast('login.phone.correct'.tr);
     }
   }
 
@@ -63,9 +61,23 @@ class RegisterController extends ViewStateController {
     });
   }
 
-  void register() {
+  Future<void> register() async {
+    EasyLoading.show();
     if(isAgree){
-
+      bool? isSuccess = await NFTService.register(HttpRunnerParams(data: {
+        'phone': phoneController.text,
+        'sms_code': codeController.text,
+        'password': pswController.text,
+        're_password': pswAgainController.text,
+        'second_password': secondPswController.text,
+        're_second_password': secondPswAgainController.text,
+        'invite_code': inviteController.text
+      }));
+      EasyLoading.dismiss();
+      if(isSuccess!){
+        EasyLoading.showToast('login.register.success'.tr);
+        Get.back();
+      }
     }else{
       EasyLoading.showToast('login.register.agree'.tr);
     }
@@ -76,4 +88,7 @@ class RegisterController extends ViewStateController {
     update();
   }
 
+  void pushToAgreementPage(bool isUserAgreement) {
+    Get.toNamed(Routes.LOGIN+Routes.REGISTER+Routes.AGREEMENT, arguments: {'isUserAgreement': isUserAgreement});
+  }
 }

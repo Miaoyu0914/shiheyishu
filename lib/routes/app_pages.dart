@@ -5,17 +5,21 @@ import 'package:shiheyishu/pages/home/bindings/nft_detail_bindings.dart';
 import 'package:shiheyishu/pages/home/views/board_detail_page.dart';
 import 'package:shiheyishu/pages/home/views/board_page.dart';
 import 'package:shiheyishu/pages/home/views/nft_detail_page.dart';
+import 'package:shiheyishu/pages/login/bindings/agreement_bindings.dart';
 import 'package:shiheyishu/pages/login/bindings/psw_bindings.dart';
 import 'package:shiheyishu/pages/login/bindings/register_bindings.dart';
 import 'package:shiheyishu/pages/login/bindings/splash_bindings.dart';
+import 'package:shiheyishu/pages/login/views/agreement_page.dart';
 import 'package:shiheyishu/pages/login/views/login_page.dart';
 import 'package:shiheyishu/pages/login/views/psw_page.dart';
 import 'package:shiheyishu/pages/login/views/register_page.dart';
 import 'package:shiheyishu/pages/login/views/splash_page.dart';
+import 'package:shiheyishu/pages/mine/bindings/account_privacy_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/reset_psw_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/safe_setting_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/wallet_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/wallet_list_bindings.dart';
+import 'package:shiheyishu/pages/mine/views/account_privacy_page.dart';
 import 'package:shiheyishu/pages/mine/views/reset_psw_page.dart';
 import 'package:shiheyishu/pages/mine/views/safe_setting_page.dart';
 import 'package:shiheyishu/pages/mine/views/wallet_list_page.dart';
@@ -46,6 +50,13 @@ class AppPages {
             name: Routes.REGISTER,
             page: () => const RegisterPage(),
             bindings: [RegisterBindings()],
+            children: [
+              GetPage(
+                name: Routes.AGREEMENT,
+                page: () => const AgreementPage(),
+                bindings: [AgreementBindings()],
+              ),
+            ]
           ),
           GetPage(
             name: Routes.FORGETPSW,
@@ -100,6 +111,11 @@ class AppPages {
                   name: Routes.RESETPSW,
                   page: () => const ResetPswPage(),
                   bindings: [ResetPswBindings()],
+              ),
+              GetPage(
+                name: Routes.PRIVACY,
+                page: () => const AccountPrivacyPage(),
+                bindings: [AccountPrivacyBindings()],
               ),
             ]
         ),

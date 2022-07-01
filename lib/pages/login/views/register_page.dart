@@ -100,6 +100,7 @@ class RegisterPage extends GetView<RegisterController> {
                     controller: controller.phoneController,
                     cursorColor: Colors.white,
                     style: const TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -128,6 +129,7 @@ class RegisterPage extends GetView<RegisterController> {
                           controller: controller.codeController,
                           cursorColor: Colors.white,
                           style: const TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             prefixIcon: Container(
                               margin: const EdgeInsets.all(12),
@@ -225,6 +227,7 @@ class RegisterPage extends GetView<RegisterController> {
                     cursorColor: Colors.white,
                     style: const TextStyle(color: Colors.white),
                     obscureText: true,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -251,6 +254,7 @@ class RegisterPage extends GetView<RegisterController> {
                     cursorColor: Colors.white,
                     style: const TextStyle(color: Colors.white),
                     obscureText: true,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(12),
@@ -345,6 +349,7 @@ class RegisterPage extends GetView<RegisterController> {
                             const TextStyle(color: Colors.white, fontSize: 12),
                       ),
                       InkWell(
+                        onTap: () => controller.pushToAgreementPage(false),
                         child: Text(
                           'login.privacy'.tr,
                           style: const TextStyle(
@@ -357,6 +362,7 @@ class RegisterPage extends GetView<RegisterController> {
                         style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                       InkWell(
+                        onTap: () => controller.pushToAgreementPage(true),
                         child: Text(
                           'login.manual'.tr,
                           style: const TextStyle(

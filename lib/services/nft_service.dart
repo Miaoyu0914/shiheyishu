@@ -17,9 +17,47 @@ import 'package:shiheyishu/services/http/http_runner_params.dart';
 
 abstract class NFTService {
   //验证码
-  static final sendSms = buildHttpRunner<bool>((HttpRunnerParams params) async {
-    var res = await request('/app/auth/sendSms', params);
-    return res.success;
+  static final sendSMS = buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/auth/sendSms', params);
+    return true;
+  });
+
+  //注册
+  static final register = buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/auth/register', params);
+    return true;
+  });
+
+  //用户使用手册
+  static final getUserAgreement =
+  buildHttpRunner<String>((HttpRunnerParams params) async {
+    var res = await request('/app/auth/yhxy', params);
+    return res.data['content'];
+  });
+
+  //隐私政策
+  static final getPrivacyAgreement =
+  buildHttpRunner<String>((HttpRunnerParams params) async {
+    var res = await request('/app/auth/privacy', params);
+    return res.data['content'];
+  });
+
+  //忘记密码
+  static final changePSW = buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/auth/forgetPassword', params);
+    return true;
+  });
+
+  //修改登录密码
+  static final resetPSW = buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/member/editPassword', params);
+    return true;
+  });
+
+  //修改支付密码
+  static final resetSecondPSW = buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/member/editSecondPassword', params);
+    return true;
   });
 
   //登录

@@ -15,4 +15,16 @@ abstract class Routes {
   static const RESETPSW = '/reset_psw';
   static const AGREEMENT = '/agreement';
   static const PRIVACY = '/privacy';
+  static const BANKCARD = '/bank_card';
+  static const BINDINGBANKCARD = '/binding_bank_card';
+  static const REALNAME = '/real_name';
+  static const SERIES = '/series';
+  static const SHARERANK = '/share_rank';
+  static const MARKETRANK = '/market_rank';
+  static const SYNTHESISLIST = '/synthesis_list';
+  static const SYNTHESISDETAIL = '/synthesis_detail';
+  static const BLINDBOXDETAIL = '/blind_box_detail';
+  static const MINEBLINDBOXLIST = '/mine_blind_box_list';
+  static const MINEBLINDBOXDETAIL = '/mine_blind_box_detail';
+  static const OPENBLINDBOX = '/open_blind_box';
 }

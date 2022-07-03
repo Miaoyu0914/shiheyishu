@@ -20,8 +20,9 @@ class BlindBoxPage extends GetView<BlindBoxController> {
         appBar: AppBar(
           title: Center(
               child: Text(
-            'home'.tr,
-            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+            'mine.blind.box'.tr,
+            style: const TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
           )),
           leadingWidth: 0,
           leading: Container(),
@@ -58,145 +59,163 @@ class BlindBoxPage extends GetView<BlindBoxController> {
             childAspectRatio: 0.58),
         itemBuilder: (context, index) {
           BlindBoxListEntity blindBox = controller.blindBoxes![index];
-          return Container(
-            decoration: const BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.all(Radius.circular(15))),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 15),
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(15)),
-                          child: WrapperImage(
-                            url: blindBox.image,
-                            width: 150,
-                            height: 150,
+          return InkWell(
+            onTap: () => controller.pushBlindBoxDetailPage(index),
+            child: Container(
+              decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(15)),
+                            child: WrapperImage(
+                              url: blindBox.image,
+                              width: 150,
+                              height: 150,
+                            ),
                           ),
                         ),
-                      ),
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Opacity(
-                            opacity: 0.3,
-                            child: Container(
-                              margin: const EdgeInsets.only(left: 10,right: 10),
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.only(
-                                  top: 15, bottom: 15, right: 20, left: 20),
-                              decoration: BoxDecoration(
-                                  color: AppColors.blindBoxTitleBackColor,
-                                  border: Border.all(
-                                      color: AppColors.blindBoxTitleBorderColor,
-                                      width: 1),
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(15))),
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Opacity(
+                              opacity: 0.3,
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(left: 20, right: 20),
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.only(
+                                    top: 15, bottom: 15, right: 20, left: 20),
+                                decoration: BoxDecoration(
+                                    color: AppColors.blindBoxTitleBackColor,
+                                    border: Border.all(
+                                        color:
+                                            AppColors.blindBoxTitleBorderColor,
+                                        width: 1),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(15))),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20,right: 20),
-                            child: Text(
-                              blindBox.name!,
-                              maxLines: 1,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  height: 1,
-                                  overflow: TextOverflow.ellipsis),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 30, right: 30),
+                              child: Text(
+                                blindBox.name!,
+                                maxLines: 1,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    height: 1,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            'blind.box.creator'.tr,
-                            style: const TextStyle(
-                                color: AppColors.nftUnselectColor, fontSize: 10),
-                          ),
-                          Text(
-                            blindBox.authorName!,
-                            style: const TextStyle(color: Colors.white, fontSize: 10),
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5,bottom: 5),
-                        child: Row(
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        Row(
                           children: [
                             Text(
-                              'blind.box.issuer'.tr,
+                              'blind.box.creator'.tr,
                               style: const TextStyle(
-                                  color: AppColors.nftUnselectColor, fontSize: 10),
+                                  color: AppColors.nftUnselectColor,
+                                  fontSize: 10),
                             ),
                             Text(
-                              blindBox.issuer!,
-                              style: const TextStyle(color: Colors.white, fontSize: 10),
+                              blindBox.authorName!,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10),
                             )
                           ],
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'blind.box.amount'.tr,
-                            style: const TextStyle(
-                                color: AppColors.nftUnselectColor, fontSize: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          child: Row(
+                            children: [
+                              Text(
+                                'blind.box.issuer'.tr,
+                                style: const TextStyle(
+                                    color: AppColors.nftUnselectColor,
+                                    fontSize: 10),
+                              ),
+                              Text(
+                                blindBox.issuer!,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 10),
+                              )
+                            ],
                           ),
-                          Text(
-                            '${blindBox.num}',
-                            style: const TextStyle(color: Colors.white, fontSize: 10),
-                          ),
-                          Text(
-                            'blind.box.sale'.tr,
-                            style: const TextStyle(
-                                color: AppColors.nftUnselectColor, fontSize: 10),
-                          ),
-                          Text(
-                            '${blindBox.sale}',
-                            style: const TextStyle(color: Colors.white, fontSize: 10),
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5,bottom: 5),
-                        child: Row(
+                        ),
+                        Row(
                           children: [
                             Text(
-                              'blind.box.money'.tr,
+                              'blind.box.amount'.tr,
                               style: const TextStyle(
-                                  color: AppColors.codeButtonTitleColor, fontSize: 16),
+                                  color: AppColors.nftUnselectColor,
+                                  fontSize: 10),
                             ),
                             Text(
-                              blindBox.price!,
-                              style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 16),
+                              '${blindBox.num}',
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10),
+                            ),
+                            Text(
+                              'blind.box.sale'.tr,
+                              style: const TextStyle(
+                                  color: AppColors.nftUnselectColor,
+                                  fontSize: 10),
+                            ),
+                            Text(
+                              '${blindBox.sale}',
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10),
                             )
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          child: Row(
+                            children: [
+                              Text(
+                                'blind.box.money'.tr,
+                                style: const TextStyle(
+                                    color: AppColors.codeButtonTitleColor,
+                                    fontSize: 16),
+                              ),
+                              Text(
+                                blindBox.price!,
+                                style: const TextStyle(
+                                    color: AppColors.codeButtonTitleColor,
+                                    fontSize: 16),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         },
         itemCount: controller.blindBoxes!.length,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.only(bottom: 126,left: 15,right: 15));
+        padding: const EdgeInsets.only(bottom: 126, left: 15, right: 15));
   }
 }

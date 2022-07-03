@@ -2,21 +2,23 @@ import 'dart:math';
 
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
 import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
-import 'package:shiheyishu/pages/home/controllers/nft_detail_controller.dart';
+import 'package:shiheyishu/entities/blind_box_detail_entity.dart';
+import 'package:shiheyishu/pages/blind_box/controllers/blind_box_detail_controller.dart';
 
-class NFTDetailPage extends StatefulWidget {
-  const NFTDetailPage({Key? key}) : super(key: key);
+class BlindBoxDetailPage extends StatefulWidget {
+  const BlindBoxDetailPage({Key? key}) : super(key: key);
 
   @override
-  _NFTDetailPageState createState() => _NFTDetailPageState();
+  State<BlindBoxDetailPage> createState() => _BlindBoxDetailPageState();
 }
 
-class _NFTDetailPageState extends State<NFTDetailPage>
+class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
     with SingleTickerProviderStateMixin {
   late final AnimationController _repeatController;
 
@@ -32,11 +34,11 @@ class _NFTDetailPageState extends State<NFTDetailPage>
     _animation = Tween<double>(begin: 0, end: 360.0).animate(_repeatController);
   }
 
-  final controller = Get.find<NFTDetailController>();
+  final controller = Get.find<BlindBoxDetailController>();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NFTDetailController>(builder: (controller) {
+    return GetBuilder<BlindBoxDetailController>(builder: (controller) {
       if (controller.isBusy) {
         return ViewStateBusyWidget();
       }
@@ -56,13 +58,21 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 case 3:
                   return _nftInfo();
                 case 4:
-                  return _buyInfo();
+                  return _allGoods();
                 case 5:
+                  return _detailShow();
+                case 6:
+                  return _blindBoxIntroduce();
+                case 7:
+                  return _orderList();
+                case 8:
+                  return _buyInfo();
+                case 9:
                   return _buyButton();
                 default:
                   return Container();
               }
-            }, childCount: 6))
+            }, childCount: 10))
           ],
         ),
       );
@@ -85,7 +95,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
         padding: const EdgeInsets.only(top: 16.5, bottom: 16.5),
         margin: const EdgeInsets.only(top: 15, bottom: 50, left: 50, right: 50),
         child: Text(
-          'nft.detail.buy'.tr,
+          'blind.box.detail.buy'.tr,
           style: const TextStyle(
               height: 1, color: AppColors.loginButtonTitleColor, fontSize: 17),
         ),
@@ -122,7 +132,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 ),
               ),
               Text(
-                'nft.detail.must.know'.tr,
+                'blind.box.detail.must.know'.tr,
                 style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -133,11 +143,331 @@ class _NFTDetailPageState extends State<NFTDetailPage>
           Padding(
             padding: const EdgeInsets.only(top: 10, bottom: 15),
             child: Text(
-              '          ' + controller.nftDetailEntity!.purchaseInfo!,
+              '          ' + controller.blindBoxDetailEntity!.purchaseInfo!,
               style: const TextStyle(
                   color: AppColors.nftDetailInfoColor, fontSize: 13),
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget _orderList() {
+    return Offstage(
+      offstage: controller.blindBoxDetailEntity!.orderListArr!.isEmpty,
+      child: Container(
+        margin: const EdgeInsets.all(15),
+        padding: const EdgeInsets.only(top: 15,left: 15,right: 15),
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                  color: AppColors.borderInsideColor,
+                  offset: Offset(0, 3),
+                  blurRadius: 6,
+                  spreadRadius: 1,
+                  inset: true),
+            ]),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: WrapperImage(
+                      url: 'diamonds.png',
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
+                  ),
+                  Text(
+                    'blind.box.detail.all'.tr,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  )
+                ],
+              ),
+            ),
+            ListView.builder(
+              itemBuilder: (context, index) {
+                OrderListArr order = controller.blindBoxDetailEntity!.orderListArr![index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.all(Radius.circular(22)),
+                            child: WrapperImage(url: order.img, width: 44, height: 44,),
+                          ),
+                          Column(
+                            children: [
+                              Text(order.name!, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),),
+                              Text(order.time!, style: const TextStyle(color: Colors.white, fontSize: 10),),
+                            ],
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(order.goodDesc!, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 13, fontWeight: FontWeight.bold),),
+                          Text('blind.box.detail.buy.in'.tr, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 10),),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              },
+              itemCount: controller.blindBoxDetailEntity!.goodsList!.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _blindBoxIntroduce() {
+    return Container(
+      margin: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.borderInsideColor,
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                spreadRadius: 1,
+                inset: true),
+          ]),
+      child: Column(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: WrapperImage(
+                      url: 'diamonds.png',
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
+                  ),
+                  Text(
+                    'blind.box.detail.introduce'.tr,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 15),
+                child: Text(
+                  '          ' + controller.blindBoxDetailEntity!.info!,
+                  style: const TextStyle(
+                      color: AppColors.nftDetailInfoColor, fontSize: 13),
+                ),
+              )
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: WrapperImage(
+                      url: 'diamonds.png',
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
+                  ),
+                  Text(
+                    'blind.box.detail.nft.introduce'.tr,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Text(
+                  '          ' + controller.blindBoxDetailEntity!.info!,
+                  style: const TextStyle(
+                      color: AppColors.nftDetailInfoColor, fontSize: 13),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _detailShow() {
+    return Container(
+      margin: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.borderInsideColor,
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                spreadRadius: 1,
+                inset: true),
+          ]),
+      child: Column(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: WrapperImage(
+                        url: 'diamonds.png',
+                        width: 20,
+                        height: 20,
+                        imageType: ImageType.assets,
+                      ),
+                    ),
+                    Text(
+                      'blind.box.detail.detail'.tr,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    )
+                  ],
+                ),
+              ),
+              HtmlWidget(controller.blindBoxDetailEntity!.content!,)
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _allGoods() {
+    return Container(
+      margin: const EdgeInsets.all(15),
+      padding: const EdgeInsets.only(top: 15,left: 15,right: 15),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.borderInsideColor,
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                spreadRadius: 1,
+                inset: true),
+          ]),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: WrapperImage(
+                    url: 'diamonds.png',
+                    width: 20,
+                    height: 20,
+                    imageType: ImageType.assets,
+                  ),
+                ),
+                Text(
+                  'blind.box.detail.all'.tr,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                )
+              ],
+            ),
+          ),
+          ListView.builder(
+            itemBuilder: (context, index) {
+              GoodsList good =
+                  controller.blindBoxDetailEntity!.goodsList![index];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Text(
+                            good.goodsName!,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'blind.box.detail.pre'.tr,
+                              style: const TextStyle(
+                                  color: AppColors.nftUnselectColor,
+                                  fontSize: 10),
+                            ),
+                            Text(
+                              '￥${good.price}',
+                              style: const TextStyle(
+                                  color: AppColors.nftUnselectColor,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    Text(
+                      'blind.box.detail.percent'.tr + '${good.probability}%',
+                      style: const TextStyle(
+                          color: AppColors.codeButtonTitleColor, fontSize: 12),
+                    )
+                  ],
+                ),
+              );
+            },
+            itemCount: controller.blindBoxDetailEntity!.goodsList!.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+          ),
         ],
       ),
     );
@@ -174,7 +504,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                     ),
                   ),
                   Text(
-                    'nft.detail.nft.info'.tr,
+                    'blind.box.detail.issuer.info'.tr,
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -185,7 +515,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
                 child: Text(
-                  '          ' + controller.nftDetailEntity!.info!,
+                  '          ' + controller.blindBoxDetailEntity!.issuerInfo!,
                   style: const TextStyle(
                       color: AppColors.nftDetailInfoColor, fontSize: 13),
                 ),
@@ -207,40 +537,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                     ),
                   ),
                   Text(
-                    'nft.detail.issuer.info'.tr,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 15),
-                child: Text(
-                  '          ' + controller.nftDetailEntity!.issuerInfo!,
-                  style: const TextStyle(
-                      color: AppColors.nftDetailInfoColor, fontSize: 13),
-                ),
-              )
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: WrapperImage(
-                      url: 'diamonds.png',
-                      width: 20,
-                      height: 20,
-                      imageType: ImageType.assets,
-                    ),
-                  ),
-                  Text(
-                    'nft.detail.creator.info'.tr,
+                    'blind.box.detail.creator.info'.tr,
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -251,130 +548,12 @@ class _NFTDetailPageState extends State<NFTDetailPage>
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  '          ' + controller.nftDetailEntity!.authorInfo!,
+                  '          ' + controller.blindBoxDetailEntity!.authorInfo!,
                   style: const TextStyle(
                       color: AppColors.nftDetailInfoColor, fontSize: 13),
                 ),
               )
             ],
-          ),
-          Container(
-            margin: const EdgeInsets.all(15),
-            padding: const EdgeInsets.all(15),
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColors.borderInsideColor,
-                      offset: Offset(0, 3),
-                      blurRadius: 6,
-                      spreadRadius: 1,
-                      inset: true),
-                ]),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'nft.detail.identity.info'.tr,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'nft.detail.album'.tr,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 13),
-                      ),
-                      InkWell(
-                        child: Row(
-                          children: [
-                            Text(
-                              controller.nftDetailEntity!.seriesName! + '  ',
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 13),
-                            ),
-                            WrapperImage(
-                              url: 'arrow.png',
-                              width: 5,
-                              height: 5,
-                              imageType: ImageType.assets,
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'nft.detail.number'.tr,
-                      style: const TextStyle(color: Colors.white, fontSize: 13),
-                    ),
-                    Text(
-                      '#${controller.nftDetailEntity!.advanceGoodsId!}/${controller.nftDetailEntity!.advanceNum!}',
-                      style: const TextStyle(color: Colors.white, fontSize: 13),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'nft.detail.type'.tr,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 13),
-                      ),
-                      Text(
-                        controller.nftDetailEntity!.equityTypeDesc!,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 13),
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'nft.detail.standard'.tr,
-                      style: const TextStyle(color: Colors.white, fontSize: 13),
-                    ),
-                    Text(
-                      controller.nftDetailEntity!.standard!,
-                      style: const TextStyle(color: Colors.white, fontSize: 13),
-                    ),
-                  ],
-                ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 15),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Text(
-                //         'nft.detail.flag'.tr,
-                //         style:
-                //             const TextStyle(color: Colors.white, fontSize: 13),
-                //       ),
-                //       Text(
-                //         'H7SFG7SGFSF****H8FH8H',
-                //         style:
-                //             const TextStyle(color: Colors.white, fontSize: 13),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-              ],
-            ),
           )
         ],
       ),
@@ -403,7 +582,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
               ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(5)),
                 child: WrapperImage(
-                  url: controller.nftDetailEntity!.authorImage,
+                  url: controller.blindBoxDetailEntity!.authorImage,
                   width: 54,
                   height: 54,
                 ),
@@ -415,8 +594,8 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(
-                        'nft.detail.creator'.tr +
-                            controller.nftDetailEntity!.authorName!,
+                        'blind.box.detail.creator'.tr +
+                            controller.blindBoxDetailEntity!.authorName!,
                         maxLines: 1,
                         style: const TextStyle(
                             color: Colors.white,
@@ -425,8 +604,8 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                       ),
                     ),
                     Text(
-                      'nft.detail.issuer'.tr +
-                          controller.nftDetailEntity!.issuer!,
+                      'blind.box.detail.issuer'.tr +
+                          controller.blindBoxDetailEntity!.issuer!,
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -440,14 +619,14 @@ class _NFTDetailPageState extends State<NFTDetailPage>
           Row(
             children: [
               Text(
-                'nft.detail.money'.tr,
+                'blind.box.detail.money'.tr,
                 style: const TextStyle(
                     color: AppColors.codeButtonTitleColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                controller.nftDetailEntity!.price!,
+                controller.blindBoxDetailEntity!.price!,
                 style: const TextStyle(
                     color: AppColors.codeButtonTitleColor,
                     fontSize: 20,
@@ -473,7 +652,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
             imageType: ImageType.assets,
           ),
           Text(
-            ' ' + controller.nftDetailEntity!.goodsName! + ' ',
+            ' ' + controller.blindBoxDetailEntity!.name! + ' ',
             style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
           ),
@@ -521,7 +700,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                     ..rotateY(pi * _animation.value / 180),
                   alignment: FractionalOffset.center, // 以轴中心开始动画
                   child: WrapperImage(
-                    url: controller.nftDetailEntity!.goodsImage,
+                    url: controller.blindBoxDetailEntity!.image,
                     width: 180,
                     height: 180,
                   ),
@@ -548,7 +727,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 ),
               ),
               Text(
-                'nft.detail.title'.tr,
+                'blind.box.detail.title'.tr,
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,

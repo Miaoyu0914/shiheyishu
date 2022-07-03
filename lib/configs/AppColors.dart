@@ -23,4 +23,5 @@ class AppColors{
   static const Color blindBoxTitleBackColor = Color(0xFF506E79);
   static const Color mineCellLineColor = Color(0xFF474747);
   static const Color nftDetailInfoColor = Color(0xFFD9D9D9);
+  static const Color rankBackColor = Color(0xFFFFECCB);
 }

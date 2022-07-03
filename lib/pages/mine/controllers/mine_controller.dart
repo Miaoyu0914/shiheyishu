@@ -6,6 +6,8 @@ import 'package:shiheyishu/configs/state/view_state_controller.dart';
 import 'package:shiheyishu/configs/storage_manager.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
 import 'package:shiheyishu/routes/app_pages.dart';
+import 'package:shiheyishu/services/http/http_runner_params.dart';
+import 'package:shiheyishu/services/nft_service.dart';
 
 class MineController extends ViewStateController {
   LoginEntity? userInfo;
@@ -14,13 +16,17 @@ class MineController extends ViewStateController {
     'mine.market.order'.tr,
     'mine.platform.order'.tr,
     'mine.donation'.tr,
-    'mine.compose'.tr
+    'mine.compose'.tr,
+    'mine.share.rank'.tr,
+    'mine.market.rank'.tr
   ];
   List<String> menuImageList = [
     'mine_3d_room.png',
     'mine_3d_room.png',
     'mine_3d_room.png',
     'mine_donation.png',
+    'mine_compose.png',
+    'mine_compose.png',
     'mine_compose.png'
   ];
   List<String> settingTitleList = [
@@ -33,21 +39,56 @@ class MineController extends ViewStateController {
     'mine_safe_setting.png',
     'mine_logout.png'
   ];
+  List<String> settingHasRealNameTitleList = [
+    'mine.safe.setting'.tr,
+    'mine.logout'.tr
+  ];
+  List<String> settingHasRealNameImageList = [
+    'mine_safe_setting.png',
+    'mine_logout.png'
+  ];
+
+  String? imagePath = '';
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     userInfo = Constant.USERINFOVALUE;
+    await getMineImage();
+    update();
+  }
+
+  Future<void> getMineImage() async {
+    imagePath = await NFTService.getMineImage(HttpRunnerParams());
   }
 
   void pushToWalletPage() {
     Get.toNamed(Routes.NAV + Routes.WALLET);
   }
 
+  void pushToMenuPages(int index) {
+    switch (index){
+      case 4:
+        Get.toNamed(Routes.NAV + Routes.SYNTHESISLIST);
+        break;
+      case 5:
+        Get.toNamed(Routes.NAV + Routes.SHARERANK);
+        break;
+      case 6:
+        Get.toNamed(Routes.NAV + Routes.MARKETRANK);
+        break;
+      default:
+        break;
+    }
+  }
+
   void pushToSettingPages(int index) {
     switch (index) {
       case 0:
         Get.toNamed(Routes.NAV + Routes.SAFE);
+        break;
+      case 1:
+        userInfo!.isReal == 0 ? Get.toNamed(Routes.NAV + Routes.REALNAME) : logout();
         break;
       case 2:
         logout();

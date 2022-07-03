@@ -33,7 +33,7 @@ class HomeController extends ViewStateController {
   bool isHotNotEnough = false;
   bool isFutureNotEnough = false;
   RefreshController refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   @override
   Future<void> onInit() async {
@@ -54,9 +54,8 @@ class HomeController extends ViewStateController {
   }
 
   Future<void> getHomeBoard() async {
-    boardListEntity = await NFTService.getBoards(HttpRunnerParams(data: {
-      "page": 1
-    }));
+    boardListEntity =
+        await NFTService.getBoards(HttpRunnerParams(data: {"page": 1}));
   }
 
   Future<void> getHomeAlbum() async {
@@ -64,10 +63,8 @@ class HomeController extends ViewStateController {
   }
 
   Future<void> getHotNFTList() async {
-    hotNFTEntity = await NFTService.getNFTs(HttpRunnerParams(data: {
-      "status": 0,
-      "page": hotPage
-    }));
+    hotNFTEntity = await NFTService.getNFTs(
+        HttpRunnerParams(data: {"status": 0, "page": hotPage}));
     hotNFTList.addAll(hotNFTEntity!.data!);
     if (hotNFTEntity!.data!.length < Constant.refreshListLimit) {
       isHotNotEnough = true;
@@ -75,10 +72,8 @@ class HomeController extends ViewStateController {
   }
 
   Future<void> getFutureNFTList() async {
-    futureNFTEntity = await NFTService.getNFTs(HttpRunnerParams(data: {
-      "status": 1,
-      "page": futurePage
-    }));
+    futureNFTEntity = await NFTService.getNFTs(
+        HttpRunnerParams(data: {"status": 1, "page": futurePage}));
     futureNFTList.addAll(futureNFTEntity!.data!);
     if (futureNFTEntity!.data!.length < Constant.refreshListLimit) {
       isFutureNotEnough = true;
@@ -87,19 +82,29 @@ class HomeController extends ViewStateController {
 
   Future<void> initTimer() async {
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      if(bannerController!.positions.isNotEmpty){
-        if(bannerController!.page!.toInt() < banners!.length - 1){
-          bannerController?.animateToPage((bannerController!.page!.toInt()) + 1, duration: const Duration(milliseconds: 300), curve: Curves.linear);
-        }else{
-          bannerController?.animateToPage(0, duration: const Duration(milliseconds: 300), curve: Curves.linear);
+      if (bannerController!.positions.isNotEmpty) {
+        if (bannerController!.page!.toInt() < banners!.length - 1) {
+          bannerController?.animateToPage((bannerController!.page!.toInt()) + 1,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.linear);
+        } else {
+          bannerController?.animateToPage(0,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.linear);
         }
       }
 
-      if(boardController!.positions.isNotEmpty){
-        if(boardController!.page!.toInt() < boardListEntity!.data!.length - 1){
-          boardController?.animateToPage(((boardController?.page?.toInt())! + 1), duration: const Duration(milliseconds: 300), curve: Curves.linear);
-        }else{
-          boardController?.animateToPage(0, duration: const Duration(milliseconds: 300), curve: Curves.linear);
+      if (boardController!.positions.isNotEmpty) {
+        if (boardController!.page!.toInt() <
+            boardListEntity!.data!.length - 1) {
+          boardController?.animateToPage(
+              ((boardController?.page?.toInt())! + 1),
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.linear);
+        } else {
+          boardController?.animateToPage(0,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.linear);
         }
       }
 
@@ -109,17 +114,18 @@ class HomeController extends ViewStateController {
 
   void tabClicked(int index) {
     nftIndex = index;
-    nftController?.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.linear);
-    if(index == 0){
-      if(isHotNotEnough){
+    nftController?.animateToPage(index,
+        duration: const Duration(milliseconds: 300), curve: Curves.linear);
+    if (index == 0) {
+      if (isHotNotEnough) {
         refreshController.loadNoData();
-      }else{
+      } else {
         refreshController.footerMode!.setValueWithNoNotify(LoadStatus.idle);
       }
-    }else{
-      if(isFutureNotEnough){
+    } else {
+      if (isFutureNotEnough) {
         refreshController.loadNoData();
-      }else{
+      } else {
         refreshController.footerMode!.setValueWithNoNotify(LoadStatus.idle);
       }
     }
@@ -127,7 +133,7 @@ class HomeController extends ViewStateController {
   }
 
   void refreshList() async {
-    if(nftIndex == 0){
+    if (nftIndex == 0) {
       hotNFTList.clear();
       hotPage = 1;
       isHotNotEnough = false;
@@ -137,7 +143,7 @@ class HomeController extends ViewStateController {
       if (isHotNotEnough) {
         refreshController.loadNoData();
       }
-    }else{
+    } else {
       futureNFTList.clear();
       futurePage = 1;
       isFutureNotEnough = false;
@@ -152,7 +158,7 @@ class HomeController extends ViewStateController {
   }
 
   void loadMoreList() async {
-    if(nftIndex == 0){
+    if (nftIndex == 0) {
       hotPage++;
       await getHotNFTList();
       if (isHotNotEnough) {
@@ -160,7 +166,7 @@ class HomeController extends ViewStateController {
       } else {
         refreshController.loadComplete();
       }
-    }else{
+    } else {
       futurePage++;
       await getFutureNFTList();
       if (isFutureNotEnough) {
@@ -173,15 +179,20 @@ class HomeController extends ViewStateController {
   }
 
   void pushToBoardListPage() {
-    Get.toNamed(Routes.NAV+Routes.BOARDLIST);
+    Get.toNamed(Routes.NAV + Routes.BOARDLIST);
   }
 
   void pushToBoardDetailPage(int index) {
-    Get.toNamed(Routes.NAV+Routes.BOARDLIST+Routes.BOARDDETAIL, arguments: {'id': boardListEntity!.data![index].id});
+    Get.toNamed(Routes.NAV + Routes.BOARDLIST + Routes.BOARDDETAIL,
+        arguments: {'id': boardListEntity!.data![index].id});
   }
 
-  void pushToNFTDetailPage(var id){
-    Get.toNamed(Routes.NAV+Routes.NFTDETAIL, arguments: {'id': id});
+  void pushToNFTDetailPage(var id) {
+    Get.toNamed(Routes.NAV + Routes.NFTDETAIL, arguments: {'id': id});
+  }
+
+  void pushToAlbumPage(var id) {
+    Get.toNamed(Routes.NAV + Routes.SERIES, arguments: {'id': id});
   }
 
   @override

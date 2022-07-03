@@ -67,7 +67,7 @@ class MinePage extends GetView<MineController> {
                 Row(
                   children: [
                     WrapperImage(
-                      url: controller.settingImageList[index],
+                      url: controller.userInfo!.isReal == 0 ? controller.settingImageList[index] : controller.settingHasRealNameImageList[index],
                       width: 20,
                       height: 20,
                       imageType: ImageType.assets,
@@ -75,7 +75,7 @@ class MinePage extends GetView<MineController> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Text(
-                        controller.settingTitleList[index],
+                        controller.userInfo!.isReal == 0 ? controller.settingTitleList[index] :controller.settingHasRealNameTitleList[index],
                         style: const TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     )
@@ -94,7 +94,7 @@ class MinePage extends GetView<MineController> {
             ),
           );
         },
-        itemCount: controller.settingTitleList.length,
+        itemCount: controller.userInfo!.isReal == 0 ? controller.settingTitleList.length : controller.settingHasRealNameTitleList.length,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         separatorBuilder: (BuildContext context, int index) {
@@ -126,36 +126,39 @@ class MinePage extends GetView<MineController> {
       child: ListView.separated(
         padding: const EdgeInsets.only(top: 20,bottom: 20,left: 20),
         itemBuilder: (context, index) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  WrapperImage(
-                    url: controller.menuImageList[index],
-                    width: 20,
-                    height: 20,
+          return InkWell(
+            onTap: () => controller.pushToMenuPages(index),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    WrapperImage(
+                      url: controller.menuImageList[index],
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        controller.menuTitleList[index],
+                        style: const TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: WrapperImage(
+                    url: 'arrow.png',
+                    width: 7,
+                    height: 14,
                     imageType: ImageType.assets,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      controller.menuTitleList[index],
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: WrapperImage(
-                  url: 'arrow.png',
-                  width: 7,
-                  height: 14,
-                  imageType: ImageType.assets,
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           );
         },
         itemCount: controller.menuTitleList.length,
@@ -235,10 +238,10 @@ class MinePage extends GetView<MineController> {
     return Stack(
       children: [
         WrapperImage(
-          url: 'liuxing.png',
+          url: controller.imagePath,
           width: Get.width,
           height: Get.height / 5,
-          imageType: ImageType.assets,
+          fit: BoxFit.fill,
         ),
         Column(
           children: [
@@ -256,17 +259,17 @@ class MinePage extends GetView<MineController> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.only(left: 15,right: 15),
               child: Stack(
                 children: [
                   WrapperImage(
                     url: 'mine_back.png',
                     width: Get.width - 30,
-                    height: 150,
+                    height: 170,
                     imageType: ImageType.assets,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(30),
                     child: Row(
                       children: [
                         ClipRRect(

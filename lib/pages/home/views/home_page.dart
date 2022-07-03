@@ -343,34 +343,37 @@ class HomePage extends GetView<HomeController> {
       child: ListView.builder(
         itemBuilder: (context, index) {
           HomeAlbumEntity album = controller.albums![index];
-          return Container(
-            margin: const EdgeInsets.only(left: 15),
-            padding:
-                const EdgeInsets.only(left: 3, right: 10, top: 3, bottom: 3),
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(18)),
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColors.borderInsideColor,
-                      offset: Offset(0, 3),
-                      blurRadius: 6,
-                      spreadRadius: 1,
-                      inset: true),
-                ]),
-            child: Row(
-              children: [
-                ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(15)),
-                    child: WrapperImage(
-                      url: album.icon,
-                      width: 30,
-                      height: 30,
-                    )),
-                Text(
-                  album.seriesName!,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
-                )
-              ],
+          return InkWell(
+            onTap: () => controller.pushToAlbumPage(album.id),
+            child: Container(
+              margin: const EdgeInsets.only(left: 15),
+              padding:
+                  const EdgeInsets.only(left: 3, right: 10, top: 3, bottom: 3),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(18)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: AppColors.borderInsideColor,
+                        offset: Offset(0, 3),
+                        blurRadius: 6,
+                        spreadRadius: 1,
+                        inset: true),
+                  ]),
+              child: Row(
+                children: [
+                  ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                      child: WrapperImage(
+                        url: album.icon,
+                        width: 30,
+                        height: 30,
+                      )),
+                  Text(
+                    album.seriesName!,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  )
+                ],
+              ),
             ),
           );
         },

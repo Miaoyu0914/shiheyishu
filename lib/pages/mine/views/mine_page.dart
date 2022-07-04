@@ -199,6 +199,7 @@ class MinePage extends GetView<MineController> {
           ),
         ),
         InkWell(
+          onTap: () => controller.pushToMineBlindBoxPage(),
           child: Column(
             children: [
               WrapperImage(
@@ -215,6 +216,7 @@ class MinePage extends GetView<MineController> {
           ),
         ),
         InkWell(
+          onTap: () => controller.pushToMineAlbumListPage(),
           child: Column(
             children: [
               WrapperImage(

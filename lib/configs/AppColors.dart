@@ -24,4 +24,7 @@ class AppColors{
   static const Color mineCellLineColor = Color(0xFF474747);
   static const Color nftDetailInfoColor = Color(0xFFD9D9D9);
   static const Color rankBackColor = Color(0xFFFFECCB);
+  static const Color payKindBackColor = Color(0xFF212227);
+  static const Color payAllKindBackColor = Color(0xFF000000);
+  static const Color mineBlindBoxOffsetColor = Color.fromRGBO(157, 179, 198, 0.49);
 }

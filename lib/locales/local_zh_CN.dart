@@ -108,6 +108,17 @@ const Map<String, String> zh_CN = {
   'market.screen': '筛选 ',
   'market.number': '编号：',
   'market.money': '¥ ',
+  'market.detail.title': '商品详情',
+  'market.detail.record': '交易记录',
+
+  'pay.title': '支付',
+  'pay.count.down': '支付剩余：',
+  'pay.money': '￥',
+  'pay.balance': '余额',
+  'pay.zhifubao': '支付宝',
+  'pay.must.know': '购物须知',
+  'pay.pay': '支付',
+  'pay.cancel': '取消',
 
 
 
@@ -182,6 +193,7 @@ const Map<String, String> zh_CN = {
   'mine.blind.box.future.open': '未开启',
   'mine.blind.box.order': '订单编号：',
   'mine.blind.box.money': '￥ ',
+  'mine.album.title': '我的藏品',
 
   'wallet.title':'钱包',
   'wallet.list.title':' 钱包明细',

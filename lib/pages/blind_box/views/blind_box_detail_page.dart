@@ -226,7 +226,7 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
                   ),
                 );
               },
-              itemCount: controller.blindBoxDetailEntity!.goodsList!.length,
+              itemCount: controller.blindBoxDetailEntity!.orderListArr!.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
@@ -375,100 +375,103 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
   }
 
   Widget _allGoods() {
-    return Container(
-      margin: const EdgeInsets.all(15),
-      padding: const EdgeInsets.only(top: 15,left: 15,right: 15),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-                color: AppColors.borderInsideColor,
-                offset: Offset(0, 3),
-                blurRadius: 6,
-                spreadRadius: 1,
-                inset: true),
-          ]),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: WrapperImage(
-                    url: 'diamonds.png',
-                    width: 20,
-                    height: 20,
-                    imageType: ImageType.assets,
+    return Offstage(
+      offstage: controller.blindBoxDetailEntity!.goodsList!.isEmpty,
+      child: Container(
+        margin: const EdgeInsets.all(15),
+        padding: const EdgeInsets.only(top: 15,left: 15,right: 15),
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                  color: AppColors.borderInsideColor,
+                  offset: Offset(0, 3),
+                  blurRadius: 6,
+                  spreadRadius: 1,
+                  inset: true),
+            ]),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: WrapperImage(
+                      url: 'diamonds.png',
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
                   ),
-                ),
-                Text(
-                  'blind.box.detail.all'.tr,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15),
-                )
-              ],
+                  Text(
+                    'blind.box.detail.all'.tr,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  )
+                ],
+              ),
             ),
-          ),
-          ListView.builder(
-            itemBuilder: (context, index) {
-              GoodsList good =
-                  controller.blindBoxDetailEntity!.goodsList![index];
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
-                          child: Text(
-                            good.goodsName!,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'blind.box.detail.pre'.tr,
+            ListView.builder(
+              itemBuilder: (context, index) {
+                GoodsList good =
+                    controller.blindBoxDetailEntity!.goodsList![index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              good.goodsName!,
                               style: const TextStyle(
-                                  color: AppColors.nftUnselectColor,
-                                  fontSize: 10),
-                            ),
-                            Text(
-                              '￥${good.price}',
-                              style: const TextStyle(
-                                  color: AppColors.nftUnselectColor,
+                                  color: Colors.white,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    Text(
-                      'blind.box.detail.percent'.tr + '${good.probability}%',
-                      style: const TextStyle(
-                          color: AppColors.codeButtonTitleColor, fontSize: 12),
-                    )
-                  ],
-                ),
-              );
-            },
-            itemCount: controller.blindBoxDetailEntity!.goodsList!.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
-          ),
-        ],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'blind.box.detail.pre'.tr,
+                                style: const TextStyle(
+                                    color: AppColors.nftUnselectColor,
+                                    fontSize: 10),
+                              ),
+                              Text(
+                                '￥${good.price}',
+                                style: const TextStyle(
+                                    color: AppColors.nftUnselectColor,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      Text(
+                        'blind.box.detail.percent'.tr + '${good.probability}%',
+                        style: const TextStyle(
+                            color: AppColors.codeButtonTitleColor, fontSize: 12),
+                      )
+                    ],
+                  ),
+                );
+              },
+              itemCount: controller.blindBoxDetailEntity!.goodsList!.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+            ),
+          ],
+        ),
       ),
     );
   }

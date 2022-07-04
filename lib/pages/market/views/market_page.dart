@@ -71,101 +71,104 @@ class MarketPage extends GetView<MarketController> {
                       childAspectRatio: 0.67),
                   itemBuilder: (context, index) {
                     Data nft =  controller.marketNFTs[index];
-                    return Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Stack(
-                              alignment: Alignment.bottomCenter,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 15),
-                                  child: ClipRRect(
-                                    borderRadius: const BorderRadius.all(Radius.circular(15)),
-                                    child: WrapperImage(
-                                      url: nft.img,
-                                      width: 150,
-                                      height: 150,
+                    return InkWell(
+                      onTap: () => controller.pushToMarketDetailPage(index),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(15))),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Stack(
+                                alignment: Alignment.bottomCenter,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 15),
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                      child: WrapperImage(
+                                        url: nft.img,
+                                        width: 150,
+                                        height: 150,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Opacity(
-                                      opacity: 0.3,
-                                      child: Container(
-                                        margin: const EdgeInsets.only(left: 10,right: 10),
-                                        alignment: Alignment.center,
-                                        padding: const EdgeInsets.only(
-                                            top: 15, bottom: 15, right: 20, left: 20),
-                                        decoration: BoxDecoration(
-                                            color: AppColors.blindBoxTitleBackColor,
-                                            border: Border.all(
-                                                color: AppColors.blindBoxTitleBorderColor,
-                                                width: 1),
-                                            borderRadius:
-                                            const BorderRadius.all(Radius.circular(15))),
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Opacity(
+                                        opacity: 0.3,
+                                        child: Container(
+                                          margin: const EdgeInsets.only(left: 10,right: 10),
+                                          alignment: Alignment.center,
+                                          padding: const EdgeInsets.only(
+                                              top: 15, bottom: 15, right: 20, left: 20),
+                                          decoration: BoxDecoration(
+                                              color: AppColors.blindBoxTitleBackColor,
+                                              border: Border.all(
+                                                  color: AppColors.blindBoxTitleBorderColor,
+                                                  width: 1),
+                                              borderRadius:
+                                              const BorderRadius.all(Radius.circular(15))),
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 20,right: 20),
-                                      child: Text(
-                                        nft.goodName!,
-                                        maxLines: 1,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 13,
-                                            height: 1,
-                                            overflow: TextOverflow.ellipsis),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 20,right: 20),
+                                        child: Text(
+                                          nft.goodName!,
+                                          maxLines: 1,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              height: 1,
+                                              overflow: TextOverflow.ellipsis),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                )
-                              ],
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'market.number'.tr,
-                                      style: const TextStyle(
-                                          color: AppColors.nftUnselectColor, fontSize: 10),
-                                    ),
-                                    Text(
-                                      '${nft.good!.limitNum}/${nft.good!.totalNum}',
-                                      style: const TextStyle(color: Colors.white, fontSize: 10),
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 5,bottom: 5),
-                                  child: Row(
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                              child: Column(
+                                children: [
+                                  Row(
                                     children: [
                                       Text(
-                                        'market.money'.tr,
+                                        'market.number'.tr,
                                         style: const TextStyle(
-                                            color: AppColors.codeButtonTitleColor, fontSize: 16),
+                                            color: AppColors.nftUnselectColor, fontSize: 10),
                                       ),
                                       Text(
-                                        nft.price!,
-                                        style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 16),
+                                        '${nft.good!.limitNum}/${nft.good!.totalNum}',
+                                        style: const TextStyle(color: Colors.white, fontSize: 10),
                                       )
                                     ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5,bottom: 5),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'market.money'.tr,
+                                          style: const TextStyle(
+                                              color: AppColors.codeButtonTitleColor, fontSize: 16),
+                                        ),
+                                        Text(
+                                          nft.price!,
+                                          style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 16),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },

@@ -7,16 +7,17 @@ import 'package:shiheyishu/configs/AppColors.dart';
 import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
-import 'package:shiheyishu/pages/home/controllers/nft_detail_controller.dart';
+import 'package:shiheyishu/entities/market_detail_entity.dart';
+import 'package:shiheyishu/pages/market/controllers/market_detail_controller.dart';
 
-class NFTDetailPage extends StatefulWidget {
-  const NFTDetailPage({Key? key}) : super(key: key);
+class MarketDetailPage extends StatefulWidget {
+  const MarketDetailPage({Key? key}) : super(key: key);
 
   @override
-  _NFTDetailPageState createState() => _NFTDetailPageState();
+  _MarketDetailPageState createState() => _MarketDetailPageState();
 }
 
-class _NFTDetailPageState extends State<NFTDetailPage>
+class _MarketDetailPageState extends State<MarketDetailPage>
     with SingleTickerProviderStateMixin {
   late final AnimationController _repeatController;
 
@@ -24,7 +25,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
 
   @override
   void initState() {
-    // TODO: implement initState
+// TODO: implement initState
     super.initState();
     _repeatController =
         AnimationController(vsync: this, duration: const Duration(seconds: 5))
@@ -32,11 +33,11 @@ class _NFTDetailPageState extends State<NFTDetailPage>
     _animation = Tween<double>(begin: 0, end: 360.0).animate(_repeatController);
   }
 
-  final controller = Get.find<NFTDetailController>();
+  final controller = Get.find<MarketDetailController>();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NFTDetailController>(builder: (controller) {
+    return GetBuilder<MarketDetailController>(builder: (controller) {
       if (controller.isBusy) {
         return ViewStateBusyWidget();
       }
@@ -56,13 +57,15 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 case 3:
                   return _nftInfo();
                 case 4:
-                  return _buyInfo();
+                  return _orderList();
                 case 5:
+                  return _buyInfo();
+                case 6:
                   return _buyButton();
                 default:
                   return Container();
               }
-            }, childCount: 6))
+            }, childCount: 7))
           ],
         ),
       );
@@ -134,12 +137,107 @@ class _NFTDetailPageState extends State<NFTDetailPage>
           Padding(
             padding: const EdgeInsets.only(top: 10, bottom: 15),
             child: Text(
-              '          ' + controller.nftDetailEntity!.purchaseInfo!,
+              '          ' + controller.marketDetailEntity!.good!.purchaseInfo!,
               style: const TextStyle(
                   color: AppColors.nftDetailInfoColor, fontSize: 13),
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _orderList() {
+    return Offstage(
+      offstage: controller.marketDetailEntity!.logs!.isEmpty,
+      child: Container(
+        margin: const EdgeInsets.all(15),
+        padding: const EdgeInsets.only(top: 15,left: 15,right: 15),
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                  color: AppColors.borderInsideColor,
+                  offset: Offset(0, 3),
+                  blurRadius: 6,
+                  spreadRadius: 1,
+                  inset: true),
+            ]),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: WrapperImage(
+                      url: 'diamonds.png',
+                      width: 20,
+                      height: 20,
+                      imageType: ImageType.assets,
+                    ),
+                  ),
+                  Text(
+                    'market.detail.record'.tr,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  )
+                ],
+              ),
+            ),
+            ListView.builder(
+              itemBuilder: (context, index) {
+                Logs order = controller.marketDetailEntity!.logs![index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.all(Radius.circular(22)),
+                            child: WrapperImage(url: order.headImg, width: 44, height: 44,),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Text(order.nickname!, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),),
+                                ),
+                                Text(order.createTime!, style: const TextStyle(color: Colors.white, fontSize: 10),),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Text('market.money'.tr+order.price!, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 13, fontWeight: FontWeight.bold),),
+                          ),
+                          Text(order.info!, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 10),),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              },
+              itemCount: controller.marketDetailEntity!.logs!.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -186,7 +284,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
                 child: Text(
-                  '          ' + controller.nftDetailEntity!.info!,
+                  '          ' + controller.marketDetailEntity!.good!.goodsName!,
                   style: const TextStyle(
                       color: AppColors.nftDetailInfoColor, fontSize: 13),
                 ),
@@ -219,7 +317,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 15),
                 child: Text(
-                  '          ' + controller.nftDetailEntity!.issuerInfo!,
+                  '          ' + controller.marketDetailEntity!.good!.issuerInfo!,
                   style: const TextStyle(
                       color: AppColors.nftDetailInfoColor, fontSize: 13),
                 ),
@@ -252,7 +350,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  '          ' + controller.nftDetailEntity!.authorInfo!,
+                  '          ' + controller.marketDetailEntity!.good!.authorInfo!,
                   style: const TextStyle(
                       color: AppColors.nftDetailInfoColor, fontSize: 13),
                 ),
@@ -297,7 +395,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                         child: Row(
                           children: [
                             Text(
-                              controller.nftDetailEntity!.seriesName! + '  ',
+                              controller.marketDetailEntity!.seriesName! + '  ',
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 13),
                             ),
@@ -321,7 +419,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                       style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                     Text(
-                      '#${controller.nftDetailEntity!.advanceGoodsId!}/${controller.nftDetailEntity!.advanceNum!}',
+                      '#${controller.marketDetailEntity!.good!.id!}/${controller.marketDetailEntity!.good!.totalNum!}',
                       style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                   ],
@@ -337,7 +435,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                             const TextStyle(color: Colors.white, fontSize: 13),
                       ),
                       Text(
-                        controller.nftDetailEntity!.equityTypeDesc!,
+                        controller.marketDetailEntity!.equityTypeDesc!,
                         style:
                             const TextStyle(color: Colors.white, fontSize: 13),
                       ),
@@ -352,29 +450,35 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                       style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                     Text(
-                      controller.nftDetailEntity!.standard!,
+                      controller.marketDetailEntity!.standard!,
                       style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                   ],
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 15),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Text(
-                //         'nft.detail.flag'.tr,
-                //         style:
-                //             const TextStyle(color: Colors.white, fontSize: 13),
-                //       ),
-                //       Text(
-                //         'H7SFG7SGFSF****H8FH8H',
-                //         style:
-                //             const TextStyle(color: Colors.white, fontSize: 13),
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'nft.detail.flag'.tr,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 13),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: Text(
+                            controller.marketDetailEntity!.hash!,
+                            maxLines: 1,
+                            style:
+                                const TextStyle(color: Colors.white, fontSize: 13, overflow: TextOverflow.ellipsis),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           )
@@ -405,7 +509,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
               ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(5)),
                 child: WrapperImage(
-                  url: controller.nftDetailEntity!.authorImage,
+                  url: controller.marketDetailEntity!.good!.authorImage,
                   width: 54,
                   height: 54,
                 ),
@@ -418,7 +522,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(
                         'nft.detail.creator'.tr +
-                            controller.nftDetailEntity!.authorName!,
+                            controller.marketDetailEntity!.good!.authorName!,
                         maxLines: 1,
                         style: const TextStyle(
                             color: Colors.white,
@@ -428,7 +532,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                     ),
                     Text(
                       'nft.detail.issuer'.tr +
-                          controller.nftDetailEntity!.issuer!,
+                          controller.marketDetailEntity!.good!.issuer!,
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -449,7 +553,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                controller.nftDetailEntity!.price!,
+                controller.marketDetailEntity!.good!.price!,
                 style: const TextStyle(
                     color: AppColors.codeButtonTitleColor,
                     fontSize: 20,
@@ -475,7 +579,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
             imageType: ImageType.assets,
           ),
           Text(
-            ' ' + controller.nftDetailEntity!.goodsName! + ' ',
+            ' ' + controller.marketDetailEntity!.good!.goodsName! + ' ',
             style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
           ),
@@ -519,11 +623,11 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 return Transform(
                   transform: Matrix4.identity()
                     ..setEntry(3, 2, 0.0001) // 第三参数定义视图距离，值越小物体就离你越远，看着就有立体感
-                    // 旋转Y轴角度，pi为圆半径，animation.value为动态获取的动画值
+// 旋转Y轴角度，pi为圆半径，animation.value为动态获取的动画值
                     ..rotateY(pi * _animation.value / 180),
                   alignment: FractionalOffset.center, // 以轴中心开始动画
                   child: WrapperImage(
-                    url: controller.nftDetailEntity!.goodsImage,
+                    url: controller.marketDetailEntity!.good!.goodsImage,
                     width: 180,
                     height: 180,
                   ),
@@ -550,7 +654,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 ),
               ),
               Text(
-                'nft.detail.title'.tr,
+                'market.detail.title'.tr,
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -565,7 +669,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
 
   @override
   void dispose() {
-    // TODO: implement dispose
+// TODO: implement dispose
     _repeatController.dispose();
     super.dispose();
   }

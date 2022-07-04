@@ -1,8 +1,8 @@
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
 
-class MineBlindBoxDetailController extends ViewStateController {
+class MineNFTListController extends ViewStateController {
   var id;
-  MineBlindBoxDetailController({required this.id});
+  MineNFTListController({required this.id});
 
   @override
   void onInit() {

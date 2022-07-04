@@ -10,8 +10,10 @@ import 'package:shiheyishu/entities/home_album_entity.dart';
 import 'package:shiheyishu/entities/home_banner_entity.dart';
 import 'package:shiheyishu/entities/home_nft_list_entity.dart';
 import 'package:shiheyishu/entities/login_entity.dart';
+import 'package:shiheyishu/entities/market_detail_entity.dart';
 import 'package:shiheyishu/entities/market_nft_list_entity.dart';
 import 'package:shiheyishu/entities/market_rank_entity.dart';
+import 'package:shiheyishu/entities/mine_album_list_entity.dart';
 import 'package:shiheyishu/entities/mine_blind_box_list_entity.dart';
 import 'package:shiheyishu/entities/nft_detail_entity.dart';
 import 'package:shiheyishu/entities/share_rank_entity.dart';
@@ -146,6 +148,19 @@ abstract class NFTService {
     return NftDetailEntity.fromJson(res.data);
   });
 
+  //nft下单
+  static final createNFTOrder =
+  buildHttpRunner<String?>((HttpRunnerParams params) async {
+    var res = await request('/app/goods_orders/createOrder', params);
+    return res.data['order_sn'];
+  });
+
+  //nft支付
+  static final payNFTOrder = buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/goods_orders/pay', params);
+    return true;
+  });
+
   //盲盒列表
   static final getBlindBoxes =
   buildHttpRunner<List<BlindBoxListEntity>>((HttpRunnerParams params) async {
@@ -161,6 +176,19 @@ abstract class NFTService {
   buildHttpRunner<BlindBoxDetailEntity>((HttpRunnerParams params) async {
     var res = await request('/app/blind_box/info', params);
     return BlindBoxDetailEntity.fromJson(res.data);
+  });
+
+  //盲盒下单
+  static final createBlindBoxOrder =
+  buildHttpRunner<String?>((HttpRunnerParams params) async {
+    var res = await request('/app/blind_box_orders/createOrder', params);
+    return res.data['order_sn'];
+  });
+
+  //盲盒支付
+  static final payBlindBoxOrder = buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/blind_box_orders/pay', params);
+    return true;
   });
 
   //我的盲盒列表
@@ -183,12 +211,46 @@ abstract class NFTService {
     return MarketNftListEntity.fromJson(res.data);
   });
 
+  //市场商品详情
+  static final getMarketDetail =
+  buildHttpRunner<MarketDetailEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/goods_rent/info', params);
+    return MarketDetailEntity.fromJson(res.data);
+  });
+
+  //市场下单
+  static final createMarketOrder =
+  buildHttpRunner<String?>((HttpRunnerParams params) async {
+    var res = await request('/app/rent_orders/createOrder', params);
+    return res.data['order_sn'];
+  });
+
+  //市场支付
+  static final payMarketOrder = buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/rent_orders/pay', params);
+    return true;
+  });
+
   //钱包
   static final getWalletList =
   buildHttpRunner<WalletListEntity>((HttpRunnerParams params) async {
     var res = await request('/app/balance_log/balanceList', params);
     return WalletListEntity.fromJson(res.data);
   });
+
+  //我的系列
+  static final getMineAlbum =
+  buildHttpRunner<MineAlbumListEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/member_space/seriesList', params);
+    return MineAlbumListEntity.fromJson(res.data);
+  });
+
+  //我的系列商品
+  // static final getMineNFTList =
+  // buildHttpRunner<MineAlbumListEntity>((HttpRunnerParams params) async {
+  //   var res = await request('/app/member_space/goodsList', params);
+  //   return MineAlbumListEntity.fromJson(res.data);
+  // });
 
   //个人中心大图
   static final getMineImage =

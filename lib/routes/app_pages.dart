@@ -18,10 +18,15 @@ import 'package:shiheyishu/pages/login/views/login_page.dart';
 import 'package:shiheyishu/pages/login/views/psw_page.dart';
 import 'package:shiheyishu/pages/login/views/register_page.dart';
 import 'package:shiheyishu/pages/login/views/splash_page.dart';
+import 'package:shiheyishu/pages/market/bindings/market_detail_bindings.dart';
+import 'package:shiheyishu/pages/market/views/market_detail_page.dart';
 import 'package:shiheyishu/pages/mine/bindings/account_privacy_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/market_rank_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/mine_album_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_blind_box_detail_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_blind_box_list_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/mine_nft_detail_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/mine_nft_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/open_blind_box_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/real_name_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/reset_psw_bindings.dart';
@@ -33,8 +38,11 @@ import 'package:shiheyishu/pages/mine/bindings/wallet_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/wallet_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/views/account_privacy_page.dart';
 import 'package:shiheyishu/pages/mine/views/market_rank_page.dart';
+import 'package:shiheyishu/pages/mine/views/mine_album_list_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_blind_box_detail_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_blind_box_list_page.dart';
+import 'package:shiheyishu/pages/mine/views/mine_nft_detail_page.dart';
+import 'package:shiheyishu/pages/mine/views/mine_nft_list_page.dart';
 import 'package:shiheyishu/pages/mine/views/open_blind_box_page.dart';
 import 'package:shiheyishu/pages/mine/views/real_name_page.dart';
 import 'package:shiheyishu/pages/mine/views/reset_psw_page.dart';
@@ -46,6 +54,8 @@ import 'package:shiheyishu/pages/mine/views/wallet_list_page.dart';
 import 'package:shiheyishu/pages/mine/views/wallet_page.dart';
 import 'package:shiheyishu/pages/nav/bindings/nav_bar_bindings.dart';
 import 'package:shiheyishu/pages/nav/views/nav_bar_page.dart';
+import 'package:shiheyishu/pages/pay/bindings/pay_bindings.dart';
+import 'package:shiheyishu/pages/pay/views/pay_page.dart';
 
 import '../pages/login/bindings/login_bindings.dart';
 
@@ -192,6 +202,33 @@ class AppPages {
                   bindings: [OpenBlindBoxBindings()],
                 ),
               ]
+            ),
+          ]
+        ),
+        GetPage(
+          name: Routes.MARKETDETAIL,
+          page: () => const MarketDetailPage(),
+          bindings: [MarketDetailBindings()],
+        ),
+        GetPage(
+          name: Routes.PAY,
+          page: () => const PayPage(),
+          bindings: [PayBindings()],
+        ),
+        GetPage(
+          name: Routes.MINENFTDETAIL,
+          page: () => const MineNFTDetailPage(),
+          bindings: [MineNFTDetailBindings()],
+        ),
+        GetPage(
+          name: Routes.MINEALBUMLIST,
+          page: () => const MineAlbumListPage(),
+          bindings: [MineAlbumListBindings()],
+          children: [
+            GetPage(
+              name: Routes.MINENFTLIST,
+              page: () => const MineNFTListPage(),
+              bindings: [MineNFTListBindings()],
             ),
           ]
         ),

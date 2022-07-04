@@ -66,8 +66,19 @@ class MineController extends ViewStateController {
     Get.toNamed(Routes.NAV + Routes.WALLET);
   }
 
+  void pushToMineBlindBoxPage() {
+    Get.toNamed(Routes.NAV + Routes.MINEBLINDBOXLIST);
+  }
+
+  void pushToMineAlbumListPage() {
+    Get.toNamed(Routes.NAV + Routes.MINEALBUMLIST);
+  }
+
   void pushToMenuPages(int index) {
-    switch (index){
+    switch (index) {
+      case 0:
+        Get.toNamed(Routes.NAV + Routes.MINEALBUMLIST);
+        break;
       case 4:
         Get.toNamed(Routes.NAV + Routes.SYNTHESISLIST);
         break;
@@ -88,7 +99,9 @@ class MineController extends ViewStateController {
         Get.toNamed(Routes.NAV + Routes.SAFE);
         break;
       case 1:
-        userInfo!.isReal == 0 ? Get.toNamed(Routes.NAV + Routes.REALNAME) : logout();
+        userInfo!.isReal == 0
+            ? Get.toNamed(Routes.NAV + Routes.REALNAME)
+            : logout();
         break;
       case 2:
         logout();
@@ -100,53 +113,56 @@ class MineController extends ViewStateController {
 
   void logout() {
     Get.bottomSheet(
-        Container(
-          margin: const EdgeInsets.all(20),
-          height: 100,
-          child: Column(
-            children: [
-              InkWell(
-                onTap: (){
-                  StorageManager.clearAll();
-                  Get.back();
-                  Get.offAndToNamed(Routes.LOGIN);
-                },
-                child: SizedBox(
-                  width: Get.width,
-                  child: Center(
-                    child: Text(
-                      'mine.logout.sure'.tr,
-                      style: const TextStyle(color: Colors.red, fontSize: 18),
-                    ),
+      Container(
+        margin: const EdgeInsets.all(20),
+        height: 100,
+        child: Column(
+          children: [
+            InkWell(
+              onTap: () {
+                StorageManager.clearAll();
+                Get.back();
+                Get.offAndToNamed(Routes.LOGIN);
+              },
+              child: SizedBox(
+                width: Get.width,
+                child: Center(
+                  child: Text(
+                    'mine.logout.sure'.tr,
+                    style: const TextStyle(color: Colors.red, fontSize: 18),
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 20,bottom: 20),
-                child: Divider(height: 1, color: AppColors.mineCellLineColor,),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 20, bottom: 20),
+              child: Divider(
+                height: 1,
+                color: AppColors.mineCellLineColor,
               ),
-              InkWell(
-                onTap: (){
-                  Get.back();
-                },
-                child: SizedBox(
-                  width: Get.width,
-                  child: Center(
-                    child: Text(
-                      'mine.logout.cancel'.tr,
-                      style: const TextStyle(
-                          color: AppColors.codeButtonTitleColor, fontSize: 18),
-                    ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: SizedBox(
+                width: Get.width,
+                child: Center(
+                  child: Text(
+                    'mine.logout.cancel'.tr,
+                    style: const TextStyle(
+                        color: AppColors.codeButtonTitleColor, fontSize: 18),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        backgroundColor: AppColors.main,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
       ),
+      backgroundColor: AppColors.main,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
     );
   }
 }

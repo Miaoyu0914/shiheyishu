@@ -4,6 +4,6 @@ import 'package:shiheyishu/pages/mine/controllers/mine_blind_box_detail_controll
 class MineBlindBoxDetailBindings extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => MineBlindBoxDetailController());
+    Get.lazyPut(() => MineBlindBoxDetailController(id: Get.arguments['id']));
   }
 }

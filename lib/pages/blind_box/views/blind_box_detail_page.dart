@@ -185,7 +185,7 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
                     ),
                   ),
                   Text(
-                    'blind.box.detail.all'.tr,
+                    'blind.box.detail.record'.tr,
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -208,18 +208,29 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
                             borderRadius: const BorderRadius.all(Radius.circular(22)),
                             child: WrapperImage(url: order.img, width: 44, height: 44,),
                           ),
-                          Column(
-                            children: [
-                              Text(order.name!, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),),
-                              Text(order.time!, style: const TextStyle(color: Colors.white, fontSize: 10),),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Text(order.name!, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),),
+                                ),
+                                Text(order.time!, style: const TextStyle(color: Colors.white, fontSize: 10),),
+                              ],
+                            ),
                           )
                         ],
                       ),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(order.goodDesc!, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 13, fontWeight: FontWeight.bold),),
-                          Text('blind.box.detail.buy.in'.tr, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 10),),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Text(controller.blindBoxDetailEntity!.price!, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 13, fontWeight: FontWeight.bold),),
+                          ),
+                          Text(order.goodDesc!, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 10),),
                         ],
                       )
                     ],

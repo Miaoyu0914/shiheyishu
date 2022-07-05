@@ -70,25 +70,28 @@ class _NFTDetailPageState extends State<NFTDetailPage>
   }
 
   Widget _buyButton() {
-    return InkWell(
-      onTap: () => controller.pushToPayPage(),
-      child: Container(
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  AppColors.loginButtonLeftColor,
-                  AppColors.loginButtonRightColor
-                ])),
-        alignment: Alignment.center,
-        padding: const EdgeInsets.only(top: 16.5, bottom: 16.5),
-        margin: const EdgeInsets.only(top: 15, bottom: 50, left: 50, right: 50),
-        child: Text(
-          'nft.detail.buy'.tr,
-          style: const TextStyle(
-              height: 1, color: AppColors.loginButtonTitleColor, fontSize: 17),
+    return Offstage(
+      offstage: controller.nftDetailEntity!.status == 3,
+      child: InkWell(
+        onTap: () => controller.pushToPayPage(),
+        child: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(25)),
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    AppColors.loginButtonLeftColor,
+                    AppColors.loginButtonRightColor
+                  ])),
+          alignment: Alignment.center,
+          padding: const EdgeInsets.only(top: 16.5, bottom: 16.5),
+          margin: const EdgeInsets.only(top: 15, bottom: 50, left: 50, right: 50),
+          child: Text(
+            controller.nftDetailEntity!.status == 1 ? 'home.nft.future.tag'.tr : 'nft.detail.buy'.tr,
+            style: const TextStyle(
+                height: 1, color: AppColors.loginButtonTitleColor, fontSize: 17),
+          ),
         ),
       ),
     );

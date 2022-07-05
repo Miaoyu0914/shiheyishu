@@ -120,7 +120,7 @@ class MineBlindBoxListPage extends GetView<MineBlindBoxListController> {
 //横轴间距
                     crossAxisSpacing: 10.0,
 //子组件宽高长度比例
-                    childAspectRatio: 0.68),
+                    childAspectRatio: 0.62),
                 itemBuilder: (context, index) {
                   Data blindBox = controller.tabIndex == 0
                       ? controller.alreadyBlindBoxes[index]

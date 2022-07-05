@@ -25,9 +25,11 @@ class HomePage extends GetView<HomeController> {
           backgroundColor: AppColors.main,
           appBar: AppBar(
             title: Center(
-                child: Text(
-              'home'.tr,
-              style: const TextStyle(color: Colors.white, fontSize: 20),
+                child: WrapperImage(
+              url: 'home_logo.png',
+              width: 95,
+              height: 30,
+              imageType: ImageType.assets,
             )),
             leadingWidth: 0,
             leading: Container(),
@@ -71,7 +73,9 @@ class HomePage extends GetView<HomeController> {
 
   Widget _nftList() {
     return SizedBox(
-      height: controller.nftIndex == 0 ? (520 * controller.hotNFTList.length + 106) : (520 * controller.futureNFTList.length + 106),
+      height: controller.nftIndex == 0
+          ? (520 * controller.hotNFTList.length + 106)
+          : (520 * controller.futureNFTList.length + 106),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -156,12 +160,53 @@ class HomePage extends GetView<HomeController> {
                                 padding: const EdgeInsets.only(
                                     top: 20, left: 20, right: 20),
                                 child: ClipRRect(
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(20)),
-                                  child: WrapperImage(
-                                    url: nft.goodsImage,
-                                    width: Get.width - 30,
-                                    height: (Get.width - 70) * 1.05,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Stack(
+                                        alignment: Alignment.topLeft,
+                                        children: [
+                                          WrapperImage(
+                                            url: nft.goodsImage,
+                                            width: Get.width - 30,
+                                            height: (Get.width - 70) * 1.05,
+                                          ),
+                                          Offstage(
+                                            offstage: nft.status != 1,
+                                            child: Container(
+                                              margin: const EdgeInsets.only(left: 15, top: 15,right: 120),
+                                              padding: const EdgeInsets.only(left: 15,right: 15,top: 9,bottom: 9),
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                color: AppColors.main,
+                                                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                                border: Border.all(color: AppColors.rankBackColor, width: 1)
+                                              ),
+                                              child: Text('home.nft.future.tag'.tr, style: const TextStyle(color: AppColors.rankBackColor, fontSize: 12, height: 1),),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Offstage(
+                                        offstage: nft.status != 3,
+                                        child: Opacity(
+                                          opacity: 0.61,
+                                          child: Container(
+                                            height: (Get.width - 70) * 1.05,
+                                              color:
+                                                  AppColors.payAllKindBackColor,
+                                              alignment: Alignment.center,
+                                              child: WrapperImage(
+                                                url: 'sold_out.png',
+                                                width: 76,
+                                                height: 76,
+                                                imageType: ImageType.assets,
+                                              )),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
@@ -185,7 +230,8 @@ class HomePage extends GetView<HomeController> {
                                     child: Column(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 15),
+                                          padding:
+                                              const EdgeInsets.only(top: 15),
                                           child: Row(
                                             children: [
                                               Expanded(
@@ -218,8 +264,9 @@ class HomePage extends GetView<HomeController> {
                                                             bottomLeft:
                                                                 Radius.circular(
                                                                     6),
-                                                            bottomRight: Radius
-                                                                .circular(6)),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    6)),
                                                     border: Border.all(
                                                         color: AppColors
                                                             .navSelectedTitleColor,
@@ -238,7 +285,8 @@ class HomePage extends GetView<HomeController> {
                                                                   bottomLeft: Radius
                                                                       .circular(
                                                                           5))),
-                                                      alignment: Alignment.center,
+                                                      alignment:
+                                                          Alignment.center,
                                                       child: Text(
                                                         'home.nft.limit'.tr,
                                                         style: const TextStyle(
@@ -250,7 +298,8 @@ class HomePage extends GetView<HomeController> {
                                                     Container(
                                                       decoration:
                                                           const BoxDecoration(
-                                                        color: Colors.transparent,
+                                                        color:
+                                                            Colors.transparent,
                                                         borderRadius:
                                                             BorderRadius.only(
                                                                 bottomRight:
@@ -258,7 +307,8 @@ class HomePage extends GetView<HomeController> {
                                                                         .circular(
                                                                             6)),
                                                       ),
-                                                      alignment: Alignment.center,
+                                                      alignment:
+                                                          Alignment.center,
                                                       child: Text(
                                                         ' ${nft.totalNum}' +
                                                             'home.nft.unit'.tr,
@@ -325,7 +375,9 @@ class HomePage extends GetView<HomeController> {
                         ),
                       );
                     },
-                    itemCount: pageIndex == 0 ? controller.hotNFTList.length : controller.futureNFTList.length,
+                    itemCount: pageIndex == 0
+                        ? controller.hotNFTList.length
+                        : controller.futureNFTList.length,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                   );

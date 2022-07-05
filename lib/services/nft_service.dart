@@ -15,6 +15,8 @@ import 'package:shiheyishu/entities/market_nft_list_entity.dart';
 import 'package:shiheyishu/entities/market_rank_entity.dart';
 import 'package:shiheyishu/entities/mine_album_list_entity.dart';
 import 'package:shiheyishu/entities/mine_blind_box_list_entity.dart';
+import 'package:shiheyishu/entities/mine_give_entity.dart';
+import 'package:shiheyishu/entities/mine_platform_order_entity.dart';
 import 'package:shiheyishu/entities/nft_detail_entity.dart';
 import 'package:shiheyishu/entities/share_rank_entity.dart';
 import 'package:shiheyishu/entities/synthesis_list_entity.dart';
@@ -251,6 +253,20 @@ abstract class NFTService {
   //   var res = await request('/app/member_space/goodsList', params);
   //   return MineAlbumListEntity.fromJson(res.data);
   // });
+
+  //平台订单
+  static final getPlatformOrderList =
+  buildHttpRunner<MinePlatformOrderEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/goods_orders/orderList', params);
+    return MinePlatformOrderEntity.fromJson(res.data);
+  });
+
+  //转增记录
+  static final getGiveList =
+  buildHttpRunner<MineGiveEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/member_space/transferLog', params);
+    return MineGiveEntity.fromJson(res.data);
+  });
 
   //个人中心大图
   static final getMineImage =

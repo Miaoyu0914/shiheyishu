@@ -39,6 +39,7 @@ const Map<String, String> zh_CN = {
   'home.nft.unit': '份 ',
   'home.nft.already': '已售：',
   'home.nft.money': '￥ ',
+  'home.nft.future.tag': '敬请期待即将开售',
   'board.title': '公告',
   'board.detail.title': '公告详情',
   'board.look': '观看',
@@ -203,5 +204,14 @@ const Map<String, String> zh_CN = {
   'wallet.look.more':'查看全部',
   'wallet.money': '¥ ',
 
+  'platform.order.title': '平台订单',
+  'platform.order.all': '全部',
+  'platform.order.future.pay': '待支付',
+  'platform.order.already': '已完成',
+  'platform.order.cancel': '已取消',
+  'platform.order.go.pay': '去支付',
 
+  'mine.give.title': '转增记录',
+  'mine.give.people': '转出给',
+  'mine.give.time': '转出时间'
 };

@@ -56,7 +56,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
             //横轴间距
             crossAxisSpacing: 10.0,
             //子组件宽高长度比例
-            childAspectRatio: 0.58),
+            childAspectRatio: 0.55),
         itemBuilder: (context, index) {
           BlindBoxListEntity blindBox = controller.blindBoxes![index];
           return InkWell(
@@ -187,7 +187,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          padding: const EdgeInsets.only(top: 10),
                           child: Row(
                             children: [
                               Text(

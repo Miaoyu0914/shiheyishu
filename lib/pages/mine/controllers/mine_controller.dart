@@ -22,12 +22,12 @@ class MineController extends ViewStateController {
   ];
   List<String> menuImageList = [
     'mine_3d_room.png',
-    'mine_3d_room.png',
-    'mine_3d_room.png',
+    'market_order.png',
+    'platform_order.png',
     'mine_donation.png',
     'mine_compose.png',
-    'mine_compose.png',
-    'mine_compose.png'
+    's_rank.png',
+    'm_rank.png'
   ];
   List<String> settingTitleList = [
     'mine.safe.setting'.tr,
@@ -78,6 +78,9 @@ class MineController extends ViewStateController {
     switch (index) {
       case 0:
         Get.toNamed(Routes.NAV + Routes.MINEALBUMLIST);
+        break;
+      case 3:
+        Get.toNamed(Routes.NAV + Routes.MINEGIVELIST);
         break;
       case 4:
         Get.toNamed(Routes.NAV + Routes.SYNTHESISLIST);

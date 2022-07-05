@@ -314,7 +314,7 @@ class MinePage extends GetView<MineController> {
                                                   controller.userInfo!.phone!));
                                         },
                                         child: WrapperImage(
-                                          url: 'search.png',
+                                          url: 'copy.png',
                                           width: 13,
                                           height: 13,
                                           imageType: ImageType.assets,
@@ -350,7 +350,7 @@ class MinePage extends GetView<MineController> {
                                                 .userInfo!.ethAddress!));
                                       },
                                       child: WrapperImage(
-                                        url: 'search.png',
+                                        url: 'copy.png',
                                         width: 13,
                                         height: 13,
                                         imageType: ImageType.assets,

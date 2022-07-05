@@ -32,21 +32,23 @@ class NFTDetailController extends ViewStateController {
   }
 
   Future<void> pushToPayPage() async {
-    EasyLoading.show();
-    String? orderSn = await NFTService.createNFTOrder(
-      HttpRunnerParams(
-        data: {
-          'goods_id': nftDetailEntity!.id
-        }
-      )
-    );
-    EasyLoading.dismiss();
-    if(orderSn != ''){
-      Get.toNamed(Routes.NAV+Routes.PAY, arguments: {
-        'orderSn': orderSn,
-        'payType': 0,
-        'entity': nftDetailEntity
-      });
+    if(nftDetailEntity!.status == 2){
+      EasyLoading.show();
+      String? orderSn = await NFTService.createNFTOrder(
+          HttpRunnerParams(
+              data: {
+                'goods_id': nftDetailEntity!.id
+              }
+          )
+      );
+      EasyLoading.dismiss();
+      if(orderSn != ''){
+        Get.toNamed(Routes.NAV+Routes.PAY, arguments: {
+          'orderSn': orderSn,
+          'payType': 0,
+          'entity': nftDetailEntity
+        });
+      }
     }
   }
 }

@@ -32,4 +32,9 @@ abstract class Routes {
   static const MINENFTDETAIL = '/mine_nft_detail';
   static const MINEALBUMLIST = '/mine_album_list';
   static const MINENFTLIST = '/mine_nft_list';
+  static const MINEGIVELIST = '/mine_give_list';
+  static const MINEPLATFORMORDERLIST = '/mine_platform_order_list';
+  static const MINEPLATFORMORDERDETAIL = '/mine_platform_order_detail';
+  static const MINEMARKETORDERLIST = '/mine_market_order_list';
+  static const MINEMARKETORDERDETAIL = '/mine_market_order_detail';
 }

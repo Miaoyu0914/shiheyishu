@@ -10,8 +10,8 @@ class SafeSettingController extends ViewStateController {
     'safe.set.account'.tr
   ];
   List<String> menuImages = [
-    'safe_card.png',
-    'safe_card.png',
+    'reset_psw.png',
+    'reset_psw.png',
     'safe_card.png',
     'safe_account.png'
   ];

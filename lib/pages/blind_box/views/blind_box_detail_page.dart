@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart'hide BoxDecoration, BoxShadow;
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter/services.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
@@ -10,6 +13,7 @@ import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
 import 'package:shiheyishu/entities/blind_box_detail_entity.dart';
 import 'package:shiheyishu/pages/blind_box/controllers/blind_box_detail_controller.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class BlindBoxDetailPage extends StatefulWidget {
   const BlindBoxDetailPage({Key? key}) : super(key: key);
@@ -690,27 +694,49 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
             WrapperImage(
               url: 'nft_back_top.png',
               width: Get.width,
-              height: 200,
+              height: Get.width / 2,
               imageType: ImageType.assets,
             ),
-            WrapperImage(
-              url: 'nft_back_bottom.png',
+            Container(
               width: Get.width,
-              height: 230,
-              imageType: ImageType.assets,
+              height: Get.width / 2,
+              alignment: Alignment.bottomCenter,
+              child: WrapperImage(
+                url: 'nft_back_bottom.png',
+                width: 320,
+                height: 120,
+                imageType: ImageType.assets,
+              ),
             )
           ],
         ),
         Center(
-          child: Padding(
+          child: (controller.blindBoxDetailEntity!.threeD != '' &&
+              controller.blindBoxDetailEntity!.threeD!.endsWith('gltf'))
+              ? FutureBuilder(
+            future: rootBundle.loadString("resource/model_html.html"),
+            builder:
+                (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.data != null &&
+                  snapshot.connectionState == ConnectionState.done) {
+                return Container(
+                  child: _gltf(snapshot.data),
+                );
+              } else {
+                return Container();
+              }
+            },
+          )
+              : Padding(
             padding: const EdgeInsets.only(top: 100, bottom: 70),
             child: AnimatedBuilder(
               animation: _animation,
               builder: (context, child) {
                 return Transform(
                   transform: Matrix4.identity()
-                    ..setEntry(3, 2, 0.0001) // 第三参数定义视图距离，值越小物体就离你越远，看着就有立体感
-                    // 旋转Y轴角度，pi为圆半径，animation.value为动态获取的动画值
+                    ..setEntry(
+                        3, 2, 0.0001) // 第三参数定义视图距离，值越小物体就离你越远，看着就有立体感
+                  // 旋转Y轴角度，pi为圆半径，animation.value为动态获取的动画值
                     ..rotateY(pi * _animation.value / 180),
                   alignment: FractionalOffset.center, // 以轴中心开始动画
                   child: WrapperImage(
@@ -733,8 +759,8 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
                   padding: const EdgeInsets.only(left: 25, right: 40, top: 3),
                   child: WrapperImage(
                     url: 'nav_back.png',
-                    width: 8,
-                    height: 12,
+                    width: 18,
+                    height: 18,
                     imageType: ImageType.assets,
                     fit: BoxFit.contain,
                   ),
@@ -751,6 +777,56 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
           ),
         )
       ],
+    );
+  }
+
+  Widget _gltf(String? html) {
+    if (html == null) {
+      return Container();
+    }
+    html = html.replaceFirst("gltfUrl", controller.blindBoxDetailEntity!.threeD!);
+    return IgnorePointer(
+      ignoring: true,
+      child: Stack(
+        children: [
+          Offstage(
+            offstage: !controller.initGltf,
+            child: SizedBox(
+                width: Get.width,
+                height: Get.width,
+                child: const CupertinoActivityIndicator()),
+          ),
+          Container(
+            alignment: Alignment.center,
+            child: Container(
+              padding: const EdgeInsets.only(top: 50),
+              width: Get.width,
+              height: Get.width,
+              child: _web(html),
+              // child: androidWeb(resizeTestBase64),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _web(String html) {
+    return WebView(
+      javascriptChannels: <JavascriptChannel>{
+        JavascriptChannel(
+            name: 'progress',
+            onMessageReceived: (JavascriptMessage message) async {
+              if (message.message.toString() == "1") {
+                controller.gltfHasLoad();
+              }
+            }),
+      },
+      backgroundColor: Colors.transparent,
+      initialUrl: Uri.dataFromString(html,
+          mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+          .toString(),
+      javascriptMode: JavascriptMode.unrestricted,
     );
   }
 

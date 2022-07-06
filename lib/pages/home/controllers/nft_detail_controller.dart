@@ -53,6 +53,7 @@ class NFTDetailController extends ViewStateController {
   }
 
   bool initGltf = true;
+
   void gltfHasLoad() {
     initGltf = false;
     update();

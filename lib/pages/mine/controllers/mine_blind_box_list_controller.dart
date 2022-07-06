@@ -116,6 +116,10 @@ class MineBlindBoxListController extends ViewStateController {
   }
 
   void pushToBlindBoxDetail(int index) {
-    Get.toNamed(Routes.NAV+Routes.MINEBLINDBOXDETAIL, arguments: {'id': futureBlindBoxes[index].box!.id, 'isOpen': index == 0});
+    if(tabIndex == 0){
+      Get.toNamed(Routes.NAV+Routes.MINEBLINDBOXLIST+Routes.MINEBLINDBOXDETAIL+Routes.MINEBLINDBOXOPEN, arguments: {'blind_box': alreadyBlindBoxes[index],'isOpen': true});
+    }else{
+      Get.toNamed(Routes.NAV+Routes.MINEBLINDBOXLIST+Routes.MINEBLINDBOXDETAIL, arguments: {'blindBox': futureBlindBoxes[index], 'isOpen': false});
+    }
   }
 }

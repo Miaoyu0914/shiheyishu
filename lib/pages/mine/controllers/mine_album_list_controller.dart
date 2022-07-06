@@ -1,13 +1,12 @@
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:shiheyishu/configs/constant.dart';
+import 'package:get/get.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
-import 'package:shiheyishu/entities/mine_album_list_entity.dart';
+import 'package:shiheyishu/entities/mine_group_list_entity.dart';
+import 'package:shiheyishu/routes/app_pages.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 import 'package:shiheyishu/services/nft_service.dart';
 
 class MineAlbumListController extends ViewStateController {
-  MineAlbumListEntity? mineAlbumListEntity;
-  List<Data> albums = [];
+  List<MineGroupListEntity>? groupList;
 
   @override
   Future<void> onInit() async {
@@ -18,37 +17,10 @@ class MineAlbumListController extends ViewStateController {
   }
 
   Future<void> getMineAlbumList() async {
-    mineAlbumListEntity = await NFTService.getMineAlbum(HttpRunnerParams());
-    albums.addAll(mineAlbumListEntity!.data!);
-    if (mineAlbumListEntity!.data!.length < Constant.refreshListLimit) {
-      isNotEnough = true;
-    }
+    groupList = await NFTService.getGroupList(HttpRunnerParams());
   }
 
-  int page = 1;
-  bool isNotEnough = false;
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
-
-  void refreshList() async {
-    albums.clear();
-    page = 1;
-    isNotEnough = false;
-    refreshController.footerMode!.setValueWithNoNotify(LoadStatus.idle);
-    await getMineAlbumList();
-    refreshController.refreshCompleted();
-    if (isNotEnough) {
-      refreshController.loadNoData();
-    }
-  }
-
-  void loadMoreList() async {
-    page++;
-    await getMineAlbumList();
-    if (isNotEnough) {
-      refreshController.loadNoData();
-    } else {
-      refreshController.loadComplete();
-    }
+  void pushToGoodsPage(int index) {
+    Get.toNamed(Routes.NAV + Routes.MINEALBUMLIST + Routes.MINENFTLIST, arguments: {'id': groupList![index].goodsName});
   }
 }

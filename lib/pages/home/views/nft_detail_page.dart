@@ -514,11 +514,16 @@ class _NFTDetailPageState extends State<NFTDetailPage>
               height: Get.width / 2,
               imageType: ImageType.assets,
             ),
-            WrapperImage(
-              url: 'nft_back_bottom.png',
+            Container(
               width: Get.width,
               height: Get.width / 2,
-              imageType: ImageType.assets,
+              alignment: Alignment.bottomCenter,
+              child: WrapperImage(
+                url: 'nft_back_bottom.png',
+                width: 320,
+                height: 120,
+                imageType: ImageType.assets,
+              ),
             )
           ],
         ),
@@ -571,8 +576,8 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                   padding: const EdgeInsets.only(left: 25, right: 40, top: 3),
                   child: WrapperImage(
                     url: 'nav_back.png',
-                    width: 8,
-                    height: 12,
+                    width: 18,
+                    height: 18,
                     imageType: ImageType.assets,
                     fit: BoxFit.contain,
                   ),

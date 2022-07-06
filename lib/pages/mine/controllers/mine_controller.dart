@@ -77,7 +77,7 @@ class MineController extends ViewStateController {
   void pushToMenuPages(int index) {
     switch (index) {
       case 0:
-        Get.toNamed(Routes.NAV + Routes.MINEALBUMLIST);
+        Get.toNamed(Routes.NAV + Routes.THREE);
         break;
       case 3:
         Get.toNamed(Routes.NAV + Routes.MINEGIVELIST);

@@ -49,4 +49,11 @@ class MarketDetailController extends ViewStateController {
       });
     }
   }
+
+  bool initGltf = true;
+
+  void gltfHasLoad() {
+    initGltf = false;
+    update();
+  }
 }

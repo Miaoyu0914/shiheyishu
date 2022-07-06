@@ -100,6 +100,8 @@ const Map<String, String> zh_CN = {
   'blind.box.detail.must.know': '购物须知',
   'blind.box.detail.buy': '购买',
   'blind.box.detail.open': '开启盲盒',
+  'blind.box.detail.back': '返回',
+  'blind.box.detail.look': '查看',
 
 
   'market.title': '市场',
@@ -195,6 +197,19 @@ const Map<String, String> zh_CN = {
   'mine.blind.box.order': '订单编号：',
   'mine.blind.box.money': '￥ ',
   'mine.album.title': '我的藏品',
+  'mine.nft.detail.share': '炫耀',
+  'mine.nft.detail.give': '转赠',
+  'mine.nft.detail.give.success': '转赠成功',
+  'mine.nft.detail.give.people': '赠予人',
+  'mine.nft.detail.give.phone.hint': '请输入手机号',
+  'mine.nft.detail.sell': '转售',
+  'mine.nft.detail.sell.success': '转售成功',
+  'mine.nft.detail.set.price': '  设置单价',
+  'mine.nft.detail.pay.free': '支付通道服务费（@free%）：',
+  'mine.nft.detail.service.free': '平台综合服务费（@free%）：',
+  'mine.nft.detail.share.free': '创作者版权分成（@free%）：',
+  'mine.nft.detail.share.get': '转售所得：',
+  'mine.nft.detail.sure.button': '确认转售',
 
   'wallet.title':'钱包',
   'wallet.list.title':' 钱包明细',
@@ -203,6 +218,10 @@ const Map<String, String> zh_CN = {
   'wallet.cash.out':'提现',
   'wallet.look.more':'查看全部',
   'wallet.money': '¥ ',
+
+
+  'three.title': '3D藏品室',
+  'three.null': '暂未开放',
 
   'platform.order.title': '平台订单',
   'platform.order.all': '全部',

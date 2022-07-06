@@ -3,19 +3,19 @@ import 'package:get/get.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/normal_appbar.dart';
-import 'package:shiheyishu/pages/mine/controllers/open_blind_box_controller.dart';
+import 'package:shiheyishu/pages/mine/controllers/three_controller.dart';
 
-class OpenBlindBoxPage extends GetView<OpenBlindBoxController> {
-  const OpenBlindBoxPage({Key? key}) : super(key: key);
+class ThreePage extends GetView<ThreeController> {
+  const ThreePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<OpenBlindBoxController>(builder: (controller) {
+    return GetBuilder<ThreeController>(builder: (controller) {
       if (controller.isBusy) {
         return ViewStateBusyWidget();
       }
       return Scaffold(
-        appBar: NormalAppBar().getAppBar(context),
+        appBar: NormalAppBar(title: 'three.title'.tr).getAppBar(context),
         backgroundColor: AppColors.main,
         body: CustomScrollView(
           slivers: [
@@ -34,6 +34,6 @@ class OpenBlindBoxPage extends GetView<OpenBlindBoxController> {
   }
 
   Widget _body() {
-    return Container();
+    return ViewStateEmptyWidget('three.null'.tr);
   }
 }

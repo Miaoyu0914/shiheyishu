@@ -21,6 +21,7 @@ import 'package:shiheyishu/pages/login/views/splash_page.dart';
 import 'package:shiheyishu/pages/market/bindings/market_detail_bindings.dart';
 import 'package:shiheyishu/pages/market/views/market_detail_page.dart';
 import 'package:shiheyishu/pages/mine/bindings/account_privacy_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/give_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/market_rank_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_album_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_blind_box_detail_bindings.dart';
@@ -30,18 +31,21 @@ import 'package:shiheyishu/pages/mine/bindings/mine_market_order_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_market_order_detail_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_nft_detail_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_nft_list_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/mine_open_blind_box_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_platform_order_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_platform_order_detail_bindings.dart';
-import 'package:shiheyishu/pages/mine/bindings/open_blind_box_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/real_name_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/resell_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/reset_psw_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/safe_setting_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/share_rank_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/synthesis_detail_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/synthesis_list_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/three_blindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/wallet_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/wallet_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/views/account_privacy_page.dart';
+import 'package:shiheyishu/pages/mine/views/give_page.dart';
 import 'package:shiheyishu/pages/mine/views/market_rank_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_album_list_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_blind_box_detail_page.dart';
@@ -51,15 +55,17 @@ import 'package:shiheyishu/pages/mine/views/mine_market_order_detail_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_market_order_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_nft_detail_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_nft_list_page.dart';
+import 'package:shiheyishu/pages/mine/views/mine_open_blind_box_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_platform_order_detail_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_platform_order_page.dart';
-import 'package:shiheyishu/pages/mine/views/open_blind_box_page.dart';
 import 'package:shiheyishu/pages/mine/views/real_name_page.dart';
+import 'package:shiheyishu/pages/mine/views/resell_page.dart';
 import 'package:shiheyishu/pages/mine/views/reset_psw_page.dart';
 import 'package:shiheyishu/pages/mine/views/safe_setting_page.dart';
 import 'package:shiheyishu/pages/mine/views/share_rank_page.dart';
 import 'package:shiheyishu/pages/mine/views/synthesis_detail_page.dart';
 import 'package:shiheyishu/pages/mine/views/synthesis_list_page.dart';
+import 'package:shiheyishu/pages/mine/views/three_page.dart';
 import 'package:shiheyishu/pages/mine/views/wallet_list_page.dart';
 import 'package:shiheyishu/pages/mine/views/wallet_page.dart';
 import 'package:shiheyishu/pages/nav/bindings/nav_bar_bindings.dart';
@@ -143,6 +149,14 @@ class AppPages {
             ]
         ),
         GetPage(
+            name: Routes.THREE,
+            page: () => const ThreePage(),
+            bindings: [ThreeBindings()],
+            children: [
+
+            ]
+        ),
+        GetPage(
             name: Routes.SAFE,
             page: () => const SafeSettingPage(),
             bindings: [SafeSettingBindings()],
@@ -207,9 +221,9 @@ class AppPages {
               bindings: [MineBlindBoxDetailBindings()],
               children: [
                 GetPage(
-                  name: Routes.OPENBLINDBOX,
-                  page: () => const OpenBlindBoxPage(),
-                  bindings: [OpenBlindBoxBindings()],
+                  name: Routes.MINEBLINDBOXOPEN,
+                  page: () => const MineOpenBlindBoxPage(),
+                  bindings: [MineOpenBlindBoxBindings()],
                 ),
               ]
             ),
@@ -229,6 +243,18 @@ class AppPages {
           name: Routes.MINENFTDETAIL,
           page: () => const MineNFTDetailPage(),
           bindings: [MineNFTDetailBindings()],
+          children: [
+            GetPage(
+              name: Routes.RESELL,
+              page: () => const RESellPage(),
+              bindings: [RESellBindings()],
+            ),
+            GetPage(
+              name: Routes.GIVE,
+              page: () => const GivePage(),
+              bindings: [GiveBindings()],
+            ),
+          ]
         ),
         GetPage(
           name: Routes.MINEALBUMLIST,

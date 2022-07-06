@@ -26,7 +26,7 @@ abstract class Routes {
   static const BLINDBOXDETAIL = '/blind_box_detail';
   static const MINEBLINDBOXLIST = '/mine_blind_box_list';
   static const MINEBLINDBOXDETAIL = '/mine_blind_box_detail';
-  static const OPENBLINDBOX = '/open_blind_box';
+  static const MINEBLINDBOXOPEN = '/mine_blind_box_open';
   static const MARKETDETAIL = '/market_detail';
   static const PAY = '/pay';
   static const MINENFTDETAIL = '/mine_nft_detail';
@@ -37,4 +37,7 @@ abstract class Routes {
   static const MINEPLATFORMORDERDETAIL = '/mine_platform_order_detail';
   static const MINEMARKETORDERLIST = '/mine_market_order_list';
   static const MINEMARKETORDERDETAIL = '/mine_market_order_detail';
+  static const RESELL = '/resell';
+  static const GIVE = '/give';
+  static const THREE = '/three';
 }

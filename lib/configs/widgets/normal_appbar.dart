@@ -37,11 +37,9 @@ class NormalAppBar {
                     Get.back();
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 22, bottom: 22, left: 24, right: 24),
+                    padding: const EdgeInsets.only(top: 20, bottom: 18, left: 18, right: 18),
                     child: WrapperImage(
                       url: 'nav_back.png',
-                      width: 8,
-                      height: 12,
                       imageType: ImageType.assets,
                       fit: BoxFit.contain,
                     ),

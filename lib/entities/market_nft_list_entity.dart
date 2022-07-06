@@ -241,8 +241,8 @@ class Good {
       int? showMinutes, 
       String? issuer, 
       String? purchaseInfo,
-    String? createTime,
-    String? updateTime,
+    dynamic createTime,
+    dynamic updateTime,
       int? isNft, 
       String? tokenUri, 
       int? totalNum, 
@@ -326,8 +326,8 @@ class Good {
   int? _showMinutes;
   String? _issuer;
   String? _purchaseInfo;
-  String? _createTime;
-  String? _updateTime;
+  dynamic _createTime;
+  dynamic _updateTime;
   int? _isNft;
   String? _tokenUri;
   int? _totalNum;
@@ -352,8 +352,8 @@ Good copyWith({  int? id,
   int? limitNum,
   int? showMinutes,
   String? issuer,
-  String? purchaseInfo,
-  String? createTime,
+  dynamic purchaseInfo,
+  dynamic createTime,
   String? updateTime,
   int? isNft,
   String? tokenUri,
@@ -408,8 +408,8 @@ Good copyWith({  int? id,
   int? get showMinutes => _showMinutes;
   String? get issuer => _issuer;
   String? get purchaseInfo => _purchaseInfo;
-  String? get createTime => _createTime;
-  String? get updateTime => _updateTime;
+  dynamic get createTime => _createTime;
+  dynamic get updateTime => _updateTime;
   int? get isNft => _isNft;
   String? get tokenUri => _tokenUri;
   int? get totalNum => _totalNum;

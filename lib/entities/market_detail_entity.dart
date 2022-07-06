@@ -47,9 +47,9 @@ class MarketDetailEntity {
       int? seriesId, 
       int? status, 
       String? goodSnapshot, 
-      String? spaceSnapshot, 
-      String? createTime, 
-      String? updateTime, 
+      String? spaceSnapshot,
+    dynamic createTime,
+    dynamic updateTime,
       String? matchTime, 
       String? payTime, 
       String? payFee, 
@@ -162,8 +162,8 @@ class MarketDetailEntity {
   int? _status;
   String? _goodSnapshot;
   String? _spaceSnapshot;
-  String? _createTime;
-  String? _updateTime;
+  dynamic _createTime;
+  dynamic _updateTime;
   String? _matchTime;
   String? _payTime;
   String? _payFee;
@@ -197,8 +197,8 @@ MarketDetailEntity copyWith({  int? id,
   int? status,
   String? goodSnapshot,
   String? spaceSnapshot,
-  String? createTime,
-  String? updateTime,
+  dynamic createTime,
+  dynamic updateTime,
   String? matchTime,
   String? payTime,
   String? payFee,
@@ -268,8 +268,8 @@ MarketDetailEntity copyWith({  int? id,
   int? get status => _status;
   String? get goodSnapshot => _goodSnapshot;
   String? get spaceSnapshot => _spaceSnapshot;
-  String? get createTime => _createTime;
-  String? get updateTime => _updateTime;
+  dynamic get createTime => _createTime;
+  dynamic get updateTime => _updateTime;
   String? get matchTime => _matchTime;
   String? get payTime => _payTime;
   String? get payFee => _payFee;
@@ -357,9 +357,9 @@ class Logs {
   Logs({
       int? id, 
       int? memberId, 
-      String? code, 
-      String? createTime, 
-      int? updateTime, 
+      String? code,
+    dynamic createTime,
+    dynamic updateTime,
       String? info, 
       String? price, 
       String? nickname, 
@@ -389,8 +389,8 @@ class Logs {
   int? _id;
   int? _memberId;
   String? _code;
-  String? _createTime;
-  int? _updateTime;
+  dynamic _createTime;
+  dynamic _updateTime;
   String? _info;
   String? _price;
   String? _nickname;
@@ -398,8 +398,8 @@ class Logs {
 Logs copyWith({  int? id,
   int? memberId,
   String? code,
-  String? createTime,
-  int? updateTime,
+  dynamic createTime,
+  dynamic updateTime,
   String? info,
   String? price,
   String? nickname,
@@ -417,8 +417,8 @@ Logs copyWith({  int? id,
   int? get id => _id;
   int? get memberId => _memberId;
   String? get code => _code;
-  String? get createTime => _createTime;
-  int? get updateTime => _updateTime;
+  dynamic get createTime => _createTime;
+  dynamic get updateTime => _updateTime;
   String? get info => _info;
   String? get price => _price;
   String? get nickname => _nickname;
@@ -482,8 +482,8 @@ class Good {
       int? showMinutes, 
       String? issuer, 
       String? purchaseInfo, 
-      int? createTime, 
-      int? updateTime, 
+      dynamic createTime,
+    dynamic updateTime,
       int? isNft, 
       String? tokenUri, 
       int? totalNum, 
@@ -561,8 +561,8 @@ class Good {
   int? _showMinutes;
   String? _issuer;
   String? _purchaseInfo;
-  int? _createTime;
-  int? _updateTime;
+  dynamic _createTime;
+  dynamic _updateTime;
   int? _isNft;
   String? _tokenUri;
   int? _totalNum;
@@ -586,8 +586,8 @@ Good copyWith({  int? id,
   int? showMinutes,
   String? issuer,
   String? purchaseInfo,
-  int? createTime,
-  int? updateTime,
+  dynamic createTime,
+  dynamic updateTime,
   int? isNft,
   String? tokenUri,
   int? totalNum,
@@ -637,8 +637,8 @@ Good copyWith({  int? id,
   int? get showMinutes => _showMinutes;
   String? get issuer => _issuer;
   String? get purchaseInfo => _purchaseInfo;
-  int? get createTime => _createTime;
-  int? get updateTime => _updateTime;
+  dynamic get createTime => _createTime;
+  dynamic get updateTime => _updateTime;
   int? get isNft => _isNft;
   String? get tokenUri => _tokenUri;
   int? get totalNum => _totalNum;

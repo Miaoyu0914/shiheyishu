@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter/services.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
@@ -8,6 +11,7 @@ import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
 import 'package:shiheyishu/pages/home/controllers/nft_detail_controller.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class NFTDetailPage extends StatefulWidget {
   const NFTDetailPage({Key? key}) : super(key: key);
@@ -86,11 +90,16 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                   ])),
           alignment: Alignment.center,
           padding: const EdgeInsets.only(top: 16.5, bottom: 16.5),
-          margin: const EdgeInsets.only(top: 15, bottom: 50, left: 50, right: 50),
+          margin:
+              const EdgeInsets.only(top: 15, bottom: 50, left: 50, right: 50),
           child: Text(
-            controller.nftDetailEntity!.status == 1 ? 'home.nft.future.tag'.tr : 'nft.detail.buy'.tr,
+            controller.nftDetailEntity!.status == 1
+                ? 'home.nft.future.tag'.tr
+                : 'nft.detail.buy'.tr,
             style: const TextStyle(
-                height: 1, color: AppColors.loginButtonTitleColor, fontSize: 17),
+                height: 1,
+                color: AppColors.loginButtonTitleColor,
+                fontSize: 17),
           ),
         ),
       ),
@@ -502,38 +511,55 @@ class _NFTDetailPageState extends State<NFTDetailPage>
             WrapperImage(
               url: 'nft_back_top.png',
               width: Get.width,
-              height: 200,
+              height: Get.width / 2,
               imageType: ImageType.assets,
             ),
             WrapperImage(
               url: 'nft_back_bottom.png',
               width: Get.width,
-              height: 230,
+              height: Get.width / 2,
               imageType: ImageType.assets,
             )
           ],
         ),
         Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 100, bottom: 70),
-            child: AnimatedBuilder(
-              animation: _animation,
-              builder: (context, child) {
-                return Transform(
-                  transform: Matrix4.identity()
-                    ..setEntry(3, 2, 0.0001) // 第三参数定义视图距离，值越小物体就离你越远，看着就有立体感
-                    // 旋转Y轴角度，pi为圆半径，animation.value为动态获取的动画值
-                    ..rotateY(pi * _animation.value / 180),
-                  alignment: FractionalOffset.center, // 以轴中心开始动画
-                  child: WrapperImage(
-                    url: controller.nftDetailEntity!.goodsImage,
-                    width: 180,
-                    height: 180,
+          child: (controller.nftDetailEntity!.threeD != '' &&
+                  controller.nftDetailEntity!.threeD!.endsWith('gltf'))
+              ? FutureBuilder(
+                  future: rootBundle.loadString("resource/model_html.html"),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.data != null &&
+                        snapshot.connectionState == ConnectionState.done) {
+                      return Container(
+                        child: _gltf(snapshot.data),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(top: 100, bottom: 70),
+                  child: AnimatedBuilder(
+                    animation: _animation,
+                    builder: (context, child) {
+                      return Transform(
+                        transform: Matrix4.identity()
+                          ..setEntry(
+                              3, 2, 0.0001) // 第三参数定义视图距离，值越小物体就离你越远，看着就有立体感
+                          // 旋转Y轴角度，pi为圆半径，animation.value为动态获取的动画值
+                          ..rotateY(pi * _animation.value / 180),
+                        alignment: FractionalOffset.center, // 以轴中心开始动画
+                        child: WrapperImage(
+                          url: controller.nftDetailEntity!.goodsImage,
+                          width: 180,
+                          height: 180,
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
+                ),
         ),
         Padding(
           padding: EdgeInsets.only(top: CommonUtils.getAppBarHeight()),
@@ -566,10 +592,61 @@ class _NFTDetailPageState extends State<NFTDetailPage>
     );
   }
 
+  Widget _gltf(String? html) {
+    if (html == null) {
+      return Container();
+    }
+    html = html.replaceFirst("gltfUrl", controller.nftDetailEntity!.threeD!);
+    return IgnorePointer(
+      ignoring: true,
+      child: Stack(
+        children: [
+          Offstage(
+            offstage: !controller.initGltf,
+            child: SizedBox(
+                width: Get.width,
+                height: Get.width,
+                child: const CupertinoActivityIndicator()),
+          ),
+          Container(
+            alignment: Alignment.center,
+            child: Container(
+              padding: const EdgeInsets.only(top: 50),
+              width: Get.width,
+              height: Get.width,
+              child: _web(html),
+              // child: androidWeb(resizeTestBase64),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _web(String html) {
+    return WebView(
+      javascriptChannels: <JavascriptChannel>{
+        JavascriptChannel(
+            name: 'progress',
+            onMessageReceived: (JavascriptMessage message) async {
+              if (message.message.toString() == "1") {
+                controller.gltfHasLoad();
+              }
+            }),
+      },
+      backgroundColor: Colors.transparent,
+      initialUrl: Uri.dataFromString(html,
+              mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+          .toString(),
+      javascriptMode: JavascriptMode.unrestricted,
+    );
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
     _repeatController.dispose();
+
     super.dispose();
   }
 }

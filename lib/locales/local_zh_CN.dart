@@ -132,7 +132,7 @@ const Map<String, String> zh_CN = {
   'mine.3d.room': '3D藏品室',
   'mine.market.order': '市场订单',
   'mine.platform.order': '平台订单',
-  'mine.donation': '转增记录',
+  'mine.donation': '转赠记录',
   'mine.compose': '合成',
   'mine.share.rank': '邀请排行',
   'mine.market.rank': '交易排行',

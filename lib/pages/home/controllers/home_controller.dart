@@ -59,7 +59,7 @@ class HomeController extends ViewStateController {
   }
 
   Future<void> getHomeAlbum() async {
-    albums = await NFTService.getAlbums(HttpRunnerParams());
+    albums = await NFTService.getHomeAlbums(HttpRunnerParams());
   }
 
   Future<void> getHotNFTList() async {

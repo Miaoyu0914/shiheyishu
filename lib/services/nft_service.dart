@@ -115,7 +115,7 @@ abstract class NFTService {
   });
 
   //首页专辑
-  static final getAlbums =
+  static final getHomeAlbums =
   buildHttpRunner<List<HomeAlbumEntity>>((HttpRunnerParams params) async {
     var res = await request('/app/goods_series/homeSeriesList', params);
     List<dynamic> data = res.data;
@@ -138,6 +138,16 @@ abstract class NFTService {
     List<dynamic> data = res.data;
     return data.map((e){
       return AlbumDetailListEntity.fromJson(e);
+    }).toList();
+  });
+
+  //专辑列表
+  static final getAlbums =
+  buildHttpRunner<List<HomeAlbumEntity>>((HttpRunnerParams params) async {
+    var res = await request('/app/goods_series/seriesList', params);
+    List<dynamic> data = res.data;
+    return data.map((e){
+      return HomeAlbumEntity.fromJson(e);
     }).toList();
   });
 

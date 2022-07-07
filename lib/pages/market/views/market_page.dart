@@ -37,14 +37,14 @@ class MarketPage extends GetView<MarketController> {
             elevation: 0,
           ),
           body: Column(
-            children: [_searchBar(context), _screenBar(), _marketNFTList()],
+            children: [_searchBar(context), _screenBar(context), _marketNFTList()],
           ));
     });
   }
 
   Widget _marketNFTList() {
     if(controller.marketNFTs.isEmpty){
-      return Container();
+      return ViewStateEmptyWidget('');
     }
     return Expanded(
       child: SmartRefresher(
@@ -178,7 +178,7 @@ class MarketPage extends GetView<MarketController> {
     );
   }
 
-  Widget _screenBar() {
+  Widget _screenBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15,top: 11, bottom: 15),
       child: Row(
@@ -202,11 +202,14 @@ class MarketPage extends GetView<MarketController> {
               ],
             ),
           ),
-          Row(
-            children: [
-              Text('market.screen'.tr, style: const TextStyle(color: Colors.white, fontSize: 14),),
-              WrapperImage(url: 'screen.png', imageType: ImageType.assets, width: 6, height: 12,)
-            ],
+          InkWell(
+            onTap: () => controller.showAlbumSelectSheet(context),
+            child: Row(
+              children: [
+                Text('market.screen'.tr, style: const TextStyle(color: Colors.white, fontSize: 14),),
+                WrapperImage(url: 'screen.png', imageType: ImageType.assets, width: 6, height: 12,)
+              ],
+            ),
           )
         ],
       ),

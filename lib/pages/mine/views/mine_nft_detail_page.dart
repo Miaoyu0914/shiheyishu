@@ -62,7 +62,7 @@ class _MineNFTDetailPageState extends State<MineNFTDetailPage>
                     case 4:
                       return _buyInfo();
                     case 5:
-                      return _buyButton();
+                      return _buyButton(context);
                     default:
                       return Container();
                   }
@@ -73,14 +73,14 @@ class _MineNFTDetailPageState extends State<MineNFTDetailPage>
     });
   }
 
-  Widget _buyButton() {
+  Widget _buyButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 50,top: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           InkWell(
-            // onTap: () => ,
+            onTap: () => controller.showShareImageSheet(context),
             child: Container(
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(25)),

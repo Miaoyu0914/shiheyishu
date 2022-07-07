@@ -131,7 +131,7 @@ const Map<String, String> zh_CN = {
   'mine.wallet': '钱包',
   'mine.blind.box': '盲盒',
   'mine.collection': '藏品',
-  'mine.3d.room': '3D藏品室',
+  'mine.3d.room': '数字展厅',
   'mine.market.order': '市场订单',
   'mine.platform.order': '平台订单',
   'mine.donation': '转赠记录',
@@ -220,7 +220,7 @@ const Map<String, String> zh_CN = {
   'wallet.money': '¥ ',
 
 
-  'three.title': '3D藏品室',
+  'three.title': '数字展厅',
   'three.null': '暂未开放',
 
   'platform.order.title': '平台订单',

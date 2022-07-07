@@ -26,5 +26,8 @@ class AppColors{
   static const Color rankBackColor = Color(0xFFFFECCB);
   static const Color payKindBackColor = Color(0xFF212227);
   static const Color payAllKindBackColor = Color(0xFF000000);
+  static const Color marketSelectColor = Color(0xFF2E3148);
+  static const Color shareTitleColor = Color(0xFF19211D);
+  static const Color shareLimitColor = Color(0xFF505455);
   static const Color mineBlindBoxOffsetColor = Color.fromRGBO(157, 179, 198, 0.49);
 }

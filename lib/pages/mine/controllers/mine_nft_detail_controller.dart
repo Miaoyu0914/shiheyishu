@@ -63,73 +63,73 @@ class MineNFTDetailController extends ViewStateController {
   }
 
   void showShareImageSheet(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (ctx) {
-        return WillPopScope(
-          child: Stack(
-            children: [
-              InkWell(
-                onTap: () => Get.back(),
-                child: Opacity(
-                  opacity: 1,
-                  child: Blur(
-                    child: Container(
-                      width: Get.width,
-                      height: Get.height,
-                      color: Colors.transparent,
-                    ),
-                    blurColor: Colors.black,
-                    blur: 27.86,
-                  ),
-                ),
-              ),
-              Center(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20)),
-                          child: WrapperImage(
-                            url: mineNftDetailEntity!.good!.shareImg,
-                            width: 300,
-                            height: 450,
-                          )),
-                      Row(
-                        children: [
-                          Column(
-                            children: [
-                              Text(mineNftDetailEntity!.good!.goodsName!, style: const TextStyle(color: AppColors.shareTitleColor, fontSize: 20, fontWeight: FontWeight.bold),),
-                              Row(
-                                children: [
-                                  Text('限量：${mineNftDetailEntity!.good!.totalNum}份', style: const TextStyle(color: AppColors.shareLimitColor, fontSize: 12),),
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(6))
-                                    ),
-
-                                  )
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          onWillPop: () async => pop(),
-        );
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (ctx) {
+    //     return WillPopScope(
+    //       child: Stack(
+    //         children: [
+    //           InkWell(
+    //             onTap: () => Get.back(),
+    //             child: Opacity(
+    //               opacity: 1,
+    //               child: Blur(
+    //                 child: Container(
+    //                   width: Get.width,
+    //                   height: Get.height,
+    //                   color: Colors.transparent,
+    //                 ),
+    //                 blurColor: Colors.black,
+    //                 blur: 27.86,
+    //               ),
+    //             ),
+    //           ),
+    //           Center(
+    //             child: Container(
+    //               decoration: const BoxDecoration(
+    //                 borderRadius: BorderRadius.all(Radius.circular(20)),
+    //               ),
+    //               child: Column(
+    //                 children: [
+    //                   ClipRRect(
+    //                       borderRadius: const BorderRadius.only(
+    //                           topLeft: Radius.circular(20),
+    //                           topRight: Radius.circular(20)),
+    //                       child: WrapperImage(
+    //                         url: mineNftDetailEntity!.good!.shareImg,
+    //                         width: 300,
+    //                         height: 450,
+    //                       )),
+    //                   Row(
+    //                     children: [
+    //                       Column(
+    //                         children: [
+    //                           Text(mineNftDetailEntity!.good!.goodsName!, style: const TextStyle(color: AppColors.shareTitleColor, fontSize: 20, fontWeight: FontWeight.bold),),
+    //                           Row(
+    //                             children: [
+    //                               Text('限量：${mineNftDetailEntity!.good!.totalNum}份', style: const TextStyle(color: AppColors.shareLimitColor, fontSize: 12),),
+    //                               Container(
+    //                                 decoration: const BoxDecoration(
+    //                                   borderRadius: BorderRadius.all(Radius.circular(6))
+    //                                 ),
+    //
+    //                               )
+    //                             ],
+    //                           )
+    //                         ],
+    //                       )
+    //                     ],
+    //                   )
+    //                 ],
+    //               ),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //       onWillPop: () async => pop(),
+    //     );
+    //   },
+    // );
   }
 
   Future<bool> pop() async {

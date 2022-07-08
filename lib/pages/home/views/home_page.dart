@@ -219,9 +219,10 @@ class HomePage extends GetView<HomeController> {
                                         borderRadius: const BorderRadius.only(
                                             bottomRight: Radius.circular(20)),
                                         child: WrapperImage(
-                                          url: nft.authorImage,
+                                          url: 'home_nft_back.png',
                                           width: 145,
                                           height: 145,
+                                          imageType: ImageType.assets,
                                         )),
                                   ),
                                   Padding(
@@ -321,13 +322,13 @@ class HomePage extends GetView<HomeController> {
                                                   ],
                                                 ),
                                               ),
-                                              Text(
-                                                'home.nft.already'.tr +
-                                                    '${nft.sale}',
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 12),
-                                              ),
+                                              // Text(
+                                              //   'home.nft.already'.tr +
+                                              //       '${nft.sale}',
+                                              //   style: const TextStyle(
+                                              //       color: Colors.white,
+                                              //       fontSize: 12),
+                                              // ),
                                             ],
                                           ),
                                         ),

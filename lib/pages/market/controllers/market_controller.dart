@@ -134,7 +134,7 @@ class MarketController extends ViewStateController {
         builder: (ctx) {
           return WillPopScope(
             child: Padding(
-              padding: EdgeInsets.only(top: Get.statusBarHeight
+              padding: EdgeInsets.only(top: Get.statusBarHeight,right: 15
               ),
               child: Stack(
                 alignment: Alignment.topRight,

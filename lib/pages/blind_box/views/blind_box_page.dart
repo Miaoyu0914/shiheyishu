@@ -20,10 +20,10 @@ class BlindBoxPage extends GetView<BlindBoxController> {
         appBar: AppBar(
           title: Center(
               child: Text(
-            'mine.blind.box'.tr,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-          )),
+                'mine.blind.box'.tr,
+                style: const TextStyle(
+                    color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+              )),
           leadingWidth: 0,
           leading: Container(),
           backgroundColor: AppColors.main,
@@ -33,13 +33,13 @@ class BlindBoxPage extends GetView<BlindBoxController> {
           slivers: [
             SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
-              switch (index) {
-                case 0:
-                  return _blindBoxList();
-                default:
-                  return Container();
-              }
-            }, childCount: 1))
+                  switch (index) {
+                    case 0:
+                      return _blindBoxList();
+                    default:
+                      return Container();
+                  }
+                }, childCount: 1))
           ],
         ),
       );
@@ -49,7 +49,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
   Widget _blindBoxList() {
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //横轴元素个数
+          //横轴元素个数
             crossAxisCount: 2,
             //纵轴间距
             mainAxisSpacing: 15.0,
@@ -76,7 +76,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
                           padding: const EdgeInsets.only(bottom: 15),
                           child: ClipRRect(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(15)),
+                            const BorderRadius.all(Radius.circular(15)),
                             child: WrapperImage(
                               url: blindBox.image,
                               width: 150,
@@ -91,7 +91,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
                               opacity: 0.3,
                               child: Container(
                                 margin:
-                                    const EdgeInsets.only(left: 20, right: 20),
+                                const EdgeInsets.only(left: 20, right: 20),
                                 alignment: Alignment.center,
                                 padding: const EdgeInsets.only(
                                     top: 15, bottom: 15, right: 20, left: 20),
@@ -99,7 +99,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
                                     color: AppColors.blindBoxTitleBackColor,
                                     border: Border.all(
                                         color:
-                                            AppColors.blindBoxTitleBorderColor,
+                                        AppColors.blindBoxTitleBorderColor,
                                         width: 1),
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(15))),
@@ -107,7 +107,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.only(left: 30, right: 30),
+                              const EdgeInsets.only(left: 30, right: 30),
                               child: Text(
                                 blindBox.name!,
                                 maxLines: 1,
@@ -133,12 +133,12 @@ class BlindBoxPage extends GetView<BlindBoxController> {
                               'blind.box.creator'.tr,
                               style: const TextStyle(
                                   color: AppColors.nftUnselectColor,
-                                  fontSize: 10),
+                                  fontSize: 12),
                             ),
                             Text(
                               blindBox.authorName!,
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 10),
+                                  color: Colors.white, fontSize: 14),
                             )
                           ],
                         ),
@@ -150,12 +150,12 @@ class BlindBoxPage extends GetView<BlindBoxController> {
                                 'blind.box.issuer'.tr,
                                 style: const TextStyle(
                                     color: AppColors.nftUnselectColor,
-                                    fontSize: 10),
+                                    fontSize: 12),
                               ),
                               Text(
                                 blindBox.issuer!,
                                 style: const TextStyle(
-                                    color: Colors.white, fontSize: 10),
+                                    color: Colors.white, fontSize: 14),
                               )
                             ],
                           ),
@@ -166,23 +166,23 @@ class BlindBoxPage extends GetView<BlindBoxController> {
                               'blind.box.amount'.tr,
                               style: const TextStyle(
                                   color: AppColors.nftUnselectColor,
-                                  fontSize: 10),
+                                  fontSize: 12),
                             ),
                             Text(
                               '${blindBox.num}',
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 10),
+                                  color: Colors.white, fontSize: 14),
                             ),
                             Text(
                               'blind.box.sale'.tr,
                               style: const TextStyle(
                                   color: AppColors.nftUnselectColor,
-                                  fontSize: 10),
+                                  fontSize: 12),
                             ),
                             Text(
                               '${blindBox.sale}',
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 10),
+                                  color: Colors.white, fontSize: 14),
                             )
                           ],
                         ),

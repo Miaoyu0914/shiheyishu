@@ -213,18 +213,15 @@ class HomePage extends GetView<HomeController> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  Opacity(
-                                    opacity: 0.1,
-                                    child: ClipRRect(
-                                        borderRadius: const BorderRadius.only(
-                                            bottomRight: Radius.circular(20)),
-                                        child: WrapperImage(
-                                          url: 'home_nft_back.png',
-                                          width: 145,
-                                          height: 145,
-                                          imageType: ImageType.assets,
-                                        )),
-                                  ),
+                                  ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                          bottomRight: Radius.circular(20)),
+                                      child: WrapperImage(
+                                        url: 'home_nft_logo.png',
+                                        width: 145,
+                                        height: 145,
+                                        imageType: ImageType.assets,
+                                      )),
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         bottom: 20, left: 20, right: 20),
@@ -322,13 +319,13 @@ class HomePage extends GetView<HomeController> {
                                                   ],
                                                 ),
                                               ),
-                                              // Text(
-                                              //   'home.nft.already'.tr +
-                                              //       '${nft.sale}',
-                                              //   style: const TextStyle(
-                                              //       color: Colors.white,
-                                              //       fontSize: 12),
-                                              // ),
+                                              Text(
+                                                'home.nft.already'.tr +
+                                                    '${nft.sale}',
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -341,18 +338,18 @@ class HomePage extends GetView<HomeController> {
                                                 ClipRRect(
                                                   borderRadius:
                                                       const BorderRadius.all(
-                                                          Radius.circular(10)),
+                                                          Radius.circular(20)),
                                                   child: WrapperImage(
                                                     url: nft.issuerImage,
-                                                    width: 20,
-                                                    height: 20,
+                                                    width: 40,
+                                                    height: 40,
                                                   ),
                                                 ),
                                                 Text(
                                                   ' ' + nft.issuer!,
                                                   style: const TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 11),
+                                                      fontSize: 16),
                                                 )
                                               ],
                                             ),
@@ -421,9 +418,12 @@ class HomePage extends GetView<HomeController> {
                         width: 30,
                         height: 30,
                       )),
-                  Text(
-                    album.seriesName!,
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Text(
+                      album.seriesName!,
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   )
                 ],
               ),
@@ -439,7 +439,7 @@ class HomePage extends GetView<HomeController> {
 
   Widget _board() {
     return Container(
-      height: 50,
+      height: 75,
       margin: const EdgeInsets.all(15),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -457,11 +457,14 @@ class HomePage extends GetView<HomeController> {
         children: [
           Row(
             children: [
-              WrapperImage(
-                url: 'board.png',
-                imageType: ImageType.assets,
-                width: 86,
-                height: 35,
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: WrapperImage(
+                  url: 'board.png',
+                  imageType: ImageType.assets,
+                  width: 70,
+                  height: 40,
+                ),
               ),
               SizedBox(
                 width: 150,
@@ -472,10 +475,14 @@ class HomePage extends GetView<HomeController> {
                       onTap: () => controller.pushToBoardDetailPage(index),
                       child: Row(
                         children: [
-                          Text(
-                            board.title!,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 14),
+                          Expanded(
+                            child: Text(
+                              board.title!,
+                              maxLines: 1,
+                              style: const TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                                  color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ],
                       ),
@@ -496,13 +503,13 @@ class HomePage extends GetView<HomeController> {
                   border: Border.all(
                       color: AppColors.navSelectedTitleColor, width: 1)),
               padding:
-                  const EdgeInsets.only(top: 2, bottom: 2, left: 11, right: 11),
+                  const EdgeInsets.only(top: 5, bottom: 5, left: 11, right: 11),
               margin: const EdgeInsets.only(right: 15),
               child: Text(
                 'home.more'.tr,
                 style: const TextStyle(
                     color: AppColors.navSelectedTitleColor,
-                    fontSize: 13,
+                    fontSize: 15,
                     height: 1),
               ),
             ),

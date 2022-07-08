@@ -140,11 +140,11 @@ class MarketPage extends GetView<MarketController> {
                                       Text(
                                         'market.number'.tr,
                                         style: const TextStyle(
-                                            color: AppColors.nftUnselectColor, fontSize: 10),
+                                            color: AppColors.nftUnselectColor, fontSize: 12),
                                       ),
                                       Text(
                                         '${nft.good!.limitNum}/${nft.good!.totalNum}',
-                                        style: const TextStyle(color: Colors.white, fontSize: 10),
+                                        style: const TextStyle(color: Colors.white, fontSize: 14),
                                       )
                                     ],
                                   ),
@@ -180,7 +180,7 @@ class MarketPage extends GetView<MarketController> {
 
   Widget _screenBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15,top: 11, bottom: 15),
+      padding: const EdgeInsets.only(left: 30, right: 30,top: 11, bottom: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -40,4 +40,6 @@ abstract class Routes {
   static const RESELL = '/resell';
   static const GIVE = '/give';
   static const THREE = '/three';
+  static const MINEADDRESS = '/mine_address';
+  static const MINEBANKCARD = '/mine_bank_card';
 }

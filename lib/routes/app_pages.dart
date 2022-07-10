@@ -23,7 +23,9 @@ import 'package:shiheyishu/pages/market/views/market_detail_page.dart';
 import 'package:shiheyishu/pages/mine/bindings/account_privacy_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/give_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/market_rank_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/mine_address_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_album_list_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/mine_bank_card_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_blind_box_detail_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_blind_box_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_give_bindings.dart';
@@ -47,7 +49,9 @@ import 'package:shiheyishu/pages/mine/bindings/wallet_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/views/account_privacy_page.dart';
 import 'package:shiheyishu/pages/mine/views/give_page.dart';
 import 'package:shiheyishu/pages/mine/views/market_rank_page.dart';
+import 'package:shiheyishu/pages/mine/views/mine_address_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_album_list_page.dart';
+import 'package:shiheyishu/pages/mine/views/mine_bank_card_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_blind_box_detail_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_blind_box_list_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_give_page.dart';
@@ -167,9 +171,19 @@ class AppPages {
                   bindings: [ResetPswBindings()],
               ),
               GetPage(
+                name: Routes.MINEBANKCARD,
+                page: () => const MineBankCardPage(),
+                bindings: [MineBankCardBindings()],
+              ),
+              GetPage(
                 name: Routes.PRIVACY,
                 page: () => const AccountPrivacyPage(),
                 bindings: [AccountPrivacyBindings()],
+              ),
+              GetPage(
+                name: Routes.MINEADDRESS,
+                page: () => const MineAddressPage(),
+                bindings: [MineAddressBindings()],
               ),
             ]
         ),

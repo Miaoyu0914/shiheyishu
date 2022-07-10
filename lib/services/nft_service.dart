@@ -32,6 +32,12 @@ import 'package:shiheyishu/services/http/http_runner.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 
 abstract class NFTService {
+  //用户使用手册
+  static final getSplashImage =
+  buildHttpRunner<String>((HttpRunnerParams params) async {
+    var res = await request('/app/auth/back_img', params);
+    return res.data['img'];
+  });
   //验证码
   static final sendSMS = buildHttpRunner<bool>((HttpRunnerParams params) async {
     await request('/app/auth/sendSms', params);
@@ -369,6 +375,24 @@ abstract class NFTService {
   static final goSynthesis =
   buildHttpRunner<bool>((HttpRunnerParams params) async {
     await request('/app/member_space/synthetic', params);
+    return true;
+  });
+
+  //添加收货地址
+  static final addAddress =
+  buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/member_address/add', params);
+    return true;
+  });
+  //
+  //
+  //
+  //
+
+  //绑定银行卡
+  static final addBankCard =
+  buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/member/editBank', params);
     return true;
   });
 //

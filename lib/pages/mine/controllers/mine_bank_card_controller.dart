@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/common.dart';
@@ -10,19 +10,16 @@ import 'package:shiheyishu/entities/login_entity.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 import 'package:shiheyishu/services/nft_service.dart';
 
-class ResetPswController extends ViewStateController {
-  bool isLoginPsw = true;
-
-  ResetPswController({required this.isLoginPsw});
-
-  LoginEntity? userInfo;
+class MineBankCardController extends ViewStateController {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController cardController = TextEditingController();
+  TextEditingController bankController = TextEditingController();
   TextEditingController codeController = TextEditingController();
-  TextEditingController newPSWController = TextEditingController();
-  TextEditingController newPSWAgainController = TextEditingController();
-  String codeButtonTitle = 'reset.psw.get.code'.tr;
+  String codeButtonTitle = 'mine.bank.card.code.get'.tr;
   int countNumber = 60;
   bool canSend = true;
   Timer? _timer;
+  LoginEntity? userInfo;
 
   @override
   void onInit() {
@@ -35,7 +32,7 @@ class ResetPswController extends ViewStateController {
       if (CommonUtils.isPhoneNumber(userInfo!.phone!)) {
         EasyLoading.show();
         bool? isSendSms = await NFTService.sendSMS(HttpRunnerParams(
-            data: {"phone": userInfo!.phone, "scene": 'forget_password'}));
+            data: {"phone": userInfo!.phone, "scene": "blind_bank"}));
         EasyLoading.dismiss();
         if (isSendSms!) {
           canSend = false;
@@ -51,7 +48,7 @@ class ResetPswController extends ViewStateController {
     _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (countNumber <= 0) {
         canSend = true;
-        codeButtonTitle = 'login.code.get.again'.tr;
+        codeButtonTitle = 'mine.bank.card.code.get'.tr;
         _timer?.cancel();
         countNumber = 60;
         update();
@@ -65,23 +62,15 @@ class ResetPswController extends ViewStateController {
 
   Future<void> resetPsw() async {
     EasyLoading.show();
-    bool? isSuccess;
-    if (isLoginPsw) {
-      isSuccess = await NFTService.resetPSW(HttpRunnerParams(data: {
-        'password': newPSWController.text,
-        're_password': newPSWAgainController.text,
-        'sms_code': codeController.text
-      }));
-    } else {
-      isSuccess = await NFTService.resetSecondPSW(HttpRunnerParams(data: {
-        'password': newPSWController.text,
-        're_password': newPSWAgainController.text,
-        'sms_code': codeController.text
-      }));
-    }
+    bool? isSuccess = await NFTService.addBankCard(HttpRunnerParams(data: {
+      'bank_name': nameController.text,
+      'bank_account': cardController.text,
+      'bank': bankController.text,
+      'sms_code': codeController.text
+    }));
     EasyLoading.dismiss();
     if (isSuccess!) {
-      EasyLoading.showToast('login.psw.change.success'.tr);
+      EasyLoading.showToast('mine.bank.card.success'.tr);
       Get.back();
     }
   }

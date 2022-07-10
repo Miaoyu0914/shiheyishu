@@ -7,12 +7,14 @@ class SafeSettingController extends ViewStateController {
     'safe.reset.psw'.tr,
     'safe.reset.second.psw'.tr,
     'safe.set.card'.tr,
-    'safe.set.account'.tr
+    'safe.set.account'.tr,
+    'mine.address.title'.tr
   ];
   List<String> menuImages = [
     'reset_psw.png',
     'reset_psw.png',
     'safe_card.png',
+    'safe_account.png',
     'safe_account.png'
   ];
 
@@ -29,8 +31,14 @@ class SafeSettingController extends ViewStateController {
       case 1:
         Get.toNamed(Routes.NAV+Routes.SAFE+Routes.RESETPSW, arguments: {'isLoginPsw':false});
         break;
+      case 2:
+        Get.toNamed(Routes.NAV+Routes.SAFE+Routes.MINEBANKCARD);
+        break;
       case 3:
         Get.toNamed(Routes.NAV+Routes.SAFE+Routes.PRIVACY);
+        break;
+      case 4:
+        Get.toNamed(Routes.NAV+Routes.SAFE+Routes.MINEADDRESS);
         break;
       default:
         break;

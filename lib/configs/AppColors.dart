@@ -29,5 +29,6 @@ class AppColors{
   static const Color marketSelectColor = Color(0xFF2E3148);
   static const Color shareTitleColor = Color(0xFF19211D);
   static const Color shareLimitColor = Color(0xFF505455);
+  static const Color downloadAppTag = Color(0xFFADBCC9);
   static const Color mineBlindBoxOffsetColor = Color.fromRGBO(157, 179, 198, 0.49);
 }

@@ -12,10 +12,17 @@ import '../../../configs/storage_manager.dart';
 class SplashController extends ViewStateController {
   int countNumber = 3;
   Timer? _timer;
+  String? imagePath = '';
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     startCount();
+    await getSplashBackImage();
+    update();
+  }
+
+  Future<void> getSplashBackImage() async {
+    imagePath = await NFTService.getSplashImage(HttpRunnerParams());
   }
 
   Future<void> startCount() async {

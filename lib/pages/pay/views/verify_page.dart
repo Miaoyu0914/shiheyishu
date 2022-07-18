@@ -16,7 +16,7 @@ class VerifyPage extends GetView<VerifyController> {
         return ViewStateBusyWidget();
       }
       return Scaffold(
-        appBar: NormalAppBar().getAppBar(context),
+        appBar: NormalAppBar(title: 'slider.verify'.tr).getAppBar(context),
         backgroundColor: AppColors.main,
         body: CustomScrollView(
           slivers: [
@@ -44,13 +44,14 @@ class VerifyPage extends GetView<VerifyController> {
         javascriptChannels: <JavascriptChannel>{
           _javascriptChannel(context),
         },
+
       ),
     );
   }
 
   JavascriptChannel _javascriptChannel(BuildContext context) {
     return JavascriptChannel(
-        name: 'call_wx_andriod',
+        name: 'call_wx_android',
         onMessageReceived: (JavascriptMessage message) {
           print(message);
         });

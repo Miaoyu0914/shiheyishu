@@ -151,6 +151,7 @@ class MineNFTDetailController extends ViewStateController {
                                     ),
                                   ),
                                 )
+
                               ],
                             )
                           ],

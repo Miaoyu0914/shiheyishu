@@ -50,7 +50,7 @@ class VerifyPage extends GetView<VerifyController> {
 
   JavascriptChannel _javascriptChannel(BuildContext context) {
     return JavascriptChannel(
-        name: 'getSlideData',
+        name: 'call_wx_andriod',
         onMessageReceived: (JavascriptMessage message) {
           print(message);
         });

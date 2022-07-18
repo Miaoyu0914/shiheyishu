@@ -17,7 +17,7 @@
     <!-- 允许修改wifi状态的权限 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
    <application
-        android:label="shiheyishu"
+        android:label="世禾艺术"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

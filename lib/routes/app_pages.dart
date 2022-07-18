@@ -75,7 +75,9 @@ import 'package:shiheyishu/pages/mine/views/wallet_page.dart';
 import 'package:shiheyishu/pages/nav/bindings/nav_bar_bindings.dart';
 import 'package:shiheyishu/pages/nav/views/nav_bar_page.dart';
 import 'package:shiheyishu/pages/pay/bindings/pay_bindings.dart';
+import 'package:shiheyishu/pages/pay/bindings/verify_bindings.dart';
 import 'package:shiheyishu/pages/pay/views/pay_page.dart';
+import 'package:shiheyishu/pages/pay/views/verify_page.dart';
 
 import '../pages/login/bindings/login_bindings.dart';
 
@@ -90,6 +92,11 @@ class AppPages {
       name: Routes.SPLASH,
       page: () => const SplashPage(),
       bindings: [SplashBindings()],
+    ),
+    GetPage(
+      name: Routes.SLIDERVREIFY,
+      page: () => const VerifyPage(),
+      bindings: [VerifyBindings()],
     ),
     GetPage(
         name: Routes.LOGIN,

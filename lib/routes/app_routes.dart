@@ -42,4 +42,5 @@ abstract class Routes {
   static const THREE = '/three';
   static const MINEADDRESS = '/mine_address';
   static const MINEBANKCARD = '/mine_bank_card';
+  static const SLIDERVREIFY = '/slider_verify';
 }

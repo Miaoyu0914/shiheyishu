@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
@@ -44,14 +46,13 @@ class VerifyPage extends GetView<VerifyController> {
         javascriptChannels: <JavascriptChannel>{
           _javascriptChannel(context),
         },
-
       ),
     );
   }
 
   JavascriptChannel _javascriptChannel(BuildContext context) {
     return JavascriptChannel(
-        name: 'call_wx_android',
+        name: 'Toaster.call_code_andriod',
         onMessageReceived: (JavascriptMessage message) {
           print(message);
         });

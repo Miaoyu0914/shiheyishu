@@ -517,6 +517,7 @@ class _NFTDetailPageState extends State<NFTDetailPage>
             Container(
               width: Get.width,
               height: Get.width / 2,
+              margin: const EdgeInsets.only(top: 50),
               alignment: Alignment.bottomCenter,
               child: WrapperImage(
                 url: 'nft_back_bottom.png',

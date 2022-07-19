@@ -701,6 +701,7 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
               width: Get.width,
               height: Get.width / 2,
               alignment: Alignment.bottomCenter,
+              margin: const EdgeInsets.only(top: 50),
               child: WrapperImage(
                 url: 'nft_back_bottom.png',
                 width: 320,

@@ -25,7 +25,7 @@ class PayPage extends GetView<PayController> {
                 delegate: SliverChildBuilderDelegate((context, index) {
               switch (index) {
                 case 0:
-                  return _body();
+                  return _body(context);
                 default:
                   return Container();
               }
@@ -36,7 +36,7 @@ class PayPage extends GetView<PayController> {
     });
   }
 
-  Widget _body() {
+  Widget _body(BuildContext context) {
     return Column(
       children: [
         Stack(
@@ -190,25 +190,28 @@ class PayPage extends GetView<PayController> {
         ),
         Column(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        AppColors.loginButtonLeftColor,
-                        AppColors.loginButtonRightColor
-                      ])),
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: 16.5, bottom: 16.5),
-              margin: const EdgeInsets.only(top: 100, left: 54, right: 54),
-              child: Text(
-                'pay.pay'.tr,
-                style: const TextStyle(
-                    height: 1,
-                    color: AppColors.loginButtonTitleColor,
-                    fontSize: 17),
+            InkWell(
+              onTap: () => controller.pay(context),
+              child: Container(
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          AppColors.loginButtonLeftColor,
+                          AppColors.loginButtonRightColor
+                        ])),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(top: 16.5, bottom: 16.5),
+                margin: const EdgeInsets.only(top: 100, left: 54, right: 54),
+                child: Text(
+                  'pay.pay'.tr,
+                  style: const TextStyle(
+                      height: 1,
+                      color: AppColors.loginButtonTitleColor,
+                      fontSize: 17),
+                ),
               ),
             ),
             Container(

@@ -256,6 +256,9 @@ const Map<String, String> zh_CN = {
   'platform.order.already': '已完成',
   'platform.order.cancel': '已取消',
   'platform.order.go.pay': '去支付',
+  'platform.order.money': '¥ ',
+
+  'market.order.title': '市场订单',
 
   'mine.give.title': '转增记录',
   'mine.give.people': '转出给',

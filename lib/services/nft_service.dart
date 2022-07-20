@@ -18,6 +18,8 @@ import 'package:shiheyishu/entities/mine_blind_box_list_entity.dart';
 import 'package:shiheyishu/entities/mine_give_entity.dart';
 import 'package:shiheyishu/entities/mine_goods_list_entity.dart';
 import 'package:shiheyishu/entities/mine_group_list_entity.dart';
+import 'package:shiheyishu/entities/mine_market_in_order_entity.dart';
+import 'package:shiheyishu/entities/mine_market_out_order_entity.dart';
 import 'package:shiheyishu/entities/mine_nft_detail_entity.dart';
 import 'package:shiheyishu/entities/mine_platform_order_entity.dart';
 import 'package:shiheyishu/entities/nft_detail_entity.dart';
@@ -318,6 +320,22 @@ abstract class NFTService {
   buildHttpRunner<MinePlatformOrderEntity>((HttpRunnerParams params) async {
     var res = await request('/app/goods_orders/orderList', params);
     return MinePlatformOrderEntity.fromJson(res.data);
+  });
+
+
+  //市场订单（ -1 已取消 0 待支付 1已购买）
+  static final getMarketInOrderList =
+  buildHttpRunner<MineMarketInOrderEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/rent_orders/orderList', params);
+    return MineMarketInOrderEntity.fromJson(res.data);
+  });
+
+
+  //市场订单（1.转售中 2.已转售）
+  static final getMarketOutOrderList =
+  buildHttpRunner<MineMarketOutOrderEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/goods_rent/rentList', params);
+    return MineMarketOutOrderEntity.fromJson(res.data);
   });
 
   //转增记录

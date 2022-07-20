@@ -197,4 +197,39 @@ class MinePlatformOrderController extends ViewStateController {
       refreshController.loadComplete();
     }
   }
+
+  void tabClicked(int index) {
+    tabIndex = index;
+    update();
+  }
+
+  int getListCount() {
+    switch(tabIndex){
+      case 0:
+        return allOrders.length;
+      case 1:
+        return payOrders.length;
+      case 2:
+        return alreadyOrders.length;
+      case 3:
+        return cancelOrders.length;
+      default:
+        return 0;
+    }
+  }
+
+  Data getPlatformOrderData(int index) {
+    switch(tabIndex){
+      case 0:
+        return allOrders[index];
+      case 1:
+        return payOrders[index];
+      case 2:
+        return alreadyOrders[index];
+      case 3:
+        return cancelOrders[index];
+      default:
+        return allOrders[index];
+    }
+  }
 }

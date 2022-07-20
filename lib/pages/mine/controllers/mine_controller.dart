@@ -79,6 +79,12 @@ class MineController extends ViewStateController {
       case 0:
         Get.toNamed(Routes.NAV + Routes.THREE);
         break;
+      case 1:
+        Get.toNamed(Routes.NAV + Routes.MINEPLATFORMORDERLIST);
+        break;
+      case 2:
+        Get.toNamed(Routes.NAV + Routes.MINEMARKETORDERLIST);
+        break;
       case 3:
         Get.toNamed(Routes.NAV + Routes.MINEGIVELIST);
         break;

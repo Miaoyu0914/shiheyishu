@@ -125,7 +125,7 @@ const Map<String, String> zh_CN = {
   'pay.title': '支付',
   'pay.count.down': '支付剩余：',
   'pay.money': '￥',
-  'pay.balance': '余额',
+  'pay.balance': '微信',
   'pay.zhifubao': '支付宝',
   'pay.must.know': '购物须知',
   'pay.pay': '支付',

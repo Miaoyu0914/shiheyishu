@@ -242,20 +242,16 @@ class HomeController extends ViewStateController {
   }
 
   Future<void> _gotoAppStore() async {
-    if (!await launch(
-        'itms-apps://itunes.apple.com/app/id1604338868'
-    )) {
+    Uri downloadUri = Uri.parse('itms-apps://itunes.apple.com/app/id1604338868');
+    if (!await launchUrl(downloadUri)) {
       throw 'Could not update';
     }
   }
 
   Future<void> _launchInBrowser() async {
-    if (!await launch(
-      downloadEntity!.download!,
-      forceSafariVC: false,
-      forceWebView: false,
-    )) {
-      throw 'Could not update';
+    Uri downloadUri = Uri.parse(downloadEntity!.download!);
+    if (!await launchUrl(downloadUri)) {
+      throw 'Could not launch $downloadUri';
     }
   }
 

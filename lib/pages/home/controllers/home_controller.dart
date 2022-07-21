@@ -1,11 +1,16 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shiheyishu/configs/AppColors.dart';
+import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/constant.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
 import 'package:shiheyishu/entities/board_list_entity.dart' as bl;
+import 'package:shiheyishu/entities/download_entity.dart';
 import 'package:shiheyishu/entities/home_album_entity.dart';
 import 'package:shiheyishu/entities/home_banner_entity.dart';
 import 'package:shiheyishu/entities/home_nft_list_entity.dart';
@@ -13,6 +18,7 @@ import 'package:shiheyishu/entities/login_entity.dart';
 import 'package:shiheyishu/routes/app_pages.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 import 'package:shiheyishu/services/nft_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends ViewStateController {
   LoginEntity? userInfo;
@@ -21,6 +27,7 @@ class HomeController extends ViewStateController {
   PageController? bannerController = PageController();
   PageController? boardController = PageController();
   PageController? nftController = PageController();
+  DownloadEntity? downloadEntity;
   bl.BoardListEntity? boardListEntity;
   List<HomeAlbumEntity>? albums;
   List<Data> hotNFTList = [];
@@ -40,6 +47,7 @@ class HomeController extends ViewStateController {
     super.onInit();
     setBusy();
     userInfo = Constant.USERINFOVALUE;
+    await getDownloadInfo();
     await getHomeBanner();
     await getHomeBoard();
     await getHomeAlbum();
@@ -47,6 +55,44 @@ class HomeController extends ViewStateController {
     await getFutureNFTList();
     await initTimer();
     setIdle();
+  }
+
+  Future<void> getDownloadInfo() async {
+    downloadEntity = await NFTService.getDownloadInfo(HttpRunnerParams());
+    String currentAppVersion = await CommonUtils.getVersionName();
+    String appVersion = '';
+    if(Platform.isIOS){
+      appVersion = downloadEntity!.iosVersion;
+    }else{
+      appVersion = downloadEntity!.version!;
+    }
+    if(currentAppVersion != appVersion){
+      showDialog<bool>(
+        context: Get.context!,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('update.title'.tr),
+            titlePadding: const EdgeInsets.all(10),
+            titleTextStyle: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+            content: Text('update.content'.trParams({'version': appVersion})),
+            contentPadding: const EdgeInsets.all(10),
+            contentTextStyle: const TextStyle(color: AppColors.black6, fontSize: 16),
+            actions: <Widget>[
+              TextButton(
+                child: Text('update.button.title'.tr, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 16),),
+                onPressed: () {
+                  if(Platform.isIOS){
+                    _gotoAppStore();
+                  }else{
+                    _launchInBrowser();
+                  }
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   Future<void> getHomeBanner() async {
@@ -193,6 +239,24 @@ class HomeController extends ViewStateController {
 
   void pushToAlbumPage(var id) {
     Get.toNamed(Routes.NAV + Routes.SERIES, arguments: {'id': id});
+  }
+
+  Future<void> _gotoAppStore() async {
+    if (!await launch(
+        'itms-apps://itunes.apple.com/app/id1604338868'
+    )) {
+      throw 'Could not update';
+    }
+  }
+
+  Future<void> _launchInBrowser() async {
+    if (!await launch(
+      downloadEntity!.download!,
+      forceSafariVC: false,
+      forceWebView: false,
+    )) {
+      throw 'Could not update';
+    }
   }
 
   @override

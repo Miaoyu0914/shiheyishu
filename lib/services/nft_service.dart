@@ -6,6 +6,7 @@ import 'package:shiheyishu/entities/blind_box_detail_entity.dart';
 import 'package:shiheyishu/entities/blind_box_list_entity.dart';
 import 'package:shiheyishu/entities/board_detail_entity.dart';
 import 'package:shiheyishu/entities/board_list_entity.dart';
+import 'package:shiheyishu/entities/download_entity.dart';
 import 'package:shiheyishu/entities/home_album_entity.dart';
 import 'package:shiheyishu/entities/home_banner_entity.dart';
 import 'package:shiheyishu/entities/home_nft_list_entity.dart';
@@ -34,6 +35,13 @@ import 'package:shiheyishu/services/http/http_runner.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 
 abstract class NFTService {
+  //app更新
+  static final getDownloadInfo =
+  buildHttpRunner<DownloadEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/auth/download', params);
+    return DownloadEntity.fromJson(res.data);
+  });
+
   //用户使用手册
   static final getSplashImage =
   buildHttpRunner<String>((HttpRunnerParams params) async {

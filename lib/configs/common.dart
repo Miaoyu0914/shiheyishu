@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class CommonUtils {
@@ -100,6 +101,11 @@ class CommonUtils {
       height: 55.0,
       child: Center(child:body),
     );
+  }
+
+  static Future<String> getVersionName() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
   }
 }
 

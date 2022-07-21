@@ -10,6 +10,9 @@ const Map<String, String> zh_CN = {
   'please.input.psw.sure': '确定',
   'please.input.psw.cancel': '取消',
   'pay.success': '支付成功',
+  'update.title': '版本更新',
+  'update.content': '    新版本@version已发布！',
+  'update.button.title': '更新',
 
   'login.title': '登录',
   'login.phone.hint': '请输入手机号',

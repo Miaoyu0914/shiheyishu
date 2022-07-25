@@ -20,7 +20,6 @@ class MineBlindBoxListController extends ViewStateController {
   bool isFutureNotEnough = false;
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
-  PageController? pageController = PageController();
 
   @override
   Future<void> onInit() async {
@@ -33,7 +32,7 @@ class MineBlindBoxListController extends ViewStateController {
 
   Future<void> getOpenAlready() async {
     alreadyBlindBoxEntity = await NFTService.getMineBlindBoxList(
-        HttpRunnerParams(data: {'open': 1}));
+        HttpRunnerParams(data: {'open': 1, 'page': alreadyPage}));
     alreadyBlindBoxes.addAll(alreadyBlindBoxEntity!.data!);
     if (alreadyBlindBoxEntity!.data!.length < Constant.refreshListLimit) {
       isAlreadyNotEnough = true;
@@ -42,7 +41,7 @@ class MineBlindBoxListController extends ViewStateController {
 
   Future<void> getOpenFuture() async {
     futureBlindBoxEntity = await NFTService.getMineBlindBoxList(
-        HttpRunnerParams(data: {'open': 0}));
+        HttpRunnerParams(data: {'open': 0, 'page': futurePage}));
     futureBlindBoxes.addAll(futureBlindBoxEntity!.data!);
     if (futureBlindBoxEntity!.data!.length < Constant.refreshListLimit) {
       isFutureNotEnough = true;
@@ -65,8 +64,6 @@ class MineBlindBoxListController extends ViewStateController {
       }
     }
     update();
-    pageController?.animateToPage(index,
-        duration: const Duration(milliseconds: 300), curve: Curves.linear);
   }
 
   void refreshList() async {

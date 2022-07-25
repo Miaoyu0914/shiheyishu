@@ -18,7 +18,8 @@ class MineController extends ViewStateController {
     'mine.donation'.tr,
     'mine.compose'.tr,
     'mine.share.rank'.tr,
-    'mine.market.rank'.tr
+    'mine.market.rank'.tr,
+    'public.pool.title'.tr
   ];
   List<String> menuImageList = [
     'mine_3d_room.png',
@@ -27,6 +28,7 @@ class MineController extends ViewStateController {
     'mine_donation.png',
     'mine_compose.png',
     's_rank.png',
+    'm_rank.png',
     'm_rank.png'
   ];
   List<String> settingTitleList = [
@@ -96,6 +98,9 @@ class MineController extends ViewStateController {
         break;
       case 6:
         Get.toNamed(Routes.NAV + Routes.MARKETRANK);
+        break;
+      case 7:
+        Get.toNamed(Routes.NAV + Routes.PUBLICPOOL);
         break;
       default:
         break;

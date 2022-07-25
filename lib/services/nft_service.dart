@@ -24,6 +24,10 @@ import 'package:shiheyishu/entities/mine_market_out_order_entity.dart';
 import 'package:shiheyishu/entities/mine_nft_detail_entity.dart';
 import 'package:shiheyishu/entities/mine_platform_order_entity.dart';
 import 'package:shiheyishu/entities/nft_detail_entity.dart';
+import 'package:shiheyishu/entities/public_article_detail_entity.dart';
+import 'package:shiheyishu/entities/public_article_list_entity.dart';
+import 'package:shiheyishu/entities/public_comment_list_entity.dart';
+import 'package:shiheyishu/entities/public_pool_log_entity.dart';
 import 'package:shiheyishu/entities/sell_free_entity.dart';
 import 'package:shiheyishu/entities/share_qr_code_entity.dart';
 import 'package:shiheyishu/entities/share_rank_entity.dart';
@@ -421,6 +425,50 @@ abstract class NFTService {
     await request('/app/member/editBank', params);
     return true;
   });
+
+  //公益池
+  static final getPublicPoolNum =
+  buildHttpRunner<String?>((HttpRunnerParams params) async {
+    var res = await request('/app/auth/public_pool', params);
+    return res.data['num'];
+  });
+
+  //捐赠记录
+  static final getPublicPoolList =
+  buildHttpRunner<PublicPoolLogEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/auth/pool_log', params);
+    return PublicPoolLogEntity.fromJson(res.data);
+  });
+
+  //公益资讯
+  static final getPublicArticleList =
+  buildHttpRunner<PublicArticleListEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/public_news/articleList', params);
+    return PublicArticleListEntity.fromJson(res.data);
+  });
+
+  //公益资讯详情
+  static final getPublicArticleDetail =
+  buildHttpRunner<PublicArticleDetailEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/public_news/info', params);
+    return PublicArticleDetailEntity.fromJson(res.data);
+  });
+
+  //公益资讯评论列表
+  static final getPublicCommentList =
+  buildHttpRunner<PublicCommentListEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/public_news/commentList', params);
+    return PublicCommentListEntity.fromJson(res.data);
+  });
+
+  //评论资讯
+  static final addPublicComment =
+  buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/public_news/comment', params);
+    return true;
+  });
+
+  //
 //
 // //
 // static final wikiAddFavoriteService = buildHttpRunner<bool>((

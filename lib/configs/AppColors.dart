@@ -30,5 +30,9 @@ class AppColors{
   static const Color shareTitleColor = Color(0xFF19211D);
   static const Color shareLimitColor = Color(0xFF505455);
   static const Color downloadAppTag = Color(0xFFADBCC9);
+  static const Color publicPoolDivider = Color(0xFF505050);
+  static const Color publicPoolBack = Color(0xFF2F2E2E);
+  static const Color publicPoolDetailDivider = Color(0xFF393939);
+  static const Color publicPoolDetailCommentHint = Color(0xFFBFBFBF);
   static const Color mineBlindBoxOffsetColor = Color.fromRGBO(157, 179, 198, 0.49);
 }

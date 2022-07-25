@@ -265,5 +265,13 @@ const Map<String, String> zh_CN = {
 
   'mine.give.title': '转增记录',
   'mine.give.people': '转出给',
-  'mine.give.time': '转出时间'
+  'mine.give.time': '转出时间',
+
+  'public.pool.title': '公益池',
+  'public.pool.log': '捐赠记录',
+  'public.pool.article.list': '受捐公益',
+  'public.pool.detail.title': '资讯详情',
+  'public.pool.detail.comment.hint': '输入评论内容……',
+  'public.pool.detail.comment.send': '发送',
+  'public.pool.detail.comment.success': '评论成功，审核通过后即可展示~'
 };

@@ -36,8 +36,7 @@ import 'package:shiheyishu/pages/mine/bindings/mine_nft_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_open_blind_box_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_platform_order_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_platform_order_detail_bindings.dart';
-import 'package:shiheyishu/pages/mine/bindings/public_pool_article_bindings.dart';
-import 'package:shiheyishu/pages/mine/bindings/public_pool_bindings.dart';
+import 'package:shiheyishu/pages/public_pool/bindings/public_pool_article_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/real_name_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/resell_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/reset_psw_bindings.dart';
@@ -64,8 +63,7 @@ import 'package:shiheyishu/pages/mine/views/mine_nft_list_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_open_blind_box_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_platform_order_detail_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_platform_order_page.dart';
-import 'package:shiheyishu/pages/mine/views/public_pool_article_page.dart';
-import 'package:shiheyishu/pages/mine/views/public_pool_page.dart';
+import 'package:shiheyishu/pages/public_pool/views/public_pool_article_page.dart';
 import 'package:shiheyishu/pages/mine/views/real_name_page.dart';
 import 'package:shiheyishu/pages/mine/views/resell_page.dart';
 import 'package:shiheyishu/pages/mine/views/reset_psw_page.dart';
@@ -132,16 +130,9 @@ class AppPages {
       bindings: [NavBarBindings()],
       children: [
         GetPage(
-            name: Routes.PUBLICPOOL,
-            page: () => const PublicPoolPage(),
-            bindings: [PublicPoolBindings()],
-            children: [
-              GetPage(
-                name: Routes.PUBLICPOOLARTICLE,
-                page: () => const PublicPoolArticlePage(),
-                bindings: [PublicPoolArticleBindings()],
-              ),
-            ]
+          name: Routes.PUBLICPOOLARTICLE,
+          page: () => const PublicPoolArticlePage(),
+          bindings: [PublicPoolArticleBindings()],
         ),
         GetPage(
             name: Routes.WALLET,

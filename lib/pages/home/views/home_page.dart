@@ -61,35 +61,48 @@ class HomePage extends GetView<HomeController> {
                       return _album();
                     case 3:
                       return _nftList();
+                    case 4:
+                      return _recordInfo();
                     default:
                       return Container();
                   }
-                }, childCount: 4))
+                }, childCount: 5))
               ],
             ),
           ));
     });
   }
 
+  Widget _recordInfo() {
+    return Column(
+      children: [
+        Text('home.record'.tr, style: const TextStyle(color: AppColors.black9, fontSize: 12),),
+        Text('home.company'.tr, style: const TextStyle(color: AppColors.black9, fontSize: 12),),
+      ],
+    );
+  }
+
   Widget _nftList() {
     return SizedBox(
       height: controller.nftIndex == 0
           ? (520 * controller.hotNFTList.length + 106)
-          : (520 * controller.futureNFTList.length + 106),
+          : controller.nftIndex == 1
+              ? (520 * controller.futureNFTList.length + 106)
+              : (520 * controller.publicNFTList.length + 106),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 15, right: 44),
+                padding: const EdgeInsets.only(left: 15, right: 22),
                 child: InkWell(
                   onTap: () => controller.tabClicked(0),
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
                       Text(
-                        'home.nft.hot'.tr,
+                        controller.nftListTitles[0],
                         style: TextStyle(
                             color: controller.nftIndex == 0
                                 ? Colors.white
@@ -108,21 +121,48 @@ class HomePage extends GetView<HomeController> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(right: 22),
+                child: InkWell(
+                  onTap: () => controller.tabClicked(1),
+                  child: Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      Text(
+                        controller.nftListTitles[1],
+                        style: TextStyle(
+                            color: controller.nftIndex == 1
+                                ? Colors.white
+                                : AppColors.nftUnselectColor,
+                            fontSize: controller.nftIndex == 1 ? 15 : 14),
+                      ),
+                      Offstage(
+                          offstage: controller.nftIndex != 1,
+                          child: WrapperImage(
+                            url: 'tab_bottom.png',
+                            width: 42,
+                            height: 5,
+                            imageType: ImageType.assets,
+                          ))
+                    ],
+                  ),
+                ),
+              ),
               InkWell(
-                onTap: () => controller.tabClicked(1),
+                onTap: () => controller.tabClicked(2),
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
                     Text(
-                      'home.nft.future'.tr,
+                      controller.nftListTitles[2],
                       style: TextStyle(
-                          color: controller.nftIndex == 1
+                          color: controller.nftIndex == 2
                               ? Colors.white
                               : AppColors.nftUnselectColor,
-                          fontSize: controller.nftIndex == 0 ? 15 : 14),
+                          fontSize: controller.nftIndex == 2 ? 15 : 14),
                     ),
                     Offstage(
-                        offstage: controller.nftIndex != 1,
+                        offstage: controller.nftIndex != 2,
                         child: WrapperImage(
                           url: 'tab_bottom.png',
                           width: 42,
@@ -138,7 +178,7 @@ class HomePage extends GetView<HomeController> {
             child: PageView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: controller.nftController,
-                itemCount: 2,
+                itemCount: controller.nftListTitles.length,
                 itemBuilder: (context, pageIndex) {
                   return ListView.builder(
                     itemBuilder: (context, index) {
@@ -176,15 +216,33 @@ class HomePage extends GetView<HomeController> {
                                           Offstage(
                                             offstage: nft.status != 1,
                                             child: Container(
-                                              margin: const EdgeInsets.only(left: 15, top: 15,right: 120),
-                                              padding: const EdgeInsets.only(left: 15,right: 15,top: 9,bottom: 9),
+                                              margin: const EdgeInsets.only(
+                                                  left: 15,
+                                                  top: 15,
+                                                  right: 120),
+                                              padding: const EdgeInsets.only(
+                                                  left: 15,
+                                                  right: 15,
+                                                  top: 9,
+                                                  bottom: 9),
                                               alignment: Alignment.center,
                                               decoration: BoxDecoration(
-                                                color: AppColors.main,
-                                                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                                                border: Border.all(color: AppColors.rankBackColor, width: 1)
+                                                  color: AppColors.main,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  border: Border.all(
+                                                      color: AppColors
+                                                          .rankBackColor,
+                                                      width: 1)),
+                                              child: Text(
+                                                'home.nft.future.tag'.tr,
+                                                style: const TextStyle(
+                                                    color:
+                                                        AppColors.rankBackColor,
+                                                    fontSize: 12,
+                                                    height: 1),
                                               ),
-                                              child: Text('home.nft.future.tag'.tr, style: const TextStyle(color: AppColors.rankBackColor, fontSize: 12, height: 1),),
                                             ),
                                           )
                                         ],
@@ -194,7 +252,7 @@ class HomePage extends GetView<HomeController> {
                                         child: Opacity(
                                           opacity: 0.61,
                                           child: Container(
-                                            height: (Get.width - 70) * 1.05,
+                                              height: (Get.width - 70) * 1.05,
                                               color:
                                                   AppColors.payAllKindBackColor,
                                               alignment: Alignment.center,
@@ -480,8 +538,10 @@ class HomePage extends GetView<HomeController> {
                               board.title!,
                               maxLines: 1,
                               style: const TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                                  color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis,
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ],

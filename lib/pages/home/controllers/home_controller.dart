@@ -30,15 +30,24 @@ class HomeController extends ViewStateController {
   DownloadEntity? downloadEntity;
   bl.BoardListEntity? boardListEntity;
   List<HomeAlbumEntity>? albums;
+  List<String> nftListTitles = [
+    'home.nft.hot'.tr,
+    'home.nft.future'.tr,
+    'home.nft.public.pool'.tr
+  ];
   List<Data> hotNFTList = [];
   List<Data> futureNFTList = [];
+  List<Data> publicNFTList = [];
   HomeNftListEntity? hotNFTEntity;
   HomeNftListEntity? futureNFTEntity;
+  HomeNftListEntity? publicNFTEntity;
   int nftIndex = 0;
   int hotPage = 1;
   int futurePage = 1;
+  int publicPage = 1;
   bool isHotNotEnough = false;
   bool isFutureNotEnough = false;
+  bool isPublicNotEnough = false;
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
@@ -53,6 +62,7 @@ class HomeController extends ViewStateController {
     await getHomeAlbum();
     await getHotNFTList();
     await getFutureNFTList();
+    await getPublicNFTList();
     await initTimer();
     setIdle();
   }
@@ -61,29 +71,35 @@ class HomeController extends ViewStateController {
     downloadEntity = await NFTService.getDownloadInfo(HttpRunnerParams());
     String currentAppVersion = await CommonUtils.getVersionName();
     String appVersion = '';
-    if(Platform.isIOS){
+    if (Platform.isIOS) {
       appVersion = downloadEntity!.iosVersion;
-    }else{
+    } else {
       appVersion = downloadEntity!.version!;
     }
-    if(currentAppVersion != appVersion){
+    if (currentAppVersion != appVersion) {
       showDialog<bool>(
         context: Get.context!,
         builder: (context) {
           return AlertDialog(
             title: Text('update.title'.tr),
             titlePadding: const EdgeInsets.all(10),
-            titleTextStyle: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+            titleTextStyle: const TextStyle(
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
             content: Text('update.content'.trParams({'version': appVersion})),
             contentPadding: const EdgeInsets.all(10),
-            contentTextStyle: const TextStyle(color: AppColors.black6, fontSize: 16),
+            contentTextStyle:
+                const TextStyle(color: AppColors.black6, fontSize: 16),
             actions: <Widget>[
               TextButton(
-                child: Text('update.button.title'.tr, style: const TextStyle(color: AppColors.codeButtonTitleColor, fontSize: 16),),
+                child: Text(
+                  'update.button.title'.tr,
+                  style: const TextStyle(
+                      color: AppColors.codeButtonTitleColor, fontSize: 16),
+                ),
                 onPressed: () {
-                  if(Platform.isIOS){
+                  if (Platform.isIOS) {
                     _gotoAppStore();
-                  }else{
+                  } else {
                     _launchInBrowser();
                   }
                 },
@@ -123,6 +139,15 @@ class HomeController extends ViewStateController {
     futureNFTList.addAll(futureNFTEntity!.data!);
     if (futureNFTEntity!.data!.length < Constant.refreshListLimit) {
       isFutureNotEnough = true;
+    }
+  }
+
+  Future<void> getPublicNFTList() async {
+    publicNFTEntity = await NFTService.getNFTs(
+        HttpRunnerParams(data: {"status": 10, "page": publicPage}));
+    publicNFTList.addAll(publicNFTEntity!.data!);
+    if (publicNFTEntity!.data!.length < Constant.refreshListLimit) {
+      isPublicNotEnough = true;
     }
   }
 
@@ -168,8 +193,14 @@ class HomeController extends ViewStateController {
       } else {
         refreshController.footerMode!.setValueWithNoNotify(LoadStatus.idle);
       }
-    } else {
+    } else if (index == 1) {
       if (isFutureNotEnough) {
+        refreshController.loadNoData();
+      } else {
+        refreshController.footerMode!.setValueWithNoNotify(LoadStatus.idle);
+      }
+    } else {
+      if (isPublicNotEnough) {
         refreshController.loadNoData();
       } else {
         refreshController.footerMode!.setValueWithNoNotify(LoadStatus.idle);
@@ -189,7 +220,7 @@ class HomeController extends ViewStateController {
       if (isHotNotEnough) {
         refreshController.loadNoData();
       }
-    } else {
+    } else if (nftIndex == 1) {
       futureNFTList.clear();
       futurePage = 1;
       isFutureNotEnough = false;
@@ -197,6 +228,16 @@ class HomeController extends ViewStateController {
       await getFutureNFTList();
       refreshController.refreshCompleted();
       if (isFutureNotEnough) {
+        refreshController.loadNoData();
+      }
+    } else {
+      publicNFTList.clear();
+      publicPage = 1;
+      isPublicNotEnough = false;
+      refreshController.footerMode!.setValueWithNoNotify(LoadStatus.idle);
+      await getPublicNFTList();
+      refreshController.refreshCompleted();
+      if (isPublicNotEnough) {
         refreshController.loadNoData();
       }
     }
@@ -212,10 +253,18 @@ class HomeController extends ViewStateController {
       } else {
         refreshController.loadComplete();
       }
-    } else {
+    } else if (nftIndex == 1) {
       futurePage++;
       await getFutureNFTList();
       if (isFutureNotEnough) {
+        refreshController.loadNoData();
+      } else {
+        refreshController.loadComplete();
+      }
+    } else {
+      publicPage++;
+      await getFutureNFTList();
+      if (isPublicNotEnough) {
         refreshController.loadNoData();
       } else {
         refreshController.loadComplete();
@@ -242,7 +291,8 @@ class HomeController extends ViewStateController {
   }
 
   Future<void> _gotoAppStore() async {
-    Uri downloadUri = Uri.parse('itms-apps://itunes.apple.com/app/id1604338868');
+    Uri downloadUri =
+        Uri.parse('itms-apps://itunes.apple.com/app/id1604338868');
     if (!await launchUrl(downloadUri)) {
       throw 'Could not update';
     }

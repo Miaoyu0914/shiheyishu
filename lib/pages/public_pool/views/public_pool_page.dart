@@ -5,7 +5,7 @@ import 'package:shiheyishu/configs/AppColors.dart';
 import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
-import 'package:shiheyishu/pages/mine/controllers/public_pool_controller.dart';
+import 'package:shiheyishu/pages/public_pool/controllers/public_pool_controller.dart';
 import 'package:shiheyishu/entities/public_article_list_entity.dart' as pa;
 import 'package:shiheyishu/entities/public_pool_log_entity.dart';
 
@@ -34,33 +34,6 @@ class PublicPoolPage extends GetView<PublicPoolController> {
           width: Get.width,
           height: Get.width * 0.7,
           imageType: ImageType.assets,
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: CommonUtils.getAppBarHeight()),
-          child: Row(
-            children: [
-              InkWell(
-                onTap: () => Get.back(),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 40, top: 3),
-                  child: WrapperImage(
-                    url: 'nav_back.png',
-                    width: 18,
-                    height: 18,
-                    imageType: ImageType.assets,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              Text(
-                'public.pool.title'.tr,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
         ),
         Padding(
           padding: EdgeInsets.only(top: Get.width * 0.35),

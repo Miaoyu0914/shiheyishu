@@ -13,7 +13,6 @@ const Map<String, String> zh_CN = {
   'update.title': '版本更新',
   'update.content': '    新版本@version已发布！',
   'update.button.title': '更新',
-
   'login.title': '登录',
   'login.phone.hint': '请输入手机号',
   'login.phone.correct': '请输入正确的手机号',
@@ -37,21 +36,21 @@ const Map<String, String> zh_CN = {
   'login.manual.title': '用户注册协议',
   'login.manual': '《用户注册协议》',
   'login.psw.change.success': '密码修改成功',
-
-
   'home.title': '首页',
   'home.more': '更多',
   'home.nft.hot': '热门藏品  ',
   'home.nft.future': '即将发售  ',
+  'home.nft.public.pool': '公益藏品  ',
   'home.nft.limit': ' 限量 ',
   'home.nft.unit': '份 ',
   'home.nft.already': '已售：',
   'home.nft.money': '￥ ',
   'home.nft.future.tag': '敬请期待即将开售',
+  'home.record': '世禾艺术-粤ICP备2020075262号-1',
+  'home.company': '广州世禾信息技术有限公司',
   'board.title': '公告',
   'board.detail.title': '公告详情',
   'board.look': '观看',
-
   'nft.detail.title': '商品详情',
   'nft.detail.creator': '创作者：',
   'nft.detail.issuer': '发行方：',
@@ -67,8 +66,6 @@ const Map<String, String> zh_CN = {
   'nft.detail.flag': '链上标识',
   'nft.detail.must.know': '购物须知',
   'nft.detail.buy': '购买',
-
-
   'nft.series.title': '专辑显示',
   'nft.series.collection': '收藏品',
   'nft.series.trade': '交易额',
@@ -81,9 +78,6 @@ const Map<String, String> zh_CN = {
   'nft.series.number': '编号：',
   'nft.series.money': '￥ ',
   'nft.series.empty': '暂无商品',
-
-
-
   'blind.box.title': '盲盒',
   'blind.box.creator': '创作者：',
   'blind.box.issuer': '发行方：',
@@ -110,8 +104,6 @@ const Map<String, String> zh_CN = {
   'blind.box.detail.open': '开启盲盒',
   'blind.box.detail.back': '返回',
   'blind.box.detail.look': '查看',
-
-
   'market.title': '市场',
   'market.search.hint': '请输入藏品名称',
   'market.price': '价格 ',
@@ -121,7 +113,6 @@ const Map<String, String> zh_CN = {
   'market.money': '¥ ',
   'market.detail.title': '商品详情',
   'market.detail.record': '交易记录',
-
   'pay.title': '支付',
   'pay.count.down': '支付剩余：',
   'pay.money': '￥',
@@ -130,9 +121,6 @@ const Map<String, String> zh_CN = {
   'pay.must.know': '购物须知',
   'pay.pay': '支付',
   'pay.cancel': '取消',
-
-
-
   'mine.title': '我的',
   'mine.wallet.address': '钱包地址：',
   'mine.copy.hint': '已成功复制至粘贴板',
@@ -240,19 +228,15 @@ const Map<String, String> zh_CN = {
   'mine.bank.card.code.get': '获取验证码',
   'mine.bank.card.sure': '确定',
   'mine.bank.card.success': '银行卡绑定成功',
-
-  'wallet.title':'钱包',
-  'wallet.list.title':' 钱包明细',
-  'wallet.balance':'余额',
-  'wallet.recharge':'充值',
-  'wallet.cash.out':'提现',
-  'wallet.look.more':'查看全部',
+  'wallet.title': '钱包',
+  'wallet.list.title': ' 钱包明细',
+  'wallet.balance': '余额',
+  'wallet.recharge': '充值',
+  'wallet.cash.out': '提现',
+  'wallet.look.more': '查看全部',
   'wallet.money': '¥ ',
-
-
   'three.title': '数字展厅',
   'three.null': '暂未开放',
-
   'platform.order.title': '平台订单',
   'platform.order.all': '全部',
   'platform.order.future.pay': '待支付',
@@ -260,13 +244,11 @@ const Map<String, String> zh_CN = {
   'platform.order.cancel': '已取消',
   'platform.order.go.pay': '去支付',
   'platform.order.money': '¥ ',
-
   'market.order.title': '市场订单',
-
   'mine.give.title': '转增记录',
   'mine.give.people': '转出给',
   'mine.give.time': '转出时间',
-
+  'public.pool': '公益',
   'public.pool.title': '公益池',
   'public.pool.log': '捐赠记录',
   'public.pool.article.list': '受捐公益',

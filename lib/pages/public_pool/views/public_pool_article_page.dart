@@ -8,7 +8,7 @@ import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
 import 'package:shiheyishu/configs/widgets/normal_appbar.dart';
-import 'package:shiheyishu/pages/mine/controllers/public_pool_article_controller.dart';
+import 'package:shiheyishu/pages/public_pool/controllers/public_pool_article_controller.dart';
 import 'package:shiheyishu/entities/public_comment_list_entity.dart';
 
 class PublicPoolArticlePage extends GetView<PublicPoolArticleController> {

@@ -7,6 +7,7 @@ import 'package:shiheyishu/configs/widgets/image.dart';
 import 'package:shiheyishu/pages/home/views/home_page.dart';
 import 'package:shiheyishu/pages/market/views/market_page.dart';
 import 'package:shiheyishu/pages/mine/views/mine_page.dart';
+import 'package:shiheyishu/pages/public_pool/views/public_pool_page.dart';
 import 'package:shiheyishu/pages/nav/controllers/nav_bar_controller.dart';
 
 import '../../blind_box/views/blind_box_page.dart';
@@ -36,57 +37,106 @@ class _NavBarPageState extends State<NavBarPage> {
                 children: const <Widget>[
                   HomePage(),
                   BlindBoxPage(),
+                  PublicPoolPage(),
                   MarketPage(),
                   MinePage(),
                 ],
                 index: controller.currentIndex,
               ),
-              Container(
-                height: 70,
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.all(Radius.circular(35)),
-                ),
-                margin: const EdgeInsets.only(left: 15, right: 15, bottom: 36),
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(top: 15, bottom: 15),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: controller.navTitles.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        controller.changeNavBarIndex(index);
-                      },
-                      child: Container(
-                        color: Colors.transparent,
-                        width: (Get.width - 30) / controller.navTitles.length,
-                        child: Column(
-                          children: [
-                            WrapperImage(
-                              url: controller.currentIndex == index
-                                  ? controller.navSelectedIcons[index]
-                                  : controller.navNormalIcons[index],
-                              width: 20,
-                              height: 20,
-                              imageType: ImageType.assets,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 4),
-                              child: Text(
-                                controller.navTitles[index],
-                                style: TextStyle(
-                                    color: controller.currentIndex == index
-                                        ? AppColors.navSelectedTitleColor
-                                        : Colors.white,
-                                    fontSize: 11),
+              Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Container(
+                    height: 70,
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.all(Radius.circular(35)),
+                    ),
+                    margin: const EdgeInsets.only(left: 15, right: 15, bottom: 36),
+                  ),
+                  Container(
+                    height: 131,
+                    alignment: Alignment.bottomCenter,
+                    child: ListView.builder(
+                      padding: const EdgeInsets.only(top: 15, bottom: 15),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.navTitles.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        if(index == 2){
+                          return GestureDetector(
+                            onTap: () {
+                              controller.changeNavBarIndex(index);
+                            },
+                            child: Container(
+                              color: Colors.transparent,
+                              width: (Get.width - 30) / controller.navTitles.length,
+                              alignment: Alignment.bottomCenter,
+                              child: Column(
+                                children: [
+                                  WrapperImage(
+                                    url: controller.currentIndex == index
+                                        ? controller.navSelectedIcons[index]
+                                        : controller.navNormalIcons[index],
+                                    width: 46,
+                                    height: 46,
+                                    imageType: ImageType.assets,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      controller.navTitles[index],
+                                      style: TextStyle(
+                                          color: controller.currentIndex == index
+                                              ? AppColors.navSelectedTitleColor
+                                              : Colors.white,
+                                          fontSize: 11),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                          );
+                        }
+                        return GestureDetector(
+                          onTap: () {
+                            controller.changeNavBarIndex(index);
+                          },
+                          child: Container(
+                            color: Colors.transparent,
+                            width: (Get.width - 30) / controller.navTitles.length,
+                            alignment: Alignment.bottomCenter,
+                            margin: EdgeInsets.only(top: 26),
+                            child: Column(
+                              children: [
+                                WrapperImage(
+                                  url: controller.currentIndex == index
+                                      ? controller.navSelectedIcons[index]
+                                      : controller.navNormalIcons[index],
+                                  width: 20,
+                                  height: 20,
+                                  imageType: ImageType.assets,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Text(
+                                    controller.navTitles[index],
+                                    style: TextStyle(
+                                        color: controller.currentIndex == index
+                                            ? AppColors.navSelectedTitleColor
+                                            : Colors.white,
+                                        fontSize: 11),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                ],
               )
             ],
           ));

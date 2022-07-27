@@ -120,7 +120,7 @@ class PublicPoolController extends ViewStateController {
   }
 
   void pushPublicArticleDetail(int index) {
-    Get.toNamed(Routes.NAV + Routes.PUBLICPOOL + Routes.PUBLICPOOLARTICLE,
+    Get.toNamed(Routes.NAV + Routes.PUBLICPOOLARTICLE,
         arguments: {'id': articles[index].id});
   }
 }

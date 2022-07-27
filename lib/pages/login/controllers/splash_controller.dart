@@ -16,8 +16,9 @@ class SplashController extends ViewStateController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    startCount();
     await getSplashBackImage();
+    await StorageManager.init();
+    await startCount();
     update();
   }
 
@@ -26,8 +27,6 @@ class SplashController extends ViewStateController {
   }
 
   Future<void> startCount() async {
-    await StorageManager.init();
-    Constant.getToken();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       if(countNumber <= 0){
         _timer?.cancel();
@@ -48,8 +47,8 @@ class SplashController extends ViewStateController {
   }
 
   Future<void> pushToNextPage()  async {
-    await NFTService.getUserInfo(HttpRunnerParams());
     Constant.constantInit();
+    await NFTService.getUserInfo(HttpRunnerParams());
     if(Constant.TOKENVALUE == ""){
       //loginPage
       Get.offAndToNamed(Routes.LOGIN);

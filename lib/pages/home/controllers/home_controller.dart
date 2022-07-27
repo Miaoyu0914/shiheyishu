@@ -79,6 +79,7 @@ class HomeController extends ViewStateController {
     if (currentAppVersion != appVersion) {
       showDialog<bool>(
         context: Get.context!,
+        barrierDismissible: false,
         builder: (context) {
           return AlertDialog(
             title: Text('update.title'.tr),
@@ -300,7 +301,7 @@ class HomeController extends ViewStateController {
 
   Future<void> _launchInBrowser() async {
     Uri downloadUri = Uri.parse(downloadEntity!.download!);
-    if (!await launchUrl(downloadUri)) {
+    if (!await launchUrl(downloadUri,mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $downloadUri';
     }
   }

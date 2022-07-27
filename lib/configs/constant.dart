@@ -34,12 +34,12 @@ abstract class Constant {
     TOKENVALUE = token;
   }
 
-  static Future<String> getToken() async {
+  static void getToken() async {
     final token = StorageManager.sharedPreferences?.getString(TOKEN) ?? "";
     if (!CommonUtils.strIsEmpty(token)) {
+      nftApi.options.headers["token"] = token;
       TOKENVALUE = token;
     }
-    return token;
   }
 
   //userInfo
@@ -53,16 +53,15 @@ abstract class Constant {
     USERINFOVALUE = loginEntity;
   }
 
-  static Future<LoginEntity> getUserInfo() async {
+  static void getUserInfo() async {
     Map<String,dynamic> data = jsonDecode(StorageManager.sharedPreferences!.getString(USERINFO)!);
     LoginEntity userInfo = LoginEntity.fromJson(data);
     USERINFOVALUE = userInfo;
-    return userInfo;
   }
 
   static Future<void> constantInit() async {
-    Constant.getToken();
-    Constant.getUserInfo();
+    getToken();
+    getUserInfo();
   }
 
   static final Map<String, ApiConstant> apiSettings = {

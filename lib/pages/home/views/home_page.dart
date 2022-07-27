@@ -184,7 +184,7 @@ class HomePage extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       Data nft = pageIndex == 0
                           ? controller.hotNFTList[index]
-                          : controller.futureNFTList[index];
+                          : pageIndex == 1 ? controller.futureNFTList[index] : controller.publicNFTList[index];
                       return InkWell(
                         onTap: () => controller.pushToNFTDetailPage(nft.id),
                         child: Container(
@@ -433,7 +433,7 @@ class HomePage extends GetView<HomeController> {
                     },
                     itemCount: pageIndex == 0
                         ? controller.hotNFTList.length
-                        : controller.futureNFTList.length,
+                        : pageIndex == 1 ? controller.futureNFTList.length : controller.publicNFTList.length,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                   );

@@ -52,9 +52,9 @@ class VerifyPage extends GetView<VerifyController> {
 
   JavascriptChannel _javascriptChannel(BuildContext context) {
     return JavascriptChannel(
-        name: 'Toaster.call_code_andriod',
+        name: 'appobject',
         onMessageReceived: (JavascriptMessage message) {
-          print(message);
+          controller.getMessageFromJS(message.message);
         });
   }
 }

@@ -33,7 +33,7 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
     // TODO: implement initState
     super.initState();
     _repeatController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 5))
+        AnimationController(vsync: this, duration: const Duration(seconds: 15))
           ..repeat();
     _animation = Tween<double>(begin: 0, end: 360.0).animate(_repeatController);
   }
@@ -701,7 +701,9 @@ class _BlindBoxDetailPageState extends State<BlindBoxDetailPage>
               width: Get.width,
               height: Get.width / 2,
               alignment: Alignment.bottomCenter,
-              margin: const EdgeInsets.only(top: 50),
+              margin: EdgeInsets.only(top: (controller.blindBoxDetailEntity!.threeD != '' &&
+                  controller.blindBoxDetailEntity!.threeD!.endsWith('gltf'))
+                  ? 80 : 50),
               child: WrapperImage(
                 url: 'nft_back_bottom.png',
                 width: 320,

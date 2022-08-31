@@ -13,7 +13,7 @@ class MineController extends ViewStateController {
   LoginEntity? userInfo;
   List<String> menuTitleList = [
     'mine.3d.room'.tr,
-    'mine.market.order'.tr,
+    // 'mine.market.order'.tr,
     'mine.platform.order'.tr,
     'mine.donation'.tr,
     'mine.compose'.tr,
@@ -22,7 +22,7 @@ class MineController extends ViewStateController {
   ];
   List<String> menuImageList = [
     'mine_3d_room.png',
-    'market_order.png',
+    // 'market_order.png',
     'platform_order.png',
     'mine_donation.png',
     'mine_compose.png',
@@ -75,15 +75,15 @@ class MineController extends ViewStateController {
   }
 
   void pushToMenuPages(int index) {
-    switch (index) {
-      case 0:
+    switch (index + 1) {
+      case 1:
         Get.toNamed(Routes.NAV + Routes.THREE);
         break;
-      case 1:
-        Get.toNamed(Routes.NAV + Routes.MINEPLATFORMORDERLIST);
-        break;
+      // case 1:
+      //   Get.toNamed(Routes.NAV + Routes.MINEMARKETORDERLIST);
+      //   break;
       case 2:
-        Get.toNamed(Routes.NAV + Routes.MINEMARKETORDERLIST);
+        Get.toNamed(Routes.NAV + Routes.MINEPLATFORMORDERLIST);
         break;
       case 3:
         Get.toNamed(Routes.NAV + Routes.MINEGIVELIST);

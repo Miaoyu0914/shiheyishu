@@ -1,7 +1,9 @@
+import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shiheyishu/configs/constant.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
 import 'package:shiheyishu/entities/mine_platform_order_entity.dart';
+import 'package:shiheyishu/routes/app_pages.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 import 'package:shiheyishu/services/nft_service.dart';
 
@@ -120,7 +122,7 @@ class MinePlatformOrderController extends ViewStateController {
     alreadyOrderPage = 1;
     isAlreadyNotEnough = false;
     refreshController.footerMode!.setValueWithNoNotify(LoadStatus.idle);
-    await getAllOrder();
+    await getAlreadyOrder();
     refreshController.refreshCompleted();
     if (isAlreadyNotEnough) {
       refreshController.loadNoData();
@@ -231,5 +233,26 @@ class MinePlatformOrderController extends ViewStateController {
       default:
         return allOrders[index];
     }
+  }
+
+  String getStatusString(int status) {
+    switch(status){
+      case -1:
+        return 'platform.order.cancel'.tr;
+      case 0:
+        return 'platform.order.future.pay'.tr;
+      case 1:
+        return 'platform.order.already'.tr;
+      default:
+        return '';
+    }
+  }
+
+  void gotoPay(Data data) {
+    Get.toNamed(Routes.NAV+Routes.PAY, arguments: {
+      'orderSn': data.orderSn,
+      'payType': 3,
+      'entity': data
+    });
   }
 }

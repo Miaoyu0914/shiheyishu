@@ -181,23 +181,23 @@ class MinePage extends GetView<MineController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        InkWell(
-          onTap: () => controller.pushToWalletPage(),
-          child: Column(
-            children: [
-              WrapperImage(
-                url: 'mine_wallet.png',
-                width: 74,
-                height: 74,
-                imageType: ImageType.assets,
-              ),
-              Text(
-                'mine.wallet'.tr,
-                style: const TextStyle(color: Colors.white, fontSize: 15),
-              )
-            ],
-          ),
-        ),
+        // InkWell(
+        //   onTap: () => controller.pushToWalletPage(),
+        //   child: Column(
+        //     children: [
+        //       WrapperImage(
+        //         url: 'mine_wallet.png',
+        //         width: 74,
+        //         height: 74,
+        //         imageType: ImageType.assets,
+        //       ),
+        //       Text(
+        //         'mine.wallet'.tr,
+        //         style: const TextStyle(color: Colors.white, fontSize: 15),
+        //       )
+        //     ],
+        //   ),
+        // ),
         InkWell(
           onTap: () => controller.pushToMineBlindBoxPage(),
           child: Column(

@@ -68,14 +68,14 @@ class _SynthesisDetailPageState extends State<SynthesisDetailPage>
       child: Column(
         children: [
           Stack(
-            alignment: Alignment.topLeft,
+            alignment: Alignment.topCenter,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 80),
+                padding: const EdgeInsets.only(top: 180),
                 child: WrapperImage(
                   url: 'nft_back_bottom.png',
-                  width: Get.width,
-                  height: 230,
+                  width: 320,
+                  height: 120,
                   imageType: ImageType.assets,
                 ),
               ),

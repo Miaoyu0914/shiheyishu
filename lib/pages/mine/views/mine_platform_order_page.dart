@@ -151,6 +151,7 @@ class MinePlatformOrderPage extends GetView<MinePlatformOrderController> {
               onRefresh: controller.refreshList,
               onLoading: controller.loadMoreList,
               child: ListView.builder(
+                padding: const EdgeInsets.only(top: 20),
                 itemBuilder: (context, index) {
                   Data platformOrder = controller.getPlatformOrderData(index);
                   return Container(
@@ -160,59 +161,77 @@ class MinePlatformOrderPage extends GetView<MinePlatformOrderController> {
                     margin:
                         const EdgeInsets.only(left: 15, right: 15, bottom: 15),
                     child: Stack(
+                      alignment: Alignment.topRight,
                       children: [
                         Row(
                           children: [
-                            ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(5)),
-                                child: WrapperImage(
-                                  url: platformOrder.good!.goodsImage,
-                                  width: 108,
-                                  height: 108,
-                                )),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  platformOrder.good!.goodsName!,
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'platform.order.money'.tr +
-                                          platformOrder.price!,
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: ClipRRect(
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(5)),
+                                  child: WrapperImage(
+                                    url: platformOrder.good!.goodsImage,
+                                    width: 108,
+                                    height: 108,
+                                  )),
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 50),
+                                    child: Text(
+                                      platformOrder.good!.goodsName!,
                                       style: const TextStyle(
-                                          color: AppColors.codeButtonTitleColor,
+                                          color: Colors.white,
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Container(
-                                      decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12)),
-                                          gradient: LinearGradient(
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
-                                              colors: [
-                                                AppColors.loginButtonLeftColor,
-                                                AppColors.loginButtonRightColor
-                                              ])),
-                                      child: Text(
-                                        'platform.order.go.pay'.tr,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'platform.order.money'.tr +
+                                            platformOrder.price!,
                                         style: const TextStyle(
                                             color: AppColors.codeButtonTitleColor,
-                                            fontSize: 14,
-                                            height: 1),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                    )
-                                  ],
-                                ),
-                              ],
+                                      Offstage(
+                                        offstage: platformOrder.status != 0,
+                                        child: InkWell(
+                                          onTap: () => controller.gotoPay(platformOrder),
+                                          child: Container(
+                                            padding: const EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
+                                            margin: const EdgeInsets.only(right: 10),
+                                            decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(12)),
+                                                gradient: LinearGradient(
+                                                    begin: Alignment.centerLeft,
+                                                    end: Alignment.centerRight,
+                                                    colors: [
+                                                      AppColors.loginButtonLeftColor,
+                                                      AppColors.loginButtonRightColor
+                                                    ])),
+                                            child: Text(
+                                              'platform.order.go.pay'.tr,
+                                              style: const TextStyle(
+                                                  color: AppColors.loginButtonTitleColor,
+                                                  fontSize: 12,
+                                                  height: 1),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             )
                           ],
                         ),
@@ -223,8 +242,9 @@ class MinePlatformOrderPage extends GetView<MinePlatformOrderController> {
                                   topRight: Radius.circular(10),
                                   bottomLeft: Radius.circular(10))),
                           alignment: Alignment.center,
+                          width: Get.width / 7,
                           child: Text(
-                            '待支付',
+                            controller.getStatusString(platformOrder.status!),
                             style: const TextStyle(
                                 color: AppColors.codeButtonTitleColor,
                                 fontSize: 13),

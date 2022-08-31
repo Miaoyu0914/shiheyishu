@@ -49,7 +49,7 @@ class PayPage extends GetView<PayController> {
               imageType: ImageType.assets,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 30,left: 70),
+              padding: const EdgeInsets.only(top: 30, left: 70),
               child: Column(
                 children: [
                   Column(
@@ -57,10 +57,11 @@ class PayPage extends GetView<PayController> {
                     children: [
                       Text(
                         'pay.count.down'.tr,
-                        style: const TextStyle(color: Colors.white, fontSize: 11),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 11),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15,bottom: 45),
+                        padding: const EdgeInsets.only(top: 15, bottom: 45),
                         child: Row(
                           children: [
                             Text(
@@ -75,7 +76,10 @@ class PayPage extends GetView<PayController> {
                                   ? controller.nftDetailEntity!.price!
                                   : controller.payType == 1
                                       ? controller.blindBoxDetailEntity!.price!
-                                      : controller.marketDetailEntity!.price!,
+                                      : controller.payType == 2
+                                          ? controller
+                                              .marketDetailEntity!.price!
+                                          : controller.mpoData!.price!,
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 25,
@@ -94,11 +98,17 @@ class PayPage extends GetView<PayController> {
                         height: 20,
                         imageType: ImageType.assets,
                       ),
-                      Text(controller.payType == 0
-                          ? controller.nftDetailEntity!.goodsName!
-                          : controller.payType == 1
-                          ? controller.blindBoxDetailEntity!.name!
-                          : controller.marketDetailEntity!.goodsName!,style: const TextStyle(color: Colors.white, fontSize: 12),)
+                      Text(
+                        controller.payType == 0
+                            ? controller.nftDetailEntity!.goodsName!
+                            : controller.payType == 1
+                                ? controller.blindBoxDetailEntity!.name!
+                                : controller.payType == 2
+                                    ? controller.marketDetailEntity!.goodsName!
+                                    : controller.mpoData!.good!.goodsName,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 12),
+                      )
                     ],
                   )
                 ],
@@ -110,50 +120,14 @@ class PayPage extends GetView<PayController> {
           margin: const EdgeInsets.all(15),
           padding: const EdgeInsets.all(15),
           decoration: const BoxDecoration(
-            color: AppColors.payAllKindBackColor,
-            borderRadius: BorderRadius.all(Radius.circular(10))
-          ),
+              color: AppColors.payAllKindBackColor,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Column(
             children: [
               InkWell(
                 onTap: () => controller.changePayKind(0),
                 child: Container(
                   margin: const EdgeInsets.all(15),
-                  padding: const EdgeInsets.all(15),
-                  decoration: const BoxDecoration(
-                    color: AppColors.payKindBackColor,
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    boxShadow: [
-                      BoxShadow(
-                                    color: AppColors.borderInsideColor,
-                                    offset: Offset(0, 3),
-                                    blurRadius: 6,
-                                    spreadRadius: 1,
-                                    inset: true
-                                ),
-                    ]
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          WrapperImage(url: 'balance.png', width: 17, height: 17, imageType: ImageType.assets,),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: Text('pay.balance'.tr, style: const TextStyle(color: Colors.white, fontSize: 15),),
-                          )
-                        ],
-                      ),
-                      WrapperImage(url: controller.payKind == 0 ? 'selected.png' : 'unselected.png', width: 14, height: 14, imageType: ImageType.assets,),
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => controller.changePayKind(1),
-                child: Container(
-                  margin: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
                   padding: const EdgeInsets.all(15),
                   decoration: const BoxDecoration(
                       color: AppColors.payKindBackColor,
@@ -164,23 +138,87 @@ class PayPage extends GetView<PayController> {
                             offset: Offset(0, 3),
                             blurRadius: 6,
                             spreadRadius: 1,
-                            inset: true
-                        ),
-                      ]
-                  ),
+                            inset: true),
+                      ]),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          WrapperImage(url: 'zhifubao.png', width: 17, height: 17, imageType: ImageType.assets,),
+                          WrapperImage(
+                            url: 'balance.png',
+                            width: 17,
+                            height: 17,
+                            imageType: ImageType.assets,
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 15),
-                            child: Text('pay.zhifubao'.tr, style: const TextStyle(color: Colors.white, fontSize: 15),),
+                            child: Text(
+                              'pay.balance'.tr,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 15),
+                            ),
                           )
                         ],
                       ),
-                      WrapperImage(url: controller.payKind == 1 ? 'selected.png' : 'unselected.png', width: 14, height: 14, imageType: ImageType.assets,),
+                      WrapperImage(
+                        url: controller.payKind == 0
+                            ? 'selected.png'
+                            : 'unselected.png',
+                        width: 14,
+                        height: 14,
+                        imageType: ImageType.assets,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => controller.changePayKind(1),
+                child: Container(
+                  margin:
+                      const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                  padding: const EdgeInsets.all(15),
+                  decoration: const BoxDecoration(
+                      color: AppColors.payKindBackColor,
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: AppColors.borderInsideColor,
+                            offset: Offset(0, 3),
+                            blurRadius: 6,
+                            spreadRadius: 1,
+                            inset: true),
+                      ]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          WrapperImage(
+                            url: 'zhifubao.png',
+                            width: 17,
+                            height: 17,
+                            imageType: ImageType.assets,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Text(
+                              'pay.zhifubao'.tr,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 15),
+                            ),
+                          )
+                        ],
+                      ),
+                      WrapperImage(
+                        url: controller.payKind == 1
+                            ? 'selected.png'
+                            : 'unselected.png',
+                        width: 14,
+                        height: 14,
+                        imageType: ImageType.assets,
+                      ),
                     ],
                   ),
                 ),
@@ -218,13 +256,11 @@ class PayPage extends GetView<PayController> {
               color: AppColors.main,
               alignment: Alignment.center,
               padding: const EdgeInsets.only(top: 16.5, bottom: 16.5),
-              margin: const EdgeInsets.only(top: 15,bottom: 42),
+              margin: const EdgeInsets.only(top: 15, bottom: 42),
               child: Text(
                 'pay.cancel'.tr,
-                style: const TextStyle(
-                    height: 1,
-                    color: Colors.red,
-                    fontSize: 17),
+                style:
+                    const TextStyle(height: 1, color: Colors.red, fontSize: 17),
               ),
             )
           ],

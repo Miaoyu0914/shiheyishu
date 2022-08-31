@@ -9,6 +9,7 @@ import 'package:shiheyishu/entities/market_detail_entity.dart';
 import 'package:shiheyishu/entities/nft_detail_entity.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 import 'package:shiheyishu/services/nft_service.dart';
+import 'package:shiheyishu/entities/mine_platform_order_entity.dart' as mpo;
 
 class PayController extends ViewStateController {
   int payType;
@@ -21,6 +22,8 @@ class PayController extends ViewStateController {
   NftDetailEntity? nftDetailEntity;
   BlindBoxDetailEntity? blindBoxDetailEntity;
   MarketDetailEntity? marketDetailEntity;
+  mpo.Data? mpoData;
+
 
   String countDownTitle = '';
   int payKind = 0;
@@ -43,6 +46,9 @@ class PayController extends ViewStateController {
         break;
       case 2:
         marketDetailEntity = entity;
+        break;
+      case 3:
+        mpoData = entity;
         break;
       default:
         break;

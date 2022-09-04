@@ -45,7 +45,7 @@ class SynthesisListPage extends GetView<SynthesisListController> {
             //横轴间距
             crossAxisSpacing: 10.0,
             //子组件宽高长度比例
-            childAspectRatio: 0.57),
+            childAspectRatio: 0.65),
         itemBuilder: (context, index) {
           SynthesisListEntity synthesisListEntity = controller.synthesisList![index];
           return Container(
@@ -69,10 +69,9 @@ class SynthesisListPage extends GetView<SynthesisListController> {
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      Text(synthesisListEntity.goodsName!, style: const TextStyle(color: Colors.white, fontSize: 13),),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15,bottom: 15),
-                        child: Text('编号：${synthesisListEntity.isShow}/${synthesisListEntity.totalNum}', style: const TextStyle(color: Colors.white, fontSize: 11),),
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Text(synthesisListEntity.goodsName!, style: const TextStyle(color: Colors.white, fontSize: 13),),
                       ),
                       InkWell(
                         onTap: () => controller.pushToDetailPage(index),

@@ -31,7 +31,7 @@ class _MineNFTDetailPageState extends State<MineNFTDetailPage>
     // TODO: implement initState
     super.initState();
     _repeatController =
-    AnimationController(vsync: this, duration: const Duration(seconds: 15))
+    AnimationController(vsync: this, duration: const Duration(seconds: 20))
       ..repeat();
     _animation = Tween<double>(begin: 0, end: 360.0).animate(_repeatController);
   }
@@ -62,11 +62,13 @@ class _MineNFTDetailPageState extends State<MineNFTDetailPage>
                     case 4:
                       return _buyInfo();
                     case 5:
+                      return _huaweiTag();
+                    case 6:
                       return _buyButton(context);
                     default:
                       return Container();
                   }
-                }, childCount: 6))
+                }, childCount: 7))
           ],
         ),
       );
@@ -137,6 +139,14 @@ class _MineNFTDetailPageState extends State<MineNFTDetailPage>
           ),
         ],
       ),
+    );
+  }
+
+  Widget _huaweiTag() {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      child: Text('huawei.tag'.tr, style: const TextStyle(color: Colors.white, fontSize: 14),),
     );
   }
 
@@ -367,7 +377,7 @@ class _MineNFTDetailPageState extends State<MineNFTDetailPage>
                       style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                     Text(
-                      '#${controller.mineNftDetailEntity!.good!.advanceGoodsId!}/${controller.mineNftDetailEntity!.good!.advanceNum!}',
+                      '#${controller.mineNftDetailEntity!.goodsNumber!}/${controller.mineNftDetailEntity!.good!.totalNum!}',
                       style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                   ],
@@ -464,29 +474,33 @@ class _MineNFTDetailPageState extends State<MineNFTDetailPage>
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Text(
-                        'nft.detail.creator'.tr +
-                            controller.mineNftDetailEntity!.good!.authorName!,
-                        maxLines: 1,
+                child: SizedBox(
+                  width: Get.width / 5 * 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          'nft.detail.creator'.tr +
+                              controller.mineNftDetailEntity!.good!.authorName!,
+                          maxLines: 1,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                      Text(
+                        'nft.detail.issuer'.tr +
+                            controller.mineNftDetailEntity!.good!.issuer!,
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             overflow: TextOverflow.ellipsis),
                       ),
-                    ),
-                    Text(
-                      'nft.detail.issuer'.tr +
-                          controller.mineNftDetailEntity!.good!.issuer!,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          overflow: TextOverflow.ellipsis),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

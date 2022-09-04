@@ -123,7 +123,7 @@ class MineNFTListPage extends GetView<MineNFTListController> {
                                           color: AppColors.nftUnselectColor, fontSize: 10),
                                     ),
                                     Text(
-                                      '${good.good!.limitNum}/${good.good!.totalNum}',
+                                      '${good.goodsNumber}/${good.good!.totalNum}',
                                       style: const TextStyle(color: Colors.white, fontSize: 10),
                                     )
                                   ],

@@ -129,6 +129,7 @@ class WalletPage extends GetView<WalletController> {
                           style: const TextStyle(color: Colors.white, fontSize: 14),
                         ),
                         InkWell(
+                          onTap: () => controller.pushToChargePage(),
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius:
@@ -149,6 +150,7 @@ class WalletPage extends GetView<WalletController> {
                           ),
                         ),
                         InkWell(
+                          onTap: () => controller.pushToCashOutPage(),
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius:

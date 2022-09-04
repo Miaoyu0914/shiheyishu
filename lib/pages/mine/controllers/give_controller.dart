@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
+import 'package:shiheyishu/routes/app_pages.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 import 'package:shiheyishu/services/nft_service.dart';
 
@@ -29,6 +30,7 @@ class GiveController extends ViewStateController {
       EasyLoading.dismiss();
       if(isSuccess!){
         EasyLoading.showSuccess('mine.nft.detail.give.success'.tr);
+        Get.back();
         Get.back();
       }
     }else{

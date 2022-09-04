@@ -36,9 +36,9 @@ class _NavBarPageState extends State<NavBarPage> {
               IndexedStack(
                 children: const <Widget>[
                   HomePage(),
-                  // BlindBoxPage(),
+                  BlindBoxPage(),
                   PublicPoolPage(),
-                  // MarketPage(),
+                  MarketPage(),
                   MinePage(),
                 ],
                 index: controller.currentIndex,
@@ -64,7 +64,7 @@ class _NavBarPageState extends State<NavBarPage> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        if(index == 1){
+                        if(index == 2){
                           return GestureDetector(
                             onTap: () {
                               controller.changeNavBarIndex(index);

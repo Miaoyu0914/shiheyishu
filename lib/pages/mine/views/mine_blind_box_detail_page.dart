@@ -29,7 +29,7 @@ class _MineBlindBoxDetailPageState extends State<MineBlindBoxDetailPage>
     // TODO: implement initState
     super.initState();
     _repeatController =
-    AnimationController(vsync: this, duration: const Duration(seconds: 15))
+    AnimationController(vsync: this, duration: const Duration(seconds: 20))
       ..repeat();
     _animation = Tween<double>(begin: 0, end: 360.0).animate(_repeatController);
   }
@@ -68,11 +68,13 @@ class _MineBlindBoxDetailPageState extends State<MineBlindBoxDetailPage>
                     case 8:
                       return _buyInfo();
                     case 9:
+                      return _huaweiTag();
+                    case 10:
                       return _buyButton();
                     default:
                       return Container();
                   }
-                }, childCount: 10))
+                }, childCount: 11))
           ],
         ),
       );
@@ -103,6 +105,14 @@ class _MineBlindBoxDetailPageState extends State<MineBlindBoxDetailPage>
               height: 1, color: AppColors.loginButtonTitleColor, fontSize: 17),
         ),
       ),
+    );
+  }
+
+  Widget _huaweiTag() {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      child: Text('huawei.tag'.tr, style: const TextStyle(color: Colors.white, fontSize: 14),),
     );
   }
 
@@ -606,29 +616,33 @@ class _MineBlindBoxDetailPageState extends State<MineBlindBoxDetailPage>
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Text(
-                        'blind.box.detail.creator'.tr +
-                            controller.blindBoxDetailEntity!.authorName!,
-                        maxLines: 1,
+                child: SizedBox(
+                  width: Get.width / 5 * 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          'blind.box.detail.creator'.tr +
+                              controller.blindBoxDetailEntity!.authorName!,
+                          maxLines: 1,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                      Text(
+                        'blind.box.detail.issuer'.tr +
+                            controller.blindBoxDetailEntity!.issuer!,
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             overflow: TextOverflow.ellipsis),
                       ),
-                    ),
-                    Text(
-                      'blind.box.detail.issuer'.tr +
-                          controller.blindBoxDetailEntity!.issuer!,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          overflow: TextOverflow.ellipsis),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

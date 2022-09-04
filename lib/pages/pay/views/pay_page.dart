@@ -173,56 +173,56 @@ class PayPage extends GetView<PayController> {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () => controller.changePayKind(1),
-                child: Container(
-                  margin:
-                      const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-                  padding: const EdgeInsets.all(15),
-                  decoration: const BoxDecoration(
-                      color: AppColors.payKindBackColor,
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: AppColors.borderInsideColor,
-                            offset: Offset(0, 3),
-                            blurRadius: 6,
-                            spreadRadius: 1,
-                            inset: true),
-                      ]),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          WrapperImage(
-                            url: 'zhifubao.png',
-                            width: 17,
-                            height: 17,
-                            imageType: ImageType.assets,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: Text(
-                              'pay.zhifubao'.tr,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 15),
-                            ),
-                          )
-                        ],
-                      ),
-                      WrapperImage(
-                        url: controller.payKind == 1
-                            ? 'selected.png'
-                            : 'unselected.png',
-                        width: 14,
-                        height: 14,
-                        imageType: ImageType.assets,
-                      ),
-                    ],
-                  ),
-                ),
-              )
+              // InkWell(
+              //   onTap: () => controller.changePayKind(1),
+              //   child: Container(
+              //     margin:
+              //         const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+              //     padding: const EdgeInsets.all(15),
+              //     decoration: const BoxDecoration(
+              //         color: AppColors.payKindBackColor,
+              //         borderRadius: BorderRadius.all(Radius.circular(15)),
+              //         boxShadow: [
+              //           BoxShadow(
+              //               color: AppColors.borderInsideColor,
+              //               offset: Offset(0, 3),
+              //               blurRadius: 6,
+              //               spreadRadius: 1,
+              //               inset: true),
+              //         ]),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [
+              //         Row(
+              //           children: [
+              //             WrapperImage(
+              //               url: 'zhifubao.png',
+              //               width: 17,
+              //               height: 17,
+              //               imageType: ImageType.assets,
+              //             ),
+              //             Padding(
+              //               padding: const EdgeInsets.only(left: 15),
+              //               child: Text(
+              //                 'pay.zhifubao'.tr,
+              //                 style: const TextStyle(
+              //                     color: Colors.white, fontSize: 15),
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //         WrapperImage(
+              //           url: controller.payKind == 1
+              //               ? 'selected.png'
+              //               : 'unselected.png',
+              //           width: 14,
+              //           height: 14,
+              //           imageType: ImageType.assets,
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),

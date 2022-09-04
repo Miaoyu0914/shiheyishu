@@ -24,7 +24,7 @@ class AppColors{
   static const Color mineCellLineColor = Color(0xFF474747);
   static const Color nftDetailInfoColor = Color(0xFFD9D9D9);
   static const Color rankBackColor = Color(0xFFFFECCB);
-  static const Color payKindBackColor = Color(0xFF212227);
+  static const Color payKindBackColor = Color(0xFF212229);
   static const Color payAllKindBackColor = Color(0xFF000000);
   static const Color marketSelectColor = Color(0xFF2E3148);
   static const Color shareTitleColor = Color(0xFF19211D);

@@ -45,4 +45,7 @@ abstract class Routes {
   static const SLIDERVREIFY = '/slider_verify';
   static const PUBLICPOOL = '/public_pool';
   static const PUBLICPOOLARTICLE = '/public_pool_article';
+  static const CHARGE = '/charge';
+  static const CASHOUT = '/cash_out';
+  static const PAYWEBVIEW = '/pay_web_view';
 }

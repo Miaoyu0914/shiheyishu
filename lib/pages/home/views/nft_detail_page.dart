@@ -28,10 +28,10 @@ class _NFTDetailPageState extends State<NFTDetailPage>
 
   @override
   void initState() {
-    // TODO: implement initState
+    // TODO: implement initStateFF
     super.initState();
     _repeatController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 15))
+        AnimationController(vsync: this, duration: const Duration(seconds: 20))
           ..repeat();
     _animation = Tween<double>(begin: 0, end: 360.0).animate(_repeatController);
   }
@@ -62,11 +62,13 @@ class _NFTDetailPageState extends State<NFTDetailPage>
                 case 4:
                   return _buyInfo();
                 case 5:
+                  return _huaweiTag();
+                case 6:
                   return _buyButton();
                 default:
                   return Container();
               }
-            }, childCount: 6))
+            }, childCount: 7))
           ],
         ),
       );
@@ -103,6 +105,14 @@ class _NFTDetailPageState extends State<NFTDetailPage>
           ),
         ),
       ),
+    );
+  }
+
+  Widget _huaweiTag() {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      child: Text('huawei.tag'.tr, style: const TextStyle(color: Colors.white, fontSize: 14),),
     );
   }
 
@@ -619,7 +629,9 @@ class _NFTDetailPageState extends State<NFTDetailPage>
             child: SizedBox(
                 width: Get.width,
                 height: Get.width,
-                child: const CupertinoActivityIndicator()),
+                child: const CupertinoActivityIndicator(
+                  color: Colors.white,
+                )),
           ),
           Container(
             alignment: Alignment.center,

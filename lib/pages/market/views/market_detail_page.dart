@@ -32,7 +32,7 @@ class _MarketDetailPageState extends State<MarketDetailPage>
 // TODO: implement initState
     super.initState();
     _repeatController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 15))
+        AnimationController(vsync: this, duration: const Duration(seconds: 20))
           ..repeat();
     _animation = Tween<double>(begin: 0, end: 360.0).animate(_repeatController);
   }
@@ -65,11 +65,13 @@ class _MarketDetailPageState extends State<MarketDetailPage>
                 case 5:
                   return _buyInfo();
                 case 6:
+                  return _huaweiTag();
+                case 7:
                   return _buyButton();
                 default:
                   return Container();
               }
-            }, childCount: 7))
+            }, childCount: 8))
           ],
         ),
       );
@@ -98,6 +100,14 @@ class _MarketDetailPageState extends State<MarketDetailPage>
               height: 1, color: AppColors.loginButtonTitleColor, fontSize: 17),
         ),
       ),
+    );
+  }
+
+  Widget _huaweiTag() {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      child: Text('huawei.tag'.tr, style: const TextStyle(color: Colors.white, fontSize: 14),),
     );
   }
 
@@ -423,7 +433,7 @@ class _MarketDetailPageState extends State<MarketDetailPage>
                       style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                     Text(
-                      '#${controller.marketDetailEntity!.good!.id!}/${controller.marketDetailEntity!.good!.totalNum!}',
+                      '#${controller.marketDetailEntity!.goodsNumber!}/${controller.marketDetailEntity!.good!.totalNum!}',
                       style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                   ],
@@ -520,29 +530,33 @@ class _MarketDetailPageState extends State<MarketDetailPage>
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Text(
-                        'nft.detail.creator'.tr +
-                            controller.marketDetailEntity!.good!.authorName!,
-                        maxLines: 1,
+                child: SizedBox(
+                  width: Get.width / 5 * 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          'nft.detail.creator'.tr +
+                              controller.marketDetailEntity!.good!.authorName!,
+                          maxLines: 1,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                      Text(
+                        'nft.detail.issuer'.tr +
+                            controller.marketDetailEntity!.good!.issuer!,
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             overflow: TextOverflow.ellipsis),
                       ),
-                    ),
-                    Text(
-                      'nft.detail.issuer'.tr +
-                          controller.marketDetailEntity!.good!.issuer!,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          overflow: TextOverflow.ellipsis),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

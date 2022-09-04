@@ -48,7 +48,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
 
   Widget _blindBoxList() {
     return GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           //横轴元素个数
             crossAxisCount: 2,
             //纵轴间距
@@ -56,7 +56,7 @@ class BlindBoxPage extends GetView<BlindBoxController> {
             //横轴间距
             crossAxisSpacing: 10.0,
             //子组件宽高长度比例
-            childAspectRatio: 0.55),
+            childAspectRatio: (((Get.width - 30) / 2) / 350)),
         itemBuilder: (context, index) {
           BlindBoxListEntity blindBox = controller.blindBoxes![index];
           return InkWell(

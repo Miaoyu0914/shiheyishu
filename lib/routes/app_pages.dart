@@ -21,6 +21,8 @@ import 'package:shiheyishu/pages/login/views/splash_page.dart';
 import 'package:shiheyishu/pages/market/bindings/market_detail_bindings.dart';
 import 'package:shiheyishu/pages/market/views/market_detail_page.dart';
 import 'package:shiheyishu/pages/mine/bindings/account_privacy_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/cash_out_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/charge_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/give_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/market_rank_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_address_bindings.dart';
@@ -36,6 +38,10 @@ import 'package:shiheyishu/pages/mine/bindings/mine_nft_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_open_blind_box_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_platform_order_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_platform_order_detail_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/pay_web_view_bindings.dart';
+import 'package:shiheyishu/pages/mine/views/cash_out_page.dart';
+import 'package:shiheyishu/pages/mine/views/charge_page.dart';
+import 'package:shiheyishu/pages/mine/views/pay_web_view_page.dart';
 import 'package:shiheyishu/pages/public_pool/bindings/public_pool_article_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/real_name_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/resell_bindings.dart';
@@ -143,6 +149,23 @@ class AppPages {
                   name: Routes.WALLETLIST,
                   page: () => const WalletListPage(),
                   bindings: [WalletListBindings()],
+              ),
+              GetPage(
+                name: Routes.CHARGE,
+                page: () => const ChargePage(),
+                bindings: [ChargeBindings()],
+                children: [
+                  GetPage(
+                    name: Routes.PAYWEBVIEW,
+                    page: () => const PayWebViewPage(),
+                    bindings: [PayWebViewBindings()],
+                  ),
+                ]
+              ),
+              GetPage(
+                name: Routes.CASHOUT,
+                page: () => const CashOutPage(),
+                bindings: [CashOutBindings()],
               ),
             ]
         ),

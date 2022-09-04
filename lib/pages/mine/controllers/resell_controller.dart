@@ -51,6 +51,7 @@ class RESellController extends ViewStateController {
     if(isSuccess!){
       EasyLoading.showSuccess('mine.nft.detail.sell.success'.tr);
       Get.back();
+      Get.back();
     }
   }
 

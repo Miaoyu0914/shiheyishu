@@ -6,6 +6,7 @@ import 'package:shiheyishu/entities/blind_box_detail_entity.dart';
 import 'package:shiheyishu/entities/blind_box_list_entity.dart';
 import 'package:shiheyishu/entities/board_detail_entity.dart';
 import 'package:shiheyishu/entities/board_list_entity.dart';
+import 'package:shiheyishu/entities/cash_out_info_entity.dart';
 import 'package:shiheyishu/entities/download_entity.dart';
 import 'package:shiheyishu/entities/home_album_entity.dart';
 import 'package:shiheyishu/entities/home_banner_entity.dart';
@@ -414,8 +415,34 @@ abstract class NFTService {
     await request('/app/member_address/add', params);
     return true;
   });
-  //
-  //
+
+  //充值订单
+  static final getChargeOrder =
+  buildHttpRunner<String>((HttpRunnerParams params) async {
+    var res = await request('/app/recharge/add', params);
+    return res.data['order_sn'];
+  });
+
+  //杉德支付
+  static final getPayUrl =
+  buildHttpRunner<String>((HttpRunnerParams params) async {
+    var res = await request('/app/pay/pay', params);
+    return res.data['url'];
+  });
+
+  //提现信息
+  static final getCashOutInfo =
+  buildHttpRunner<CashOutInfoEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/withdraw/getWithdrawInfo', params);
+    return CashOutInfoEntity.fromJson(res.data);
+  });
+
+  //提现
+  static final cashOut =
+  buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/withdraw/withdrawDo', params);
+    return true;
+  });
   //
   //
 

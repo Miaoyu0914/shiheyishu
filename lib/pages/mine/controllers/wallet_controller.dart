@@ -40,4 +40,12 @@ class WalletController extends ViewStateController {
     Get.toNamed(Routes.NAV+Routes.WALLET+Routes.WALLETLIST);
   }
 
+  void pushToChargePage() {
+    Get.toNamed(Routes.NAV+Routes.WALLET+Routes.CHARGE);
+  }
+
+  void pushToCashOutPage() {
+    Get.toNamed(Routes.NAV+Routes.WALLET+Routes.CASHOUT);
+  }
+
 }

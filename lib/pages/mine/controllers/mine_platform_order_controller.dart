@@ -255,4 +255,10 @@ class MinePlatformOrderController extends ViewStateController {
       'entity': data
     });
   }
+
+  void gotoDetail(Data data) {
+    Get.toNamed(Routes.NAV + Routes.MINEPLATFORMORDERLIST + Routes.MINEPLATFORMORDERDETAIL, arguments: {
+      'data': data,
+    });
+  }
 }

@@ -57,8 +57,17 @@ class PayWebViewPage extends GetView<PayWebViewController> {
   }
 
   Widget _body() {
-    return HtmlWidget(
-      controller.url,
+    return SizedBox(
+      width: Get.width,
+      height: Get.height,
+      child: WebView(
+        onWebViewCreated: (WebViewController webViewController){
+          //获取到 WebViewController
+          webViewController.loadHtmlString(controller.url);
+        },
+        javascriptMode: JavascriptMode.unrestricted,
+
+      ),
     );
   }
 }

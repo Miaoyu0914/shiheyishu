@@ -48,4 +48,5 @@ abstract class Routes {
   static const CHARGE = '/charge';
   static const CASHOUT = '/cash_out';
   static const PAYWEBVIEW = '/pay_web_view';
+  static const CHANGEUSERINFO = '/change_user_info';
 }

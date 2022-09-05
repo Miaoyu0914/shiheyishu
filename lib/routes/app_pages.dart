@@ -31,6 +31,7 @@ import 'package:shiheyishu/pages/mine/bindings/mine_bank_card_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_blind_box_detail_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_blind_box_list_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_give_bindings.dart';
+import 'package:shiheyishu/pages/mine/bindings/mine_info_change_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_market_order_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_market_order_detail_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_nft_detail_bindings.dart';
@@ -39,8 +40,10 @@ import 'package:shiheyishu/pages/mine/bindings/mine_open_blind_box_bindings.dart
 import 'package:shiheyishu/pages/mine/bindings/mine_platform_order_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/mine_platform_order_detail_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/pay_web_view_bindings.dart';
+import 'package:shiheyishu/pages/mine/controllers/mine_info_change_controller.dart';
 import 'package:shiheyishu/pages/mine/views/cash_out_page.dart';
 import 'package:shiheyishu/pages/mine/views/charge_page.dart';
+import 'package:shiheyishu/pages/mine/views/mine_info_change_page.dart';
 import 'package:shiheyishu/pages/mine/views/pay_web_view_page.dart';
 import 'package:shiheyishu/pages/public_pool/bindings/public_pool_article_bindings.dart';
 import 'package:shiheyishu/pages/mine/bindings/real_name_bindings.dart';
@@ -139,6 +142,11 @@ class AppPages {
           name: Routes.PUBLICPOOLARTICLE,
           page: () => const PublicPoolArticlePage(),
           bindings: [PublicPoolArticleBindings()],
+        ),
+        GetPage(
+          name: Routes.CHANGEUSERINFO,
+          page: () => const MineInfoChangePage(),
+          bindings: [MineInfoChangeBindings()],
         ),
         GetPage(
             name: Routes.WALLET,

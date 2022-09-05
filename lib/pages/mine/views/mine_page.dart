@@ -67,7 +67,7 @@ class MinePage extends GetView<MineController> {
                 Row(
                   children: [
                     WrapperImage(
-                      url: controller.userInfo!.isReal == 0 ? controller.settingImageList[index] : controller.settingHasRealNameImageList[index],
+                      url: controller.userInfoEntity!.isReal == 0 ? controller.settingImageList[index] : controller.settingHasRealNameImageList[index],
                       width: 20,
                       height: 20,
                       imageType: ImageType.assets,
@@ -75,7 +75,7 @@ class MinePage extends GetView<MineController> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Text(
-                        controller.userInfo!.isReal == 0 ? controller.settingTitleList[index] :controller.settingHasRealNameTitleList[index],
+                        controller.userInfoEntity!.isReal == 0 ? controller.settingTitleList[index] :controller.settingHasRealNameTitleList[index],
                         style: const TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     )
@@ -94,7 +94,7 @@ class MinePage extends GetView<MineController> {
             ),
           );
         },
-        itemCount: controller.userInfo!.isReal == 0 ? controller.settingTitleList.length : controller.settingHasRealNameTitleList.length,
+        itemCount: controller.userInfoEntity!.isReal == 0 ? controller.settingTitleList.length : controller.settingHasRealNameTitleList.length,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         separatorBuilder: (BuildContext context, int index) {
@@ -274,21 +274,24 @@ class MinePage extends GetView<MineController> {
                     padding: const EdgeInsets.all(30),
                     child: Row(
                       children: [
-                        ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(40)),
-                            child: WrapperImage(
-                              url: controller.userInfo!.headImg,
-                              width: 80,
-                              height: 80,
-                            )),
+                        InkWell(
+                          onTap: () => controller.changeUserInfo(),
+                          child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(40)),
+                              child: WrapperImage(
+                                url: controller.userInfoEntity!.headImg,
+                                width: 80,
+                                height: 80,
+                              )),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                controller.userInfo!.nickname!,
+                                controller.userInfoEntity!.nickname!,
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 15,
@@ -300,7 +303,7 @@ class MinePage extends GetView<MineController> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      controller.userInfo!.phone! + '  ',
+                                      controller.userInfoEntity!.phone! + '  ',
                                       style: const TextStyle(
                                           color: AppColors.nftUnselectColor,
                                           fontSize: 12),
@@ -311,7 +314,7 @@ class MinePage extends GetView<MineController> {
                                               'mine.copy.hint'.tr);
                                           Clipboard.setData(ClipboardData(
                                               text:
-                                                  controller.userInfo!.phone!));
+                                                  controller.userInfoEntity!.phone!));
                                         },
                                         child: WrapperImage(
                                           url: 'copy.png',
@@ -334,7 +337,7 @@ class MinePage extends GetView<MineController> {
                                   SizedBox(
                                       width: Get.width / 4,
                                       child: Text(
-                                        controller.userInfo!.ethAddress! + '  ',
+                                        controller.userInfoEntity!.ethAddress! + '  ',
                                         maxLines: 1,
                                         style: const TextStyle(
                                             color: AppColors.nftUnselectColor,
@@ -347,7 +350,7 @@ class MinePage extends GetView<MineController> {
                                             'mine.copy.hint'.tr);
                                         Clipboard.setData(ClipboardData(
                                             text: controller
-                                                .userInfo!.ethAddress!));
+                                                .userInfoEntity!.ethAddress!));
                                       },
                                       child: WrapperImage(
                                         url: 'copy.png',

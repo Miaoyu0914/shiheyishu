@@ -4,16 +4,16 @@ import 'package:shiheyishu/configs/AppColors.dart';
 import 'package:shiheyishu/configs/constant.dart';
 import 'package:shiheyishu/configs/state/view_state_controller.dart';
 import 'package:shiheyishu/configs/storage_manager.dart';
-import 'package:shiheyishu/entities/login_entity.dart';
+import 'package:shiheyishu/entities/user_info_entity.dart';
 import 'package:shiheyishu/routes/app_pages.dart';
 import 'package:shiheyishu/services/http/http_runner_params.dart';
 import 'package:shiheyishu/services/nft_service.dart';
 
 class MineController extends ViewStateController {
-  LoginEntity? userInfo;
+  UserInfoEntity? userInfoEntity;
   List<String> menuTitleList = [
     'mine.3d.room'.tr,
-    // 'mine.market.order'.tr,
+    'mine.market.order'.tr,
     'mine.platform.order'.tr,
     'mine.donation'.tr,
     'mine.compose'.tr,
@@ -22,7 +22,7 @@ class MineController extends ViewStateController {
   ];
   List<String> menuImageList = [
     'mine_3d_room.png',
-    // 'market_order.png',
+    'market_order.png',
     'platform_order.png',
     'mine_donation.png',
     'mine_compose.png',
@@ -53,8 +53,12 @@ class MineController extends ViewStateController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    userInfo = Constant.USERINFOVALUE;
     await getMineImage();
+    await getUserInfo();
+  }
+
+  Future<void> getUserInfo() async {
+    userInfoEntity = await NFTService.getUserInfo(HttpRunnerParams());
     update();
   }
 
@@ -75,13 +79,13 @@ class MineController extends ViewStateController {
   }
 
   void pushToMenuPages(int index) {
-    switch (index + 1) {
-      case 1:
+    switch (index) {
+      case 0:
         Get.toNamed(Routes.NAV + Routes.THREE);
         break;
-      // case 1:
-      //   Get.toNamed(Routes.NAV + Routes.MINEMARKETORDERLIST);
-      //   break;
+      case 1:
+        Get.toNamed(Routes.NAV + Routes.MINEMARKETORDERLIST);
+        break;
       case 2:
         Get.toNamed(Routes.NAV + Routes.MINEPLATFORMORDERLIST);
         break;
@@ -108,7 +112,7 @@ class MineController extends ViewStateController {
         Get.toNamed(Routes.NAV + Routes.SAFE);
         break;
       case 1:
-        userInfo!.isReal == 0
+        userInfoEntity!.isReal == 0
             ? Get.toNamed(Routes.NAV + Routes.REALNAME)
             : logout();
         break;
@@ -173,5 +177,9 @@ class MineController extends ViewStateController {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20))),
     );
+  }
+
+  void changeUserInfo() {
+    Get.toNamed(Routes.NAV + Routes.CHANGEUSERINFO);
   }
 }

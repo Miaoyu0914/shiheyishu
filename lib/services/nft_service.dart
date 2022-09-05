@@ -21,6 +21,7 @@ import 'package:shiheyishu/entities/mine_give_entity.dart';
 import 'package:shiheyishu/entities/mine_goods_list_entity.dart';
 import 'package:shiheyishu/entities/mine_group_list_entity.dart';
 import 'package:shiheyishu/entities/mine_market_in_order_entity.dart';
+import 'package:shiheyishu/entities/mine_market_order_entity.dart';
 import 'package:shiheyishu/entities/mine_market_out_order_entity.dart';
 import 'package:shiheyishu/entities/mine_nft_detail_entity.dart';
 import 'package:shiheyishu/entities/mine_platform_order_entity.dart';
@@ -338,9 +339,9 @@ abstract class NFTService {
 
   //市场订单（ -1 已取消 0 待支付 1已购买）
   static final getMarketInOrderList =
-  buildHttpRunner<MineMarketInOrderEntity>((HttpRunnerParams params) async {
-    var res = await request('/app/rent_orders/orderList', params);
-    return MineMarketInOrderEntity.fromJson(res.data);
+  buildHttpRunner<MineMarketOrderEntity>((HttpRunnerParams params) async {
+    var res = await request('/app/goods_orders/orderList', params);
+    return MineMarketOrderEntity.fromJson(res.data);
   });
 
 
@@ -492,6 +493,20 @@ abstract class NFTService {
   static final addPublicComment =
   buildHttpRunner<bool>((HttpRunnerParams params) async {
     await request('/app/public_news/comment', params);
+    return true;
+  });
+
+  //修改头像
+  static final changeHeadImage =
+  buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/member/editHead', params);
+    return true;
+  });
+
+  //修改昵称
+  static final changeNickName =
+  buildHttpRunner<bool>((HttpRunnerParams params) async {
+    await request('/app/member/editNick', params);
     return true;
   });
 

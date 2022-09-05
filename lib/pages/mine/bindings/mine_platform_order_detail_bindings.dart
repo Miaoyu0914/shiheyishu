@@ -4,6 +4,6 @@ import 'package:shiheyishu/pages/mine/controllers/mine_platform_order_detail_con
 class MinePlatformOrderDetailBindings extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => MinePlatformOrderDetailController(id: Get.arguments['id']));
+    Get.lazyPut(() => MinePlatformOrderDetailController(data: Get.arguments['data']));
   }
 }

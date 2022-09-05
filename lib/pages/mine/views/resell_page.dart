@@ -5,7 +5,6 @@ import 'package:shiheyishu/configs/AppColors.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
 import 'package:shiheyishu/configs/widgets/image.dart';
 import 'package:shiheyishu/configs/widgets/normal_appbar.dart';
-import 'package:shiheyishu/entities/mine_blind_box_list_entity.dart';
 import 'package:shiheyishu/pages/mine/controllers/resell_controller.dart';
 
 class RESellPage extends GetView<RESellController> {

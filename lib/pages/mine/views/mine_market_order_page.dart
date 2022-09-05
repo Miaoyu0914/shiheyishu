@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shiheyishu/configs/AppColors.dart';
+import 'package:shiheyishu/configs/common.dart';
 import 'package:shiheyishu/configs/state/view_state_widget.dart';
+import 'package:shiheyishu/configs/widgets/image.dart';
 import 'package:shiheyishu/configs/widgets/normal_appbar.dart';
 import 'package:shiheyishu/pages/mine/controllers/mine_market_order_controller.dart';
+import 'package:shiheyishu/entities/mine_market_order_entity.dart';
 
 class MineMarketOrderPage extends GetView<MineMarketOrderController> {
   const MineMarketOrderPage({Key? key}) : super(key: key);
@@ -26,29 +30,213 @@ class MineMarketOrderPage extends GetView<MineMarketOrderController> {
   Widget _body() {
     return Container(
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        boxShadow: [
-          BoxShadow(
-                        color: AppColors.borderInsideColor,
-                        offset: Offset(0, 3),
-                        blurRadius: 6,
-                        spreadRadius: 1,
-                        inset: true
-                    ),
-        ]
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.borderInsideColor,
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                spreadRadius: 1,
+                inset: true),
+          ]),
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Column(
-                children: [
-                  // Text('platform.order.all'.tr, style: TextStyle(color: controller.tabIndex == 0 ? ),),
-                ],
-              )
+              InkWell(
+                onTap: () => controller.tabClicked(0),
+                child: Column(
+                  children: [
+                    Text(
+                      'platform.order.future.pay'.tr,
+                      style: TextStyle(
+                          color: controller.tabIndex == 0
+                              ? AppColors.codeButtonTitleColor
+                              : AppColors.nftUnselectColor),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 5),
+                      color: controller.tabIndex == 0
+                          ? AppColors.codeButtonTitleColor
+                          : Colors.transparent,
+                      width: 16,
+                      height: 3,
+                    )
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: () => controller.tabClicked(1),
+                child: Column(
+                  children: [
+                    Text(
+                      'platform.order.already'.tr,
+                      style: TextStyle(
+                          color: controller.tabIndex == 1
+                              ? AppColors.codeButtonTitleColor
+                              : AppColors.nftUnselectColor),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 5),
+                      color: controller.tabIndex == 1
+                          ? AppColors.codeButtonTitleColor
+                          : Colors.transparent,
+                      width: 16,
+                      height: 3,
+                    )
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: () => controller.tabClicked(2),
+                child: Column(
+                  children: [
+                    Text(
+                      'platform.order.cancel'.tr,
+                      style: TextStyle(
+                          color: controller.tabIndex == 2
+                              ? AppColors.codeButtonTitleColor
+                              : AppColors.nftUnselectColor),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 5),
+                      color: controller.tabIndex == 2
+                          ? AppColors.codeButtonTitleColor
+                          : Colors.transparent,
+                      width: 16,
+                      height: 3,
+                    )
+                  ],
+                ),
+              ),
             ],
+          ),
+          Expanded(
+            child: SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: true,
+              header: const WaterDropHeader(),
+              footer: CustomFooter(
+                builder: (BuildContext context, LoadStatus? mode) {
+                  return CommonUtils.refreshFooter(mode);
+                },
+              ),
+              controller: controller.refreshController,
+              onRefresh: controller.refreshList,
+              onLoading: controller.loadMoreList,
+              child: ListView.builder(
+                padding: const EdgeInsets.only(top: 20),
+                itemBuilder: (context, index) {
+                  Data platformOrder = controller.getPlatformOrderData(index);
+                  return InkWell(
+                    onTap: () => controller.gotoDetail(platformOrder),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      margin:
+                      const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                      child: Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: ClipRRect(
+                                    borderRadius:
+                                    const BorderRadius.all(Radius.circular(5)),
+                                    child: WrapperImage(
+                                      url: platformOrder.good!.goodsImage,
+                                      width: 108,
+                                      height: 108,
+                                    )),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 50),
+                                      child: Text(
+                                        platformOrder.good!.goodsName!,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'platform.order.money'.tr +
+                                              platformOrder.price!,
+                                          style: const TextStyle(
+                                              color: AppColors.codeButtonTitleColor,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Offstage(
+                                          offstage: platformOrder.status != 0,
+                                          child: InkWell(
+                                            onTap: () => controller.gotoPay(platformOrder),
+                                            child: Container(
+                                              padding: const EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
+                                              margin: const EdgeInsets.only(right: 10),
+                                              decoration: const BoxDecoration(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(12)),
+                                                  gradient: LinearGradient(
+                                                      begin: Alignment.centerLeft,
+                                                      end: Alignment.centerRight,
+                                                      colors: [
+                                                        AppColors.loginButtonLeftColor,
+                                                        AppColors.loginButtonRightColor
+                                                      ])),
+                                              child: Text(
+                                                'platform.order.go.pay'.tr,
+                                                style: const TextStyle(
+                                                    color: AppColors.loginButtonTitleColor,
+                                                    fontSize: 12,
+                                                    height: 1),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                                color: AppColors.mineCellLineColor,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10))),
+                            alignment: Alignment.center,
+                            width: Get.width / 7,
+                            child: Text(
+                              controller.getStatusString(platformOrder.status!),
+                              style: const TextStyle(
+                                  color: AppColors.codeButtonTitleColor,
+                                  fontSize: 13),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                itemCount: controller.getListCount(),
+              ),
+            ),
           )
         ],
       ),
